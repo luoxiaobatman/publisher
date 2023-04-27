@@ -2,11 +2,12 @@
 created: 2023-04-27
 intention: |-
   random thoughts.
-tags: " #sketch #topdown #wiki "
 gh-title: Foo
 category: test
 share: true
 ---
+
+#sketch #topdown #wiki
 
 > Mountains cannot be surmounted except by winding paths.
 > — <cite>Johann Wolfgang von Goethe</cite>
