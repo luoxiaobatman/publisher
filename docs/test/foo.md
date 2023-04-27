@@ -7,8 +7,6 @@ category: test
 share: true
 ---
 
-#sketch #topdown #wiki
-
 > Mountains cannot be surmounted except by winding paths.
 > — <cite>Johann Wolfgang von Goethe</cite>
 

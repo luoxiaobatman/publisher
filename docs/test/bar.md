@@ -5,9 +5,10 @@ intention: |-
 gh-title: Bar
 category: test
 share: true
+tags:
+- #sketch 
+- #topdown
 ---
-
-#sketch #topdown #wiki
 
 > It is the neglect of timely repair that makes rebuilding necessary.
 > — <cite>Richard Whately</cite>
