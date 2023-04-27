@@ -19,7 +19,7 @@ tags:
 ## h2
 ![[../media/Pasted image 20230427175118.png|Pasted image 20230427175118.png]]
 
-![[../media/device_performance_monitor.activity.puml|device_performance_monitor.activity.puml]]
+![[../media/device_performance_monitor.activity.svg|device_performance_monitor.activity.svg]]
 
 ### h3
 #### h4
