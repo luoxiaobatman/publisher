@@ -18,15 +18,15 @@ tags:
 # h1
 ## h2
 
-![[performance_statistics.activity.puml]]
+![performance_statistics.activity.puml](../media/performance_statistics.activity.puml.md#)
 
 <div style="page-break-after: always; visibility: hidden">\pagebreak</div>
 
-![[device_performance_monitor.activity.puml]]
+![device_performance_monitor.activity.puml](../media/device_performance_monitor.activity.puml.md#)
 
 ### h3
 #### h4
 ##### h5
 ###### h6
 
-[[bar]]
+[bar](./bar.md#)
