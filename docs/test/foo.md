@@ -17,6 +17,13 @@ tags:
 
 # h1
 ## h2
+
+![[performance_statistics.activity.puml]]
+
+<div style="page-break-after: always; visibility: hidden">\pagebreak</div>
+
+![[device_performance_monitor.activity.puml]]
+
 ### h3
 #### h4
 ##### h5
