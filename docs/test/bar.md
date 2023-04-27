@@ -5,9 +5,6 @@ intention: |-
 gh-title: Bar
 category: test
 share: true
-tags:
-- #sketch 
-- #topdown
 ---
 
 > It is the neglect of timely repair that makes rebuilding necessary.
