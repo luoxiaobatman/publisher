@@ -6,7 +6,6 @@ title: DHCP协议
 ---
 
 
-
 ### Related to dhclient
 When you run `dhclient` on a guest machine with a statically configured IP address, the behavior depends on the guest operating system's network configuration and the DHCP server settings on the virtual network.
 
@@ -62,3 +61,150 @@ sudo ifdown en0 && sudo ifup en0
 
 Replace "en0" with the actual interface name on your system if necessary.
 
+
+### 头部
+Here is a simple ASCII art representation of the DHCP header structure:
+
+```
+ 0                   1                   2                   3   
+ 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+| Message Type | Hardware Type | Hw Addr Len |       Hops       |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|                        Transaction ID                         |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|          Seconds           |              Flags               |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|                         Client IP Addr                        |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|                          Your IP Addr                         |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|                         Server IP Addr                        |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|                        Gateway IP Addr                        |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|                                                               |
++                                                               +
+|                                                               |
++                       Client Hardware Addr                    +
+|                                                               |
++                                                               +
+|                                                               |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|                                                               |
++                                                               +
+|                                                               |
++                           Server Hostname                     +
+|                                                               |
++                                                               +
+|                                                               |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|                                                               |
++                                                               +
+|                                                               |
++                            Boot Filename                      +
+|                                                               |
++                                                               +
+|                                                               |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|                                                               |
++                                                               +
+|                                                               |
++                             Options                           +
+|                                                               |
++                                                               +
+|                                                               |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+```
+
+If you want to present the DHCP header structure to your students, using a table or diagram can be an effective way to illustrate the fields and their sizes. Here's a simple table format you can use:
+
+| Field                      | Size (bytes) | Description                                          |
+|----------------------------|--------------|------------------------------------------------------|
+| Message Type               | 1            | DHCP request or response                             |
+| Hardware Type              | 1            | Hardware type (e.g., Ethernet)                       |
+| Hardware Address Length    | 1            | Length of hardware address                           |
+| Hops                       | 1            | Hops count for DHCP relay agents                     |
+| Transaction Identifier     | 4            | Random number for matching requests and responses    |
+| Seconds                    | 2            | Elapsed time since address acquisition began         |
+| Flags                      | 2            | Flags for DHCP message (e.g., Broadcast flag)        |
+| Client IP Address          | 4            | Client's IP address if known, otherwise 0           |
+| Your IP Address            | 4            | IP address assigned to the client                    |
+| Server IP Address          | 4            | IP address of the DHCP server                        |
+| Gateway IP Address         | 4            | IP address of a gateway or relay agent, if applicable|
+| Client Hardware Address    | 16           | Client's hardware (MAC) address                      |
+| Server Hostname            | 64           | Optional server hostname                             |
+| Boot Filename              | 128          | Optional boot file name                              |
+| Options                    | Variable     | DHCP options with option-value pairs                 |
+
+
+### Related to operating system
+Various operating systems integrate with DHCP to obtain IP addresses and network configuration information automatically. The DHCP client software is typically built into the operating system or can be installed as an additional component. Here's an overview of how DHCP is used in some common operating systems:
+
+1. Windows:
+Windows operating systems, from Windows XP to Windows 11, have a built-in DHCP client. The client is enabled by default for network interfaces when you set the IP address configuration to "Obtain an IP address automatically" and "Obtain DNS server address automatically" in the network adapter settings. To access these settings:
+   - Open Control Panel > Network and Sharing Center > Change adapter settings
+   - Right-click on the network adapter, and select "Properties"
+   - Double-click "Internet Protocol Version 4 (TCP/IPv4)" or "Internet Protocol Version 6 (TCP/IPv6)"
+   - Choose the "Obtain an IP address automatically" and "Obtain DNS server address automatically" options
+
+2. macOS:
+macOS also has a built-in DHCP client. To enable DHCP for a network interface:
+   - Open System Preferences > Network
+   - Select the network interface (e.g., Ethernet or Wi-Fi) from the list on the left
+   - In the "Configure IPv4" dropdown menu, select "Using DHCP" (or "Using DHCP with manual address" to set a static IP while still receiving other configuration information from DHCP)
+   - Click "Apply" to save the changes
+
+3. Linux:
+Most Linux distributions use a DHCP client like dhclient, dhcpcd, or NetworkManager to handle DHCP. The process for enabling DHCP may vary depending on the distribution and the network management tool being used. For example, in Ubuntu with NetworkManager:
+   - Open Settings > Network
+   - Select the network interface (e.g., Ethernet or Wi-Fi)
+   - Click the gear icon to open the settings for the selected interface
+   - In the "IPv4" or "IPv6" tab, select "Automatic (DHCP)" as the method
+   - Click "Apply" to save the changes
+
+4. Android:
+Android operating systems have a built-in DHCP client, which is enabled by default when connecting to Wi-Fi networks. To verify or change the settings:
+   - Open Settings > Wi-Fi (or Connections > Wi-Fi, depending on the version)
+   - Long press the connected network, and select "Modify network" or "Manage network settings"
+   - Expand the "Advanced options" section
+   - Make sure that "DHCP" is selected for the IP settings
+
+5. iOS:
+iOS devices have a built-in DHCP client that is enabled by default for Wi-Fi connections. To check or change the settings:
+   - Open Settings > Wi-Fi
+   - Tap the blue "i" icon next to the connected network
+   - Ensure that "Automatic" (for iOS 10 and later) or "DHCP" (for earlier versions) is selected for the "Configure IP" option
+
+In all these operating systems, the DHCP client is responsible for sending DHCP discovery messages, receiving offers from DHCP servers, and configuring the network interface with the assigned IP address and other network parameters. The integration with DHCP is usually seamless, and users typically do not need to worry about the underlying DHCP process once it is configured correctly.
+
+### High Level Overview
+Here's an ASCII art representation of a use case where a client obtains an IP address from a DHCP server through a switch and a router:
+
+```
++-----------+     +------+     +--------+     +------+     +--------+
+|  DHCP     |-----|Switch|-----| Router |-----|Switch|-----| Client |
+|  Server   |     +------+     +--------+     +------+     +--------+
++-----------+                           ↑                     ↑
+          DHCP Offer, Ack          DHCP Request           DHCP Discover
+                                     (Relayed)               (Broadcast)
+```
+
+In this use case, the following steps occur:
+
+1. The client (e.g., a computer) connects to the network and wants to obtain an IP address.
+2. The client broadcasts a DHCP Discover message to the local network, which is received by the switch it is connected to.
+3. The switch forwards the DHCP Discover message to all connected devices, including the router.
+4. The router, acting as a DHCP relay agent, forwards the DHCP Discover message to the DHCP server on a different network segment.
+5. The DHCP server receives the DHCP Discover message and checks its IP address pool for an available IP address.
+6. The DHCP server sends a DHCP Offer message back to the router, offering an IP address and additional network configuration information to the client.
+7. The router forwards the DHCP Offer message to the switch connected to the client.
+8. The switch forwards the DHCP Offer message to the client.
+9. The client receives the DHCP Offer and sends a DHCP Request message to the router, requesting the offered IP address and configuration information.
+10. The router forwards the DHCP Request message to the DHCP server.
+11. The DHCP server receives the DHCP Request and sends a DHCP Ack message back to the router, acknowledging the client's request and confirming the IP address assignment.
+12. The router forwards the DHCP Ack message to the switch connected to the client.
+13. The switch forwards the DHCP Ack message to the client.
+14. The client receives the DHCP Ack message, configures its network interface with the assigned IP address and network parameters, and is now connected to the network.
+
+Please note that this ASCII art diagram is a simplification of the DHCP process and is intended to provide a high-level understanding of the steps involved. For more detailed explanations, consider using text descriptions or creating a flowchart to illustrate the process.
