@@ -146,25 +146,57 @@ It is important to note that although the `SecurityManager` has been deprecated,
 
 
 ### java.util.Collection
-Here's the Java `java.util.Collection` interfaces and implementation hierarchy in a tree-like format:
-```
+Here's the Java `java.util.Collection` interfaces and implementation hierarchy in a tree-like format with more implementations:
+
 .
 ├── Collection
 │   ├── Set
-│   │   ├── HashSet // A hash table-based implementation of the Set interface, allows null value, no guarantee of order
-│   │   ├── LinkedHashSet // A hash table and linked list-based implementation, maintains insertion order
-│   │   └── TreeSet // A sorted set implementation backed by a balanced binary search tree (Red-Black tree), does not allow null values
+│   │   ├── HashSet
+│   │   ├── LinkedHashSet
+│   │   ├── TreeSet
+│   │   ├── EnumSet
+│   │   ├── CopyOnWriteArraySet
+│   │   ├── ConcurrentSkipListSet
 │   ├── Queue
-│   │   ├── PriorityQueue // A priority-based unbounded queue based on a priority heap, elements are ordered according to their natural order or by a provided comparator
-│   │   ├── ArrayDeque // A resizable-array based implementation of the Deque interface, can be used as a stack or queue
-│   │   ├── LinkedList // A doubly-linked list-based implementation of the List and Deque interfaces, allows null values
-│   │   └── ConcurrentLinkedQueue // A lock-free, thread-safe, linked list-based queue, suitable for high concurrency scenarios
+│   │   ├── PriorityQueue
+│   │   ├── ArrayDeque
+│   │   ├── LinkedList
+│   │   ├── ConcurrentLinkedQueue
+│   │   ├── SynchronousQueue
+│   │   ├── DelayQueue
+│   │   ├── ArrayBlockingQueue
+│   │   ├── LinkedBlockingQueue
+│   │   ├── PriorityBlockingQueue
 │   ├── List
-│   │   ├── ArrayList // A dynamic array-based implementation of the List interface, allows null values, provides fast random access
-│   │   └── LinkedList // A doubly-linked list-based implementation of the List and Deque interfaces, allows null values
+│   │   ├── ArrayList
+│   │   ├── LinkedList
+│   │   ├── Vector
+│   │   ├── Stack
+│   │   ├── CopyOnWriteArrayList
 │   └── Deque
-│       ├── ArrayDeque // A resizable-array based implementation of the Deque interface, can be used as a stack or queue
-│       └── LinkedList // A doubly-linked list-based implementation of the List and Deque interfaces, allows null values
-```
+│       ├── ArrayDeque
+│       ├── LinkedList
+│       ├── LinkedBlockingDeque
+│       ├── ConcurrentLinkedDeque
 
-Note that this list is not exhaustive, and there are other specialized implementations and interfaces in the `java.util.concurrent` package, but this should give you a good overview of the core Collection hierarchy.
+Please note that this hierarchy includes implementations from both the `java.util` and `java.util.concurrent` packages. The list still might not be exhaustive, as there could be other third-party or specialized implementations.
+
+
+### AQS
+`AbstractQueuedSynchronizer` (AQS) is a class in the `java.util.concurrent.locks` package that provides a framework for implementing blocking locks and related synchronization constructs. It was introduced in Java 1.5 as a part of the Java Concurrency Utilities. The AQS is designed to be the basis for various synchronization constructs like ReentrantLock, Semaphore, CountDownLatch, and ReentrantReadWriteLock.
+
+The main idea behind AQS is to provide an abstract class that manages a queue of waiting threads, efficiently handling the blocking and unblocking of threads when acquiring or releasing synchronization resources. AQS relies on an internal state (an integer value) to represent the state of the synchronization resource. Subclasses of AQS are expected to define the semantics of the synchronization by implementing a few protected methods that manipulate the state.
+
+Some important methods of `AbstractQueuedSynchronizer` include:
+
+1. `acquire(int arg)`: Acquires the synchronization resource in exclusive mode, blocking the current thread if necessary.
+2. `release(int arg)`: Releases the synchronization resource in exclusive mode, potentially unblocking a waiting thread.
+3. `acquireShared(int arg)`: Acquires the synchronization resource in shared mode, blocking the current thread if necessary.
+4. `releaseShared(int arg)`: Releases the synchronization resource in shared mode, potentially unblocking waiting threads.
+5. `tryAcquire(int arg)`: A protected method to be implemented by subclasses, attempting to acquire the synchronization resource in exclusive mode.
+6. `tryRelease(int arg)`: A protected method to be implemented by subclasses, attempting to release the synchronization resource in exclusive mode.
+7. `tryAcquireShared(int arg)`: A protected method to be implemented by subclasses, attempting to acquire the synchronization resource in shared mode.
+8. `tryReleaseShared(int arg)`: A protected method to be implemented by subclasses, attempting to release the synchronization resource in shared mode.
+9. `isHeldExclusively()`: A protected method to be implemented by subclasses, determining if the synchronization resource is held exclusively by the current thread.
+
+By extending `AbstractQueuedSynchronizer` and implementing the required protected methods, developers can create custom synchronization constructs tailored to specific use cases. AQS manages the complexities of blocking, waiting, and signaling threads, allowing developers to focus on the semantics of the synchronization.
