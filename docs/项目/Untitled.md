@@ -23,11 +23,18 @@ title:
 
 
 supervisor.conf停掉对应的服务
-traefik.yml更改entry
+
+如果是auth-server 更改entry
+/data/dsmp/common/traefik/traefik.yml
 auth.yml更改地址
+
+/data/dsmp/common/traefik/traefik.yml
+traefik address 是dashboard的端口
+dynamic_config/router是路由, @http是动态注册的服务
+
 
 本地
 环境配置改动
-platform.base.component.url
+platform.base.component.url=http://172.16.123.51:${server.port:8081}${server.servlet.context-path:/}
 platform.base.component.enable
 TODO 画个组件注册流程图
