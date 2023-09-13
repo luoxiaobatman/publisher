@@ -5,9 +5,6 @@ category: 虚拟化
 title: index
 ---
 
-> The world is afflicted by death and decay. But the wise do not grieve, having realized the nature of the world.
-> — <cite>The Buddha</cite>
-
 ### 虚拟化
 A virtual machine (VM) is a software-based emulation of a physical computer that can run an operating system (OS) and applications, providing the functionality of a physical computer. Virtual machines are created and managed by virtualization software, which allows multiple VMs to run on a single physical host machine, sharing its resources such as CPU, memory, storage, and network.
 

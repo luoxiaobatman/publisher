@@ -913,3 +913,48 @@ public class EncodingDetector {
 
 You could use this method as a starting point and extend it to test other encodings if you need to. Keep in mind that this is a very basic form of encoding detection and will only check if the file can be read without errors in UTF-8. It is not a foolproof method and it can't distinguish between different encodings that use similar byte sequences. A more accurate encoding detection usually involves looking for specific patterns of bytes that are characteristic of certain encodings, and that requires a more complex implementation or a third-party library.
 
+
+
+### 清理
+```
+List<OuterObject> list = mapper.readValue(jsonString, new TypeReference<List<OuterObject>>(){});
+
+<dependencies> <dependency> <groupId>org.springframework.boot</groupId> <artifactId>spring-boot-configuration-processor</artifactId> <optional>true</optional> </dependency> </dependencies>
+```
+
+mvn compile把META-INF/spring-configuration-metadata.json生成出来
+
+cron表达式的syntax 秒 分 时 dayofmonth month dayofweek, 
+
+#### 关于CAS
+1. The user accesses a web application (the "client") that requires authentication.
+2. The web application redirects the unauthenticated client to the CAS server.
+3. The CAS server presents a login page to the user.
+4. The user enters their credentials.
+5. If the credentials are valid, the CAS server redirects the client back to the web application, providing a service ticket.
+6. The web application makes a back-channel request to the CAS server, presenting the service ticket to validate it.
+7. The CAS server validates the ticket and responds to the web application.
+8. The web application now recognizes the user as authenticated.
+
+#### \u8BA4\u8BC1\u94FE\u542B\u6709\u975E\u6CD5\u8BA4\u8BC1\u65B9\u5F0F
+Unicode escape sequences
+
+#### 在shell格式化时间
+```
+date +%Y%m%d%H%M%S
+```
+
+#### regex not start with
+`^(?!foo).*`
+- `(?!foo)` is a negative lookahead that succeeds if "foo" cannot be matched directly to the right of the current position.
+
+#### regex not end with
+`.*(?<!foo)$`
+- `(?<!foo)` is a negative lookbehind that succeeds if "foo" cannot be matched directly to the left of the current position.
+
+#### regex not contains
+`^(?!.*\/foo\?).*`
+- `(?!.*\/foo\?)` is a negative lookahead that succeeds if "/foo?" cannot be matched.
+
+#### 关于用程序编辑修改docx
+python, 参考pandoc/src目录下的源代码
