@@ -90,7 +90,7 @@ The Command pattern is a behavioral design pattern that turns a request into a s
 
 2. **Remote Procedure Calls (RPCs)**: In a distributed system, commands can be used to encapsulate a request as an object, which can then be transferred over the network and invoked on a remote service.
 
-3. **Job Queues**: In a job queue or a thread pool, commands can be used to represent jobs to be performed. The command object encapsulates the work to be done, and it can be added to the queue and executed later by a worker thread.
+3. **Job Queues**: In a job queue or a thread pool, commands can be used to represent jobs to be performed. The command object encapsulates the work to be done, and it can be added to the queue and executed later by a wotopicrker thread.
 
 4. **Undo/Redo Functionality**: The Command pattern can also be used to implement undo/redo functionality. Each action a user takes is stored as a command object in a history list. To undo an action, the command object can perform a reverse operation. To redo an action, the command object can simply execute its action again.
 
