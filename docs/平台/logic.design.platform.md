@@ -13,6 +13,20 @@ category: 平台
 Lorem ipsum dolor sit amet, (1) consectetur adipiscing elit. 
 { .annotate }
 
-1. :man_raising_hand: I'm an annotation! I can contain `code`, __formatted_text__, images, ... basically anything that can be expressed in Markdown.
+1. I'm an annotation! I can contain `code`, __formatted_text__, images, ... basically anything that can be expressed in Markdown.
 
 
+
+=== "Tab 1"
+
+    Lorem ipsum dolor sit amet, (1) consectetur adipiscing elit.
+    { .annotate }
+
+    1.  :man_raising_hand: I'm an annotation!
+
+=== "Tab 2"
+
+    Phasellus posuere in sem ut cursus (1)
+    { .annotate }
+
+    1.  :woman_raising_hand: I'm an annotation as well!
