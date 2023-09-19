@@ -57,7 +57,7 @@ SE：该文档由SE进行维护，并参考该文档进行其他API、特性等�
 
 ### 功能架构
 
-![[./function.design.platform|function.design.platform]]
+[[./function.design.platform|function.design.platform]]
 
 ### 逻辑架构
 
