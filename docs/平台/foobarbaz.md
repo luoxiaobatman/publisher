@@ -18,7 +18,6 @@ category: 平台
 
 ### 范围
 
-
 该文档只包含基础平台的系统架构设计，基础平台的API设计、事件设计和特性设计由单独的文档描述，不包含在该文档中。
 
 该文档适用于SE、产品经理、研发经理、开发人员和测试人员。
@@ -47,10 +46,7 @@ SE：该文档由SE进行维护，并参考该文档进行其他API、特性等�
 
 基础平台实现用户、认证、资源和帐号等配置数据的集中管理，通过数据同步组件把相应的配置数据同步给堡垒机、ASCG、DataServer和UIAM等能力组件，借助能力组件实现运维通道、业务通道和文件通道等管控，如下图：
 
-<div style="page-break-after: always; visibility: hidden">\pagebreak<p>Pagebreak</p></div>
-
-
-<div style="page-break-after: always; visibility: hidden">\pagebreak<p>Pagebreak</p></div>
+![[../media/产品构成.excalidraw.svg|产品构成.excalidraw]]
 
 以下介绍的基础平台架构设计只包含平台本身，不包括堡垒机、ASCG、DataServer、UIAM等能力组件。
 
@@ -176,7 +172,6 @@ API网关采用traefik实现，traefik设计上考虑了更多的安全性，支
 
 子系统之间的业务数据交互如下图：
 
-
 基础平台各服务之间通过API网关实现数据交互。
 
 系统管理写入系统权限和系统配置，其中系统权限管理需要读用户信息、堡垒机管理需要读取资源信息。
@@ -224,7 +219,6 @@ API网关采用traefik实现，traefik设计上考虑了更多的安全性，支
 
 * 系统运行日志
 
-
 平台各服务运行产生的日志通过log4j把产生的日志以事件的形式发送到消息中心，由系统日志服务订阅事件，并把系统运行日志以服务进行区分、以文件形式记录到本地，便于前端通过界面下载系统各服务的运行日志。
 
 Web业务模块注解产生的日志会详细记录前端请求的参数，这些日志也会统一以文件形式记录到系统运行日志中，便于进行问题排查。
@@ -251,21 +245,20 @@ Web业务模块注解产生的日志会详细记录前端请求的参数，这�
 
 基于以上原则，基础平台需要缓存的数据种类如下：
 
-|   |   |   |   |
-|---|---|---|---|
-|需要缓存的数据|Key规划|使用场景|有效期**|
-|能力组件地址|PLATFORM_T_SYS_CAPBILITY_COMPONENT|数据同步、状态查询、接口调用时使用|30天|
-|短信服务器地址|PLATFORM_T_SYS_SMS|发短信时使用|30天|
-|邮件服务器地址|PLATFORM_T_SYS_MAIL|发邮件时使用|30天|
-|AD域/LDAP地址|PLATFORM_T_USER_AD|认证转发、数据同步或采集时使用|30天|
-|Radius服务器地址|PLATFORM_T_AUTHEN_RADIUS|认证转发时使用|30天|
-|日志外发地址|PLATFORM_T_SYS_LOG_SEND|日志外发时使用|30天|
-|系统参数|PLATFORM_T_SYS_PARAM_XXX|系统登录配置（登录错误几次有验证码、锁屏时间等）、系统应急配置等|30天|
-|资源和能力组件关系|PLATFORM_T_SYS_CAPBILITY_COMPONENT_RES#resId|数据同步和运维登录时，根据资源选择指定的能力组件|30天|
-|审计分析规则|PLATFORM_T_AUDIT_POLICY|审计日志分析时使用|30天|
-|文档管控Samba用户和密码|PLATFORM_T_SYS_DATASERVER_USER#userName|登录18版堡垒机时需要把DataServer的Samba的帐号和密码带过去|5分钟|
-|工具、协议及关联关系|PLATFORM_T_RES_PROTOCOL_TOOL#protocol|portal登录时使用|30天|
-|产品扩展|DSMP_ T_RISK_xxx|DSMP产品风险中心|Xxx|
+| 需要缓存的数据          | Key规划                                      | 使用场景                                                         | 有效期** | 
+| ----------------------- | -------------------------------------------- | ---------------------------------------------------------------- | -------- |
+| 能力组件地址            | PLATFORM_T_SYS_CAPBILITY_COMPONENT           | 数据同步、状态查询、接口调用时使用                               | 30天     |
+| 短信服务器地址          | PLATFORM_T_SYS_SMS                           | 发短信时使用                                                     | 30天     |
+| 邮件服务器地址          | PLATFORM_T_SYS_MAIL                          | 发邮件时使用                                                     | 30天     |
+| AD域/LDAP地址           | PLATFORM_T_USER_AD                           | 认证转发、数据同步或采集时使用                                   | 30天     |
+| Radius服务器地址        | PLATFORM_T_AUTHEN_RADIUS                     | 认证转发时使用                                                   | 30天     |
+| 日志外发地址            | PLATFORM_T_SYS_LOG_SEND                      | 日志外发时使用                                                   | 30天     |
+| 系统参数                | PLATFORM_T_SYS_PARAM_XXX                     | 系统登录配置（登录错误几次有验证码、锁屏时间等）、系统应急配置等 | 30天     |
+| 资源和能力组件关系      | PLATFORM_T_SYS_CAPBILITY_COMPONENT_RES#resId | 数据同步和运维登录时，根据资源选择指定的能力组件                 | 30天     |
+| 审计分析规则            | PLATFORM_T_AUDIT_POLICY                      | 审计日志分析时使用                                               | 30天     |
+| 文档管控Samba用户和密码 | PLATFORM_T_SYS_DATASERVER_USER#userName      | 登录18版堡垒机时需要把DataServer的Samba的帐号和密码带过去        | 5分钟    |
+| 工具、协议及关联关系    | PLATFORM_T_RES_PROTOCOL_TOOL#protocol        | portal登录时使用                                                 | 30天     |
+| 产品扩展                | DSMP_ T_RISK_xxx                             | DSMP产品风险中心                                                 | Xxx      |
 
 说明：
 
