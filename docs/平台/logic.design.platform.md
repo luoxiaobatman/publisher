@@ -10,6 +10,8 @@ platform: true
 category: 平台
 ---
 
+![[non_publish|non_publish]]
+
 Lorem ipsum dolor sit amet, (1) consectetur adipiscing elit. 
 { .annotate }
 
