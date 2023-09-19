@@ -59,7 +59,9 @@ SE：该文档由SE进行维护，并参考该文档进行其他API、特性等�
 
 系统架构设计从产品的功能架构、逻辑架构、功能架构、子系统划分、子系统核心功能说明、子系统之间的数据交互、业务流程、静态架构、产品集成、产品部署等方面进行描述。
 
-![[./function.design.platform|function.design.platform]]
+## 功能架构
+
+![[./function.design.platform#功能架构|function.design.platform]]
 
 ### 逻辑架构
 
