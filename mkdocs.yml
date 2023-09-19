@@ -3,6 +3,8 @@ site_description: A cool description of your site
 site_url: https://luoxiaobatman.github.io/publisher # Change this to your site URL
 
 theme:
+    icon:
+        annotation: material/arrow-right-circle
     name: 'material'
     logo: assets/meta/favicons.png
     favicon: assets/meta/favicons.png
@@ -41,6 +43,11 @@ theme:
         
 # Extensions
 markdown_extensions:
+  - pymdownx.tabbed:
+      alternate_style: true
+  - attr_list
+  - md_in_html
+  - pymdownx.superfences
   - footnotes
   - nl2br
   - attr_list
@@ -94,8 +101,8 @@ plugins:
       custom-attributes: 'assets/css/custom_attributes.css'
   - custom-attributes:
       file: 'assets/css/custom_attributes.css'
-  - tags:
-      tags_file: tags.md
+  #- tags:
+  #    tags_file: tags.md
   - encryptcontent:
       title_prefix: '🔐'
       summary: 'Private page'
