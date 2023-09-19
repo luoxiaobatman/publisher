@@ -30,3 +30,18 @@ Lorem ipsum dolor sit amet, (1) consectetur adipiscing elit.
 > >     { .annotate }
 > > 
 > >     1.  :woman_raising_hand: I'm an annotation as well!
+=======
+> [!faq] ff
+> === "Tab 1"
+> 
+>     Lorem ipsum dolor sit amet, (1) consectetur adipiscing elit.
+>     { .annotate }
+> 
+>     1.  :man_raising_hand: I'm an annotation!
+> 
+> === "Tab 2"
+> 
+>     Phasellus posuere in sem ut cursus (1)
+>     { .annotate }
+> 
+>     1.  :woman_raising_hand: I'm an annotation as well!
