@@ -5,7 +5,7 @@ title: 架构设计
 author: 罗潇
 cssclass: wideTable
 first-level: 2
-pdf-filename: 架构设计
+pdf-filename: 基础平台2.0架构设计
 platform: true
 category: 架构设计
 ---
