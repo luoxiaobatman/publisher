@@ -10,10 +10,6 @@ platform: true
 category: 平台
 ---
 
-foo
-
-![[../../non_publish|non_publish]]
-
 Lorem ipsum dolor sit amet, (1) consectetur adipiscing elit. 
 { .annotate }
 
