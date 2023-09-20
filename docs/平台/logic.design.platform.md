@@ -12,7 +12,7 @@ category: 平台
 
 foo
 
-![[../../tifa|tifa]]
+![[../../non_publish|non_publish]]
 
 Lorem ipsum dolor sit amet, (1) consectetur adipiscing elit. 
 { .annotate }
