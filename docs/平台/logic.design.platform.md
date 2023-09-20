@@ -10,22 +10,12 @@ platform: true
 category: 平台
 ---
 
-Lorem ipsum dolor sit amet, (1) consectetur adipiscing elit. 
-{ .annotate }
+### 逻辑架构
 
-1. I'm an annotation! I can contain `code`, __formatted_text__, images, ... basically anything that can be expressed in Markdown.
+整体逻辑架构分为视图、业务逻辑和数据层。
 
-> [!info] info
-> === "Tab 1"
-> 
->     Lorem ipsum dolor sit amet, (1) consectetur adipiscing elit.
->     { .annotate }
-> 
->     1.  :man_raising_hand: I'm an annotation!
-> 
-> === "Tab 2"
-> 
->     Phasellus posuere in sem ut cursus (1)
->     { .annotate }
-> 
->     1.  :woman_raising_hand: I'm an annotation as well!
+视图层提供前端展示，支持浏览器、api、PC端、移动端等多种访问手段，保证安全性都通过https进行访问。
+
+业务逻辑层实现认证、用户、资源、系统的业务逻辑处理和业务控制，除四大业务中心外，还包括API网关、消息中心、缓存中心、后台服务及进程守护程序。
+
+数据层实现数据存取，认证中心、用户管理、资源管理和系统管理数据库相互独立，可以单独部署，也可以在同一个库上运行四个数据库实例。
