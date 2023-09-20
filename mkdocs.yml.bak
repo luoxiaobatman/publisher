@@ -40,7 +40,7 @@ theme:
         - navigation.expand
         - search.suggest
         - search.highlight
-
+        
 # Extensions
 markdown_extensions:
   - pymdownx.tabbed:
