@@ -25,20 +25,38 @@ category: 预研
 - **简便使用**：您可以像使用任何其他Java
 
 ### 快速开始
-> [!info] 快速开始
+
+https://www.graalvm.org/downloads/
+
+> [!info] 环境准备
 > 
 > === "windows"
->     ``` bash
->     ls
->     ```
+>     参考:
+>     https://www.graalvm.org/jdk17/docs/getting-started/windows/
 > === "mac"
->     ```bash
->     ls
->     ```
+>     参考:
+>     https://www.graalvm.org/jdk17/docs/getting-started/macos/
 > === "linux"
->     ```bash
->     ls
->     ```
+>     参考:
+>     https://www.graalvm.org/jdk17/docs/getting-started/linux/
+
+编写HelloWorld
+```java
+public class HelloWorld {
+  public static void main(String[] args) {
+    System.out.println("Hello, World!");
+  }
+}
+```
+
+
+```
+javac HelloWorld.java
+native-image HelloWorld
+
+# 打印Hello, World!
+./helloworld
+```
 
 ### 特性
 
