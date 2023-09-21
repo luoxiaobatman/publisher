@@ -25,21 +25,22 @@ category: 预研
 - **简便使用**：您可以像使用任何其他Java
 
 ### 快速开始
-
-=== "windows"
-    ```bash
-    pull
-    ```
-
-=== "mac"
-    ```bash
-    ls
-    ```
-
-=== "linux"
-    ```bash
-    ls
-    ```
+> [!info] 快速开始
+> 
+> === "windows"
+> ``` bash
+> ls
+> ```
+> 
+> === "mac"
+> ```bash
+> ls
+> ```
+> 
+> === "linux"
+> ```bash
+> ls
+> ```
 
 ### 特性
 
