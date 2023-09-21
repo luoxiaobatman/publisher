@@ -10,6 +10,7 @@ platform: true
 category: 预研
 ---
 
+
 使用 GraalVM 的好处：
 
 - **预编译性能**：将 Java 应用预编译为独立的二进制文件，使得二进制文件更小，启动速度可达到100倍。
@@ -25,12 +26,20 @@ category: 预研
 
 ### 快速开始
 
-=== tab1
-    ffd
-=== tab2
-    ddf
+=== "windows"
+    ```bash
+    pull
+    ```
 
-### 快速开始
+=== "mac"
+    ```bash
+    ls
+    ```
+
+=== "linux"
+    ```bash
+    ls
+    ```
 
 ### 特性
 
