@@ -31,12 +31,10 @@ category: 预研
 > ``` bash
 > ls
 > ```
-> 
 > === "mac"
 > ```bash
 > ls
 > ```
-> 
 > === "linux"
 > ```bash
 > ls
