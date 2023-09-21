@@ -10,19 +10,27 @@ platform: true
 category: 预研
 ---
 
-GraalVM 可将您的 Java 应用程序预编译为独立的二进制文件。这些二进制文件更小，启动速度可快达100倍，无需预热即可提供最高性能，并且比运行在Java虚拟机(JVM)上的应用程序使用更少的内存和CPU。
+使用 GraalVM 的好处：
 
-GraalVM 减少了您应用的攻击面。它从应用二进制文件中排除了未使用的类、方法和字段。它只在构建时限制反射和其他动态Java语言特性。它在运行时不加载任何未知代码。
-
-受欢迎的微服务框架，如 Spring Boot、Micronaut、Helidon 和 Quarkus，以及云平台如 Oracle Cloud Infrastructure、Amazon Web Services、Google Cloud Platform 和 Microsoft Azure 都支持 GraalVM。
-
-通过使用基于配置的优化和 G1 (优先回收) 垃圾收集器，您可以获得更低的延迟，以及与运行在Java虚拟机(JVM)上的应用程序相当或更好的峰值性能和吞吐量。
-
-您可以在您的IDE中像使用任何其他Java开发套件一样使用GraalVM JDK。
+- **预编译性能**：将 Java 应用预编译为独立的二进制文件，使得二进制文件更小，启动速度可达到100倍。
+- **资源高效**：比运行在Java虚拟机(JVM)上的应用程序使用更少的内存和CPU。
+- **增强安全性**：
+    - 减少应用的攻击面。
+    - 从应用二进制文件中排除未使用的类、方法和字段。
+    - 只在构建时限制反射和其他动态Java语言特性。
+    - 不在运行时加载任何未知代码。
+- **广泛支持**：受欢迎的微服务框架如 Spring Boot、Micronaut、Helidon 和 Quarkus，以及主流云平台都支持 GraalVM。
+- **优化性能**：通过使用基于配置的优化和 G1 (优先回收) 垃圾收集器，可以获得更低的延迟和更好的峰值性能及吞吐量。
+- **简便使用**：您可以像使用任何其他Java
 
 ### 快速开始
 
+=== tab1
+    ffd
+=== tab2
+    ddf
 
+### 快速开始
 
 ### 特性
 
