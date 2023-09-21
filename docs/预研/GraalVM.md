@@ -26,7 +26,7 @@ category: 预研
 
 ### 快速开始
 
-https://www.graalvm.org/downloads/
+[GraalVM下载](https://www.graalvm.org/downloads/)
 
 > [!info] 环境准备
 > 
@@ -49,8 +49,8 @@ public class HelloWorld {
 }
 ```
 
-
-```
+编译,执行
+```bash
 javac HelloWorld.java
 native-image HelloWorld
 
