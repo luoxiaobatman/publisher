@@ -98,48 +98,48 @@ Native Image是将 Java 代码编译成的一个本地可执行程序。仅包�
 
 为了生成一个最小的图像，Native Image 还使用一个称为静态分析的过程。
 
-#### 什么是构建时和运行时
+#### 构建时和运行时
 
-```java
-public class HelloWorld {
-    static class Greeter {
-        static {
-            System.out.println("Greeter is getting ready!");
-        }
-        
-        public static void greet() {
-          System.out.println("Hello, World!");
-        }
-    }
-
-  public static void main(String[] args) {
-    Greeter.greet();
-  }
-}
-```
-
-=== "构建时"
-    ```bash
-    native-image HelloWorld --initialize-at-build-time=HelloWorld\$Greeter
-    ========================================================================================================================
-    GraalVM Native Image: Generating 'helloworld' (executable)...
-    ========================================================================================================================
-    Greeter is getting ready!
-    [1/7] Initializing...                                                                                    (3.1s @ 0.15GB)
-     Version info: 'GraalVM dev Java 11 EE'
-     Java version info: '11.0.15+4-jvmci-22.1-b02'
-     C compiler: gcc (linux, x86_64, 9.4.0)
-     Garbage collector: Serial GC
-    ...
-    Finished generating 'helloworld' in 13.6s.
-    ``` 
-=== "运行时"
-    ```bash
-    ./helloworld 
-    Hello, World!
-    ```
-
-可以明显看到构建时输出了`Greeter is getting ready!`, 而这是我们的static块里面的代码
+> [!code] 用一个例子说清楚
+> ```java
+> public class HelloWorld {
+>     static class Greeter {
+>         static {
+>             System.out.println("Greeter is getting ready!");
+>         }
+>         
+>         public static void greet() {
+>           System.out.println("Hello, World!");
+>         }
+>     }
+> 
+>   public static void main(String[] args) {
+>     Greeter.greet();
+>   }
+> }
+> ```
+> === "构建时"
+>     ```txt
+>     native-image HelloWorld --initialize-at-build-time=HelloWorld\$Greeter
+>     ========================================================================================================================
+>     GraalVM Native Image: Generating 'helloworld' (executable)...
+>     ========================================================================================================================
+>     # 可以明显看到构建时输出了`Greeter is getting ready!`, 而这是我们的static块里面的代码
+>     Greeter is getting ready!
+>     [1/7] Initializing...                                                                                    (3.1s @ 0.15GB)
+>      Version info: 'GraalVM dev Java 11 EE'
+>      Java version info: '11.0.15+4-jvmci-22.1-b02'
+>      C compiler: gcc (linux, x86_64, 9.4.0)
+>      Garbage collector: Serial GC
+>     ...
+>     Finished generating 'helloworld' in 13.6s.
+>     ``` 
+> === "运行时"
+>     ```bash
+>     ./helloworld 
+>     # 没有输出`Greeter is getting ready!`
+>     Hello, World!
+>     ```
 
 
 #### 图像堆
