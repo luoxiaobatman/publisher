@@ -28,13 +28,13 @@ category: 预研
 > [!info] 快速开始
 > 
 > === "windows"
->     ``` bash
->     ls
->     ```
+> ``` bash
+> ls
+> ```
 > === "mac"
->     ```bash
->     ls
->     ```
+> ```bash
+> ls
+> ```
 > === "linux"
 > ```bash
 > ls
