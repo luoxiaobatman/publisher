@@ -32,7 +32,6 @@ GraalVM 为部署和运行 Java 应用程序提供了一种新方法。与 Java 
 >     - 不在运行时加载任何未知代码。
 > - **广泛支持**：受欢迎的微服务框架如 Spring Boot、Micronaut、Helidon 和 Quarkus，以及主流云平台都支持 GraalVM。
 > - **优化性能**：通过使用基于配置的优化和 G1 (优先回收) 垃圾收集器，可以获得更低的延迟和更好的峰值性能及吞吐量。
-> - **简便使用**：您可以像使用任何其他Java
 
 
 ### 快速开始
@@ -40,18 +39,13 @@ GraalVM 为部署和运行 Java 应用程序提供了一种新方法。与 Java 
 > [!info] 环境准备
 > 
 > === "windows"
->     参考:
->     https://www.graalvm.org/jdk17/docs/getting-started/windows/
->     需要安装Visual Studio, 配置好一些列环境变量, 具体参考
+>     安装Visual Studio, 配置列环境变量
+>     参考: https://www.graalvm.org/jdk17/docs/getting-started/windows/
 > === "mac"
->     参考:
->     https://www.graalvm.org/jdk17/docs/getting-started/macos/
 >     ```bash
 >     xcode-select --install
 >     ```
 > === "linux"
->     参考:
->     https://www.graalvm.org/jdk17/docs/getting-started/linux/
 >     ```bash
 >     # 使用YUM包管理器
 >     sudo yum install gcc glibc-devel zlib-devel
@@ -60,56 +54,51 @@ GraalVM 为部署和运行 Java 应用程序提供了一种新方法。与 Java 
 >     # DNF
 >     sudo dnf install gcc glibc-devel zlib-devel libstdc++-static
 >     ```
-> 准备好环境后, 就可以去[下载GraalVM](https://www.graalvm.org/downloads/)    
+>     参考: https://www.graalvm.org/jdk17/docs/getting-started/linux/
+> 准备好环境后, 便开始[下载GraalVM](https://www.graalvm.org/downloads/)    
 
 > [!info] HelloWorld
-> > [!info] 编码
-> > ```java
-> > public class HelloWorld {
-> >   public static void main(String[] args) {
-> >     System.out.println("Hello, World!");
-> >   }
-> > }
-> > ```
+> ```java
+> public class HelloWorld {
+>   public static void main(String[] args) {
+>     System.out.println("Hello, World!");
+>   }
+> }
+> ```
 >
-> > [!info] 编译,执行
-> > ```bash
-> > javac HelloWorld.java
-> > native-image HelloWorld
-> > 
-> > # 打印Hello, World!
-> > ./helloworld
-> > ```
+> ```bash
+> javac HelloWorld.java
+> native-image HelloWorld
+> 
+> # 打印Hello, World!
+> ./helloworld
+> ```
 
-### 特性
+### 什么是Native Image
 
-#### 什么是Native Image
-
-Native Image可以提前将 Java 代码编译成二进制文件——一个本地可执行程序。仅包括运行时所需的代码，即应用程序类、标准库类、语言运行时以及来自 JDK 的静态链接的本地代码。
+Native Image是将 Java 代码编译成的一个本地可执行程序。仅包括运行时所需的代码，即应用程序类、标准库类、语言运行时以及来自 JDK 的静态链接的本地代码。
 
 使用 Native Image 生成的可执行文件具有几个重要的优点：
 
-- 运行成本更低, 只需 Java 虚拟机所需资源的一小部分。
+- 运行成本更低。
 - 在毫秒内启动。
 - 立即提供峰值性能，无需预热。
-- 可被打包成轻量级的容器镜像，便于快速、高效地部署。
+- 打包成轻量级的容器镜像，便于快速、高效地部署。
 - 减少攻击面。
 
-可执行文件是由 Native Image 构建器或 `native-image` 工具创建，该工具为特定的操作系统创建一个二进制文件。首先，`native-image` 工具对您的代码进行静态分析，以确定在应用程序运行时可达的类和方法。
+可执行文件是由 `native-image` 工具创建，该工具为特定的操作系统创建一个二进制文件。
 
-`native-image` 工具可用于构建本地可执行程序（默认）或本地共享库。
+### 大致的构建过程
 
-### 工作原理
+接受 Java 字节码作为输入，产生一个独立的二进制文件。在生成二进制文件的过程中，Native Image 可以运行用户代码。最后，Native Image 将编译过的用户代码、Java 运行时的部分内容（例如，垃圾收集器、线程支持等）以及代码执行的结果链接到二进制文件中。
 
-Native Image 接受 Java 字节码作为输入，产生一个独立的二进制文件（一个可执行程序或一个共享库）。在生成二进制文件的过程中，Native Image 可以运行用户代码。最后，Native Image 将编译过的用户代码、Java 运行时的部分内容（例如，垃圾收集器、线程支持等）以及代码执行的结果链接到二进制文件中。
+这个二进制文件称为Native Image。将生成这个文件的工具称为 native-image 构建器。
 
-这个二进制文件称为原生可执行程序或Native Image。将生成这个二进制文件的工具称为 native-image 构建器或 native-image 生成器。
-
-为了清楚地区分在Native Image构建期间执行的代码和在Native Image执行期间执行的代码，称这两者之间的差异为构建时(buildtime)和运行时间时(runtime)。
+为区分在Native Image构建期间执行的代码和在Native Image执行期间执行的代码，称这两者之间的差异为构建时(buildtime)和运行时(runtime)。
 
 为了生成一个最小的图像，Native Image 还使用一个称为静态分析的过程。
 
-#### 构建时和运行时
+#### 什么是构建时和运行时
 
 ```java
 public class HelloWorld {
@@ -129,49 +118,37 @@ public class HelloWorld {
 }
 ```
 
-```
-javac HelloWorld.java
-java HelloWorld 
-Greeter is getting ready!
-Hello, World!
-```
+=== "构建时"
+    ```bash
+    native-image HelloWorld --initialize-at-build-time=HelloWorld\$Greeter
+    ========================================================================================================================
+    GraalVM Native Image: Generating 'helloworld' (executable)...
+    ========================================================================================================================
+    Greeter is getting ready!
+    [1/7] Initializing...                                                                                    (3.1s @ 0.15GB)
+     Version info: 'GraalVM dev Java 11 EE'
+     Java version info: '11.0.15+4-jvmci-22.1-b02'
+     C compiler: gcc (linux, x86_64, 9.4.0)
+     Garbage collector: Serial GC
+    ...
+    Finished generating 'helloworld' in 13.6s.
+    ``` 
+=== "运行时"
+    ```bash
+    ./helloworld 
+    Hello, World!
+    ```
 
-```
-native-image HelloWorld
-========================================================================================================================
-GraalVM Native Image: Generating 'helloworld' (executable)...
-========================================================================================================================
-...
-Finished generating 'helloworld' in 14.9s.
-./helloworld 
-Greeter is getting ready!
-Hello, World!
-```
+可以明显看到构建时输出了`Greeter is getting ready!`, 而这是我们的static块里面的代码
 
-```
-native-image HelloWorld --initialize-at-build-time=HelloWorld\$Greeter
-========================================================================================================================
-GraalVM Native Image: Generating 'helloworld' (executable)...
-========================================================================================================================
-Greeter is getting ready!
-[1/7] Initializing...                                                                                    (3.1s @ 0.15GB)
- Version info: 'GraalVM dev Java 11 EE'
- Java version info: '11.0.15+4-jvmci-22.1-b02'
- C compiler: gcc (linux, x86_64, 9.4.0)
- Garbage collector: Serial GC
-...
-Finished generating 'helloworld' in 13.6s.
-./helloworld 
-Hello, World!
-```
 
 #### 图像堆
-包括:
+主要以下三个部分:
 - 在图像构建期间创建的、从应用程序代码可达的对象。
 - 在Native Image中使用的类的 `java.lang.Class` 对象。
 - 嵌入在方法代码中的对象常量。
 
-当Native Image二进制启动时，会从二进制文件复制初始的图像堆。
+当Native Image二进制启动时，会从二进制文件复制图像堆。
 
 举个例子
 ```java
@@ -214,8 +191,6 @@ Hello, World! My message is: native
 
 
 ### SpringBoot3一起使用
-
-
 
 #### 快速开始
 
