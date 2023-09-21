@@ -62,24 +62,24 @@ GraalVM 为部署和运行 Java 应用程序提供了一种新方法。与 Java 
 >     ```
 > 准备好环境后, 就可以去[下载GraalVM](https://www.graalvm.org/downloads/)    
 
-
-编写HelloWorld
-```java
-public class HelloWorld {
-  public static void main(String[] args) {
-    System.out.println("Hello, World!");
-  }
-}
-```
-
-编译,执行
-```bash
-javac HelloWorld.java
-native-image HelloWorld
-
-# 打印Hello, World!
-./helloworld
-```
+> [!info] HelloWorld
+> > [!info] 编码
+> > ```java
+> > public class HelloWorld {
+> >   public static void main(String[] args) {
+> >     System.out.println("Hello, World!");
+> >   }
+> > }
+> > ```
+>
+> > [!info] 编译,执行
+> > ```bash
+> > javac HelloWorld.java
+> > native-image HelloWorld
+> > 
+> > # 打印Hello, World!
+> > ./helloworld
+> > ```
 
 ### 特性
 
