@@ -88,7 +88,7 @@ Native Image是将 Java 代码编译成的一个本地可执行程序。仅包�
 
 可执行文件是由 `native-image` 工具创建，该工具为特定的操作系统创建一个二进制文件。
 
-### 大致的构建过程
+### 构建过程
 
 接受 Java 字节码作为输入，产生一个独立的二进制文件。在生成二进制文件的过程中，Native Image 可以运行用户代码。最后，Native Image 将编译过的用户代码、Java 运行时的部分内容（例如，垃圾收集器、线程支持等）以及代码执行的结果链接到二进制文件中。
 
@@ -175,7 +175,6 @@ Finished generating 'example' in 19.0s.
 ./example 
 Hello, World! My message is: native
 ```
-
 
 #### 静态分析
 
