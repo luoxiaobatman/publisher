@@ -11,3 +11,8 @@ category: 预研
 ---
 
 GraalVM
+
+
+参考文档 [^1]
+
+[^1]: https://www.graalvm.org/jdk17/docs/introduction/
