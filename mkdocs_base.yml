@@ -38,6 +38,7 @@ theme:
         - navigation.tabs.sticky
         - navigation.expand
         - navigation.path
+        - navigation.sections
 #        - toc.integrate
         - search.suggest
         - search.highlight
