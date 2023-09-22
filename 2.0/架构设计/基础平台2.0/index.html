@@ -5,7 +5,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
-<meta content="启明星辰天榕产品事业部" name="description"/>
+<meta content="设计目标与原则：" name="description"/>
 <meta content="罗潇" name="author"/>
 <link href="../../%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90/%E8%BF%90%E8%A1%8C%E6%97%B6%E5%8A%9F%E8%83%BD/" rel="prev"/>
 <link href="../../%E6%A6%82%E8%A6%81%E8%AE%BE%E8%AE%A1/" rel="next"/>
@@ -25,8 +25,8 @@
 <meta content="None" name="site_url"/>
 <meta content="基础平台2.0" property="og:title"/>
 <meta content="基础平台2.0" name="twitter:title"/>
-<meta content="启明星辰天榕产品事业部" name="description"/>
-<meta content="启明星辰天榕产品事业部" name="twitter:description"/>
+<meta content="设计目标与原则：" name="description"/>
+<meta content="设计目标与原则：" name="twitter:description"/>
 <meta content="summary_large_image" name="twitter:card"/>
 <meta content="Noneassets/meta/SEO.png" property="og:image"/>
 <meta content="Noneassets/meta/SEO.png" name="twitter:image"/>
@@ -696,33 +696,46 @@
 </tr>
 </tbody>
 </table>
-<p><strong>启明星辰天榕产品事业部</strong></p>
 <div class="admonition info">
 <p class="admonition-title">TLDR</p>
 <ol>
-<li><strong>简介：</strong><br/>
-   - 该文档介绍了基础平台2.0的架构设计，涵盖功能架构、逻辑架构、开发架构、运行架构和物理架构。<br/>
-   - 旨在为研发人员提供一个对基础平台的深入理解，并为其业务功能的快速开发提供支持。<br/>
-   - 文档主要适用于SE、研发经理和开发人员阅读。</li>
+<li><strong>简介：</strong><ul>
+<li>该文档介绍了基础平台2.0的架构设计，涵盖功能架构、逻辑架构、开发架构、运行架构和物理架构。</li>
+<li>旨在为研发人员提供一个对基础平台的深入理解，并为其业务功能的快速开发提供支持。</li>
+<li>文档主要适用于SE、研发经理和开发人员阅读。</li>
+</ul>
+</li>
 <li>
-<p><strong>设计目标与原则：</strong><br/>
-   - <strong>设计目标：</strong></p>
+<p><strong>设计目标与原则：</strong></p>
 <ul>
+<li><strong>设计目标：</strong><ul>
 <li>简化技术难度，降低人力成本。</li>
 <li>提供公共服务，避免重复劳动。</li>
 <li>平台代码和产品代码进行隔离。</li>
 <li>提供多种部署方式，包括低资源消耗或高性能支撑。</li>
-<li><strong>关键功能：</strong></li>
+</ul>
+</li>
+<li><strong>关键功能：</strong><ul>
 <li>包括网关服务、系统服务、用户服务、消息模块和公共代码。</li>
-<li><strong>关键质量属性：</strong></li>
+</ul>
+</li>
+<li><strong>关键质量属性：</strong><ul>
 <li>详细列出了硬件配置和性能要求。</li>
 <li>着重强调了规范性、易用性和接口化。</li>
-<li><strong>部署方式：</strong></li>
+</ul>
+</li>
+<li><strong>部署方式：</strong><ul>
 <li>提供低资源部署、高性能部署和容器化部署三种方式。</li>
-<li><strong>设计约束：</strong></li>
+</ul>
+</li>
+<li><strong>设计约束：</strong><ul>
 <li>对服务间交互和操作系统交互都有明确的约束。</li>
-<li><strong>设计原则：</strong></li>
+</ul>
+</li>
+<li><strong>设计原则：</strong><ul>
 <li>功能与业务功能隔离，强调配置与扩展的重要性。</li>
+</ul>
+</li>
 </ul>
 </li>
 <li>
@@ -740,27 +753,6 @@
   - 功能服务包括系统管理、用户管理和资产管理。<br/>
   - 中间件主要依赖Postgresql，但不强依赖Kafka和Redis。</p>
 </li>
-</ol>
-</div>
-<div class="admonition info">
-<p class="admonition-title">补充</p>
-<ol>
-<li><strong>安全性</strong>：<br/>
-   - 在多数的平台设计中，安全性是非常关键的部分。可以进一步详细描述关于平台如何处理数据加密、网络安全、入侵检测、日志审计等方面的内容。</li>
-<li><strong>灾难恢复和备份</strong>：<br/>
-   - 对于任何平台，数据备份和灾难恢复是不可或缺的。可以详细描述备份策略、恢复策略，以及如何确保数据的一致性和完整性。</li>
-<li><strong>性能监测与优化</strong>：<br/>
-   - 怎样监测平台的性能？是否有任何内建的工具或第三方工具来帮助监测？当性能下降时，有哪些预定的优化策略？</li>
-<li><strong>文档的更新和版本控制</strong>：<br/>
-   - 如何确保文档是最新的？有没有一个版本控制策略来跟踪架构的变化？</li>
-<li><strong>用户反馈和持续改进</strong>：<br/>
-   - 平台是否有机制来收集用户反馈？这些反馈如何被用于后续的版本中进行改进？</li>
-<li><strong>集成与兼容性</strong>：<br/>
-   - 如果其他系统或应用需要与这个平台集成，是否有预定义的APIs或SDKs？平台是如何确保与其他系统的兼容性？</li>
-<li><strong>扩展性</strong>：<br/>
-   - 如何处理未来的功能需求或扩展？架构是否足够灵活以支持新增的模块或服务？</li>
-<li><strong>培训和支持</strong>：<br/>
-   - 为新的开发人员、SE或研发经理提供哪些培训资源？有没有在线帮助、教程或社区论坛？</li>
 </ol>
 </div>
 <h2 id="1">1. <strong>简介</strong><a class="headerlink" href="#1" title="Permanent link">¶</a></h2>
