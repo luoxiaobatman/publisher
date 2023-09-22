@@ -10,4 +10,4 @@ platform: true
 category: 数据库设计
 ---
 
-数据库设计index
+数据库设计

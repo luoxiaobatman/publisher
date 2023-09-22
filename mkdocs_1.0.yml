@@ -1,0 +1,13 @@
+INHERIT: ./mkdocs_base.yml
+
+site_name: 基础平台 # Change this to your site name
+site_description: 基础平台
+
+plugins:
+    awesome-pages:
+        filename: .pages_10
+    exclude:
+        glob:
+            - 架构设计/基础平台2.0*
+            - 需求分析/*
+            - 预研/*

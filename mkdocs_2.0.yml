@@ -5,11 +5,12 @@ site_description: 基础平台
 
 plugins:
     awesome-pages:
-        filename: .pages
+        filename: .pages_20
     exclude:
         glob:
-#        - 架构设计/基础平台2.0*
+            - 架构设计/基础平台1.0*
 #        - 需求分析/*
 #        - 数据库设计/*
-#        - 接口设计/[!{i}]*
-#        - 概要设计/[!{i}]*
+            - 接口设计/[!{i}]*
+            - 概要设计/[!{i}]*
+            - 详细设计/[!{i}]*
