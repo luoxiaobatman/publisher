@@ -207,13 +207,15 @@ public class MyApplication {
     String home() {
         return "Hello World!";
     }
-
     public static void main(String[] args) {
-        SpringApplication.run(MyApplication.class, args);
+        SpringApplication.run(MyApplication.class, args); // (1)
     }
 
 }
 ```
+
+1. :man_raising_hand: I'm a code annotation! I can contain `code`, __formatted [](https://squidfunk.github.io/mkdocs-material/reference/code-blocks/#__codelineno-15-8)text__, images, ... basically anything that can be written in Markdown.
+
 
 > [!info] maven构建docker镜像
 > 
