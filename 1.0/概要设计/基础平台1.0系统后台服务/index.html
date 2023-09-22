@@ -1,0 +1,1397 @@
+
+<!DOCTYPE html>
+
+<html class="no-js" lang="zh">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<meta content="基础平台" name="description"/>
+<meta content="罗潇" name="author"/>
+<link href="../%E5%9F%BA%E7%A1%80%E5%B9%B3%E5%8F%B01.0%E8%B5%84%E4%BA%A7%E7%AE%A1%E7%90%86/" rel="prev"/>
+<link href="../../%E8%AF%A6%E7%BB%86%E8%AE%BE%E8%AE%A1/%E5%B8%90%E5%8F%B7%E6%A0%B8%E6%9F%A5%E6%94%B9%E7%9B%B8%E5%85%B3/" rel="next"/>
+<link href="../../assets/meta/favicon.ico" rel="icon"/>
+<meta content="mkdocs-1.5.3, mkdocs-material-9.3.1" name="generator"/>
+<title>基础平台1.0系统后台服务 - 基础平台</title>
+<link href="../../assets/stylesheets/main.046329b4.min.css" rel="stylesheet"/>
+<link href="../../assets/stylesheets/palette.85d0ee34.min.css" rel="stylesheet"/>
+<style>:root{--md-annotation-icon:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22 12a10 10 0 0 1-10 10A10 10 0 0 1 2 12 10 10 0 0 1 12 2a10 10 0 0 1 10 10M6 13h8l-3.5 3.5 1.42 1.42L17.84 12l-5.92-5.92L10.5 7.5 14 11H6v2Z"/></svg>');}</style>
+<link href="../../assets/css/custom_attributes.css" rel="stylesheet"/>
+<script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+<script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.min.js"></script>
+<script src="https://unpkg.com/tippy.js@6/dist/tippy-bundle.umd.js"></script>
+<link href="https://unpkg.com/tippy.js@6/animations/scale-subtle.css" rel="stylesheet"/>
+<link href="https://unpkg.com/tippy.js@6/themes/translucent.css" rel="stylesheet"/>
+<link crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" referrerpolicy="no-referrer" rel="stylesheet"/>
+<meta content="None" name="site_url"/>
+<meta content="基础平台1.0系统后台服务" property="og:title"/>
+<meta content="基础平台1.0系统后台服务" name="twitter:title"/>
+<meta content="基础平台" name="og:description"/>
+<meta content="基础平台" name="twitter:description"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Noneassets/meta/SEO.png" property="og:image"/>
+<meta content="Noneassets/meta/SEO.png" name="twitter:image"/>
+<link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+            html.glightbox-open { overflow: initial; height: 100%; }
+            .gslide-title { margin-top: 0px; user-select: text; }
+            .gslide-desc { color: #666; user-select: text; }
+            .gslide-image img { background: white; }
+            
+                .gscrollbar-fixer { padding-right: 15px; }
+                .gdesc-inner { font-size: 0.75rem; }
+                body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+                body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+                body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}
+                </style><script src="../../assets/javascripts/glightbox.min.js"></script></head>
+<body data-md-color-accent="light-blue" data-md-color-primary="teal" data-md-color-scheme="default" dir="ltr">
+<script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+<input autocomplete="off" class="md-toggle" data-md-toggle="drawer" id="__drawer" type="checkbox"/>
+<input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
+<label class="md-overlay" for="__drawer"></label>
+<div data-md-component="skip">
+<a class="md-skip" href="#111">
+          跳转至
+        </a>
+</div>
+<div data-md-component="announce">
+</div>
+<div data-md-color-scheme="default" data-md-component="outdated" hidden="">
+</div>
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+<nav aria-label="页眉" class="md-header__inner md-grid">
+<a aria-label="基础平台" class="md-header__button md-logo" data-md-component="logo" href="../.." title="基础平台">
+<img alt="logo" src="../../assets/meta/favicons.png"/>
+</a>
+<label class="md-header__button md-icon" for="__drawer">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"></path></svg>
+</label>
+<div class="md-header__title" data-md-component="header-title">
+<div class="md-header__ellipsis">
+<div class="md-header__topic">
+<span class="md-ellipsis">
+            基础平台
+          </span>
+</div>
+<div class="md-header__topic" data-md-component="header-topic">
+<span class="md-ellipsis">
+            
+              基础平台1.0系统后台服务
+            
+          </span>
+</div>
+</div>
+</div>
+<form class="md-header__option" data-md-component="palette">
+<input aria-label="Switch to dark mode" class="md-option" data-md-color-accent="light-blue" data-md-color-media="(prefers-color-scheme: light)" data-md-color-primary="teal" data-md-color-scheme="default" id="__palette_1" name="__palette" type="radio"/>
+<label class="md-header__button md-icon" for="__palette_2" hidden="" title="Switch to dark mode">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6zm0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4zM7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"></path></svg>
+</label>
+<input aria-label="Switch to light mode" class="md-option" data-md-color-accent="indigo" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-primary="blue" data-md-color-scheme="slate" id="__palette_2" name="__palette" type="radio"/>
+<label class="md-header__button md-icon" for="__palette_1" hidden="" title="Switch to light mode">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3Z"></path></svg>
+</label>
+</form>
+<label class="md-header__button md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"></path></svg>
+</label>
+<div class="md-search" data-md-component="search" role="dialog">
+<label class="md-search__overlay" for="__search"></label>
+<div class="md-search__inner" role="search">
+<form class="md-search__form" name="search">
+<input aria-label="搜索" autocapitalize="off" autocomplete="off" autocorrect="off" class="md-search__input" data-md-component="search-query" name="query" placeholder="搜索" required="" spellcheck="false" type="text"/>
+<label class="md-search__icon md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"></path></svg>
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"></path></svg>
+</label>
+<nav aria-label="查找" class="md-search__options">
+<a aria-label="分享" class="md-search__icon md-icon" data-clipboard="" data-clipboard-text="" data-md-component="search-share" href="javascript:void(0)" tabindex="-1" title="分享">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7 0-.24-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91 1.61 0 2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08Z"></path></svg>
+</a>
+<button aria-label="清空当前内容" class="md-search__icon md-icon" tabindex="-1" title="清空当前内容" type="reset">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"></path></svg>
+</button>
+</nav>
+<div class="md-search__suggest" data-md-component="search-suggest"></div>
+</form>
+<div class="md-search__output">
+<div class="md-search__scrollwrap" data-md-scrollfix="">
+<div class="md-search-result" data-md-component="search-result">
+<div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+<ol class="md-search-result__list" role="presentation"></ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+</nav>
+<nav aria-label="标签" class="md-tabs" data-md-component="tabs">
+<div class="md-grid">
+<ul class="md-tabs__list">
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="../../%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/%E5%9F%BA%E7%A1%80%E5%B9%B3%E5%8F%B01.0/">
+          
+  
+    
+  
+  架构设计
+
+        </a>
+</li>
+<li class="md-tabs__item md-tabs__item--active">
+<a class="md-tabs__link" href="../%E5%9F%BA%E7%A1%80%E5%B9%B3%E5%8F%B01.0%E6%80%BB%E4%BD%93%E8%AE%BE%E8%AE%A1/">
+          
+  
+    
+  
+  概要设计
+
+        </a>
+</li>
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="../../%E8%AF%A6%E7%BB%86%E8%AE%BE%E8%AE%A1/%E5%B8%90%E5%8F%B7%E6%A0%B8%E6%9F%A5%E6%94%B9%E7%9B%B8%E5%85%B3/">
+          
+  
+    
+  
+  详细设计
+
+        </a>
+</li>
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="../../%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BE%E8%AE%A1/">
+          
+  
+    
+  
+  数据库设计
+
+        </a>
+</li>
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="../../%E6%8E%A5%E5%8F%A3%E8%AE%BE%E8%AE%A1/%E5%9F%BA%E7%A1%80%E5%B9%B3%E5%8F%B01.0%E5%9F%BA%E4%BA%8B%E4%BB%B6%E6%BA%90%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3/">
+          
+  
+    
+  
+  接口设计
+
+        </a>
+</li>
+</ul>
+</div>
+</nav>
+</header>
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="导航栏" class="md-nav md-nav--primary md-nav--lifted" data-md-level="0">
+<label class="md-nav__title" for="__drawer">
+<a aria-label="基础平台" class="md-nav__button md-logo" data-md-component="logo" href="../.." title="基础平台">
+<img alt="logo" src="../../assets/meta/favicons.png"/>
+</a>
+    基础平台
+  </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_1" type="checkbox"/>
+<label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+<span class="md-ellipsis">
+    架构设计
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_1_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_1">
+<span class="md-nav__icon md-icon"></span>
+            架构设计
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/%E5%9F%BA%E7%A1%80%E5%B9%B3%E5%8F%B01.0/">
+<span class="md-ellipsis">
+    基础平台1.0
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--active md-nav__item--nested">
+<input checked="" class="md-nav__toggle md-toggle" id="__nav_2" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+<span class="md-ellipsis">
+    概要设计
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="true" aria-labelledby="__nav_2_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_2">
+<span class="md-nav__icon md-icon"></span>
+            概要设计
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item md-nav__item--active md-nav__item--nested">
+<input checked="" class="md-nav__toggle md-toggle" id="__nav_2_1" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+<span class="md-ellipsis">
+    基础平台1.0
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="true" aria-labelledby="__nav_2_1_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_1">
+<span class="md-nav__icon md-icon"></span>
+            基础平台1.0
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../%E5%9F%BA%E7%A1%80%E5%B9%B3%E5%8F%B01.0%E6%80%BB%E4%BD%93%E8%AE%BE%E8%AE%A1/">
+<span class="md-ellipsis">
+    基础平台1.0总体设计
+  </span>
+</a>
+</li>
+<li class="md-nav__item md-nav__item--active md-nav__item--nested">
+<input checked="" class="md-nav__toggle md-toggle" id="__nav_2_1_2" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_1_2" id="__nav_2_1_2_label" tabindex="0">
+<span class="md-ellipsis">
+    功能设计
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="true" aria-labelledby="__nav_2_1_2_label" class="md-nav" data-md-level="3">
+<label class="md-nav__title" for="__nav_2_1_2">
+<span class="md-nav__icon md-icon"></span>
+            功能设计
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../%E5%9F%BA%E7%A1%80%E5%B9%B3%E5%8F%B01.0%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86/">
+<span class="md-ellipsis">
+    基础平台1.0用户管理
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../%E5%9F%BA%E7%A1%80%E5%B9%B3%E5%8F%B01.0%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86/">
+<span class="md-ellipsis">
+    基础平台1.0系统管理
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../%E5%9F%BA%E7%A1%80%E5%B9%B3%E5%8F%B01.0%E8%B5%84%E4%BA%A7%E7%AE%A1%E7%90%86/">
+<span class="md-ellipsis">
+    基础平台1.0资产管理
+  </span>
+</a>
+</li>
+<li class="md-nav__item md-nav__item--active">
+<input class="md-nav__toggle md-toggle" id="__toc" type="checkbox"/>
+<label class="md-nav__link md-nav__link--active" for="__toc">
+<span class="md-ellipsis">
+    基础平台1.0系统后台服务
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<a class="md-nav__link md-nav__link--active" href="./">
+<span class="md-ellipsis">
+    基础平台1.0系统后台服务
+  </span>
+</a>
+<nav aria-label="目录" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#111">
+    1.1.1 系统后台服务
+  </a>
+<nav aria-label="1.1.1 系统后台服务" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#1111">
+    1.1.1.1 通知服务
+  </a>
+<nav aria-label="1.1.1.1 通知服务" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#11111">
+    1.1.1.1.1功能描述
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#11112">
+    1.1.1.1.2功能设计
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#111121">
+    1.1.1.1.2.1事件处理
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#1112">
+    1.1.1.2 邮件服务
+  </a>
+<nav aria-label="1.1.1.2 邮件服务" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#11121">
+    1.1.1.2.1功能描述
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#11122">
+    1.1.1.2.2功能设计
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#111221">
+    1.1.1.2.2.1事件处理
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#1113">
+    1.1.1.3 短信服务
+  </a>
+<nav aria-label="1.1.1.3 短信服务" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#11131">
+    1.1.1.3.1功能描述
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#11132">
+    1.1.1.3.2功能设计
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#111321">
+    1.1.1.3.2.1事件处理
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#1114api">
+    1.1.1.4 API网关
+  </a>
+<nav aria-label="1.1.1.4 API网关" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#11141">
+    1.1.1.4.1权限处理
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#11142">
+    1.1.1.4.2路由配置
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#1115">
+    1.1.1.5 日志服务
+  </a>
+<nav aria-label="1.1.1.5 日志服务" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#11151">
+    1.1.1.5.1功能描述
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#11152">
+    1.1.1.5.2功能设计
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#111521">
+    1.1.1.5.2.1日志外发
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#111522">
+    1.1.1.5.2.2系统登录日志
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#111523">
+    1.1.1.5.2.3系统操作日志
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#111524">
+    1.1.1.5.2.4系统运行日志
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#1116">
+    1.1.1.6 定时任务服务
+  </a>
+<nav aria-label="1.1.1.6 定时任务服务" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#11161">
+    1.1.1.6.1功能描述
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#11162">
+    1.1.1.6.2功能设计
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#1117">
+    1.1.1.7 数据同步服务
+  </a>
+<nav aria-label="1.1.1.7 数据同步服务" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#11171">
+    1.1.1.7.1功能描述
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#11172">
+    1.1.1.7.2功能设计
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#111721">
+    1.1.1.7.2.1能力组件新增事件数据同步
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#111722">
+    1.1.1.7.2.2组织机构增删改事件数据同步
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#111723">
+    1.1.1.7.2.3用户增删改事件数据同步
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#111724">
+    1.1.1.7.2.4资源组增删改事件数据同步
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#111725">
+    1.1.1.7.2.5系统资源增删改事件数据同步
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#111726">
+    1.1.1.7.2.6应用资源增删改事件数据同步
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#111727">
+    1.1.1.7.2.7资源帐号增删改事件数据同步
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#111728">
+    1.1.1.7.2.8资源组关联能力组件数据同步
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#111729">
+    1.1.1.7.2.9资源组取消关联能力组件数据同步
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#1117210">
+    1.1.1.7.2.10能力组件删除事件数据同步
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#1118root">
+    1.1.1.8 系统配置服务(ROOT)
+  </a>
+<nav aria-label="1.1.1.8 系统配置服务(ROOT)" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#11181">
+    1.1.1.8.1功能描述
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#11182">
+    1.1.1.8.2功能设计
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#111821">
+    1.1.1.8.2.1 网络时间配置
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#111822">
+    1.1.1.8.2.2事件处理
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#1119root">
+    1.1.1.9 配置备份服务(ROOT)
+  </a>
+<nav aria-label="1.1.1.9 配置备份服务(ROOT)" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#11191">
+    1.1.1.9.1功能描述
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#11192">
+    1.1.1.9.2功能设计
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#111921">
+    1.1.1.9.2.1定时备份
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#111922">
+    1.1.1.9.2.2事件处理
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#11110root">
+    1.1.1.10 升级服务(ROOT)
+  </a>
+<nav aria-label="1.1.1.10 升级服务(ROOT)" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#111101">
+    1.1.1.10.1功能描述
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#111102">
+    1.1.1.10.2功能设计
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#11111root">
+    1.1.1.11 主备服务(ROOT)
+  </a>
+<nav aria-label="1.1.1.11 主备服务(ROOT)" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#111111">
+    1.1.1.11.1功能描述
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#111112">
+    1.1.1.11.2功能设计
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_3" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+<span class="md-ellipsis">
+    详细设计
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_3_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_3">
+<span class="md-nav__icon md-icon"></span>
+            详细设计
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_3_1" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+<span class="md-ellipsis">
+    基础平台1.0
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_3_1_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_3_1">
+<span class="md-nav__icon md-icon"></span>
+            基础平台1.0
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../%E8%AF%A6%E7%BB%86%E8%AE%BE%E8%AE%A1/%E5%B8%90%E5%8F%B7%E6%A0%B8%E6%9F%A5%E6%94%B9%E7%9B%B8%E5%85%B3/">
+<span class="md-ellipsis">
+    帐号核查改相关
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_4" type="checkbox"/>
+<div class="md-nav__link md-nav__container">
+<a class="md-nav__link" href="../../%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BE%E8%AE%A1/">
+<span class="md-ellipsis">
+    数据库设计
+  </span>
+</a>
+</div>
+<nav aria-expanded="false" aria-labelledby="__nav_4_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_4">
+<span class="md-nav__icon md-icon"></span>
+            数据库设计
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_5" type="checkbox"/>
+<label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+<span class="md-ellipsis">
+    接口设计
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_5_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_5">
+<span class="md-nav__icon md-icon"></span>
+            接口设计
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_5_1" type="checkbox"/>
+<label class="md-nav__link" for="__nav_5_1" id="__nav_5_1_label" tabindex="0">
+<span class="md-ellipsis">
+    基础平台1.0
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_5_1_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_5_1">
+<span class="md-nav__icon md-icon"></span>
+            基础平台1.0
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../%E6%8E%A5%E5%8F%A3%E8%AE%BE%E8%AE%A1/%E5%9F%BA%E7%A1%80%E5%B9%B3%E5%8F%B01.0%E5%9F%BA%E4%BA%8B%E4%BB%B6%E6%BA%90%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3/">
+<span class="md-ellipsis">
+    基础平台1.0基事件源设计文档
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../%E6%8E%A5%E5%8F%A3%E8%AE%BE%E8%AE%A1/%E5%9F%BA%E7%A1%80%E5%B9%B3%E5%8F%B01.0%E6%8E%A5%E5%8F%A3%E8%AE%BE%E8%AE%A1%E8%A7%84%E8%8C%83/">
+<span class="md-ellipsis">
+    基础平台1.0接口设计规范
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../%E6%8E%A5%E5%8F%A3%E8%AE%BE%E8%AE%A1/%E5%9F%BA%E7%A1%80%E5%B9%B3%E5%8F%B01.0%E7%94%A8%E6%88%B7api%E8%AE%BE%E8%AE%A1/">
+<span class="md-ellipsis">
+    基础平台1.0用户api设计
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../%E6%8E%A5%E5%8F%A3%E8%AE%BE%E8%AE%A1/%E5%9F%BA%E7%A1%80%E5%B9%B3%E5%8F%B01.0%E7%B3%BB%E7%BB%9Fapi%E8%AE%BE%E8%AE%A1/">
+<span class="md-ellipsis">
+    基础平台1.0系统api设计
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../%E6%8E%A5%E5%8F%A3%E8%AE%BE%E8%AE%A1/%E5%9F%BA%E7%A1%80%E5%B9%B3%E5%8F%B01.0%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86%E4%BA%8B%E4%BB%B6%E6%BA%90%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3/">
+<span class="md-ellipsis">
+    基础平台1.0系统管理事件源设计文档
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../%E6%8E%A5%E5%8F%A3%E8%AE%BE%E8%AE%A1/%E5%9F%BA%E7%A1%80%E5%B9%B3%E5%8F%B01.0%E8%B5%84%E6%BA%90%E4%B8%AD%E5%BF%83API%E6%8E%A5%E5%8F%A3%E8%AE%BE%E8%AE%A1/">
+<span class="md-ellipsis">
+    基础平台1.0资源中心API接口设计
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../%E6%8E%A5%E5%8F%A3%E8%AE%BE%E8%AE%A1/%E5%9F%BA%E7%A1%80%E5%B9%B3%E5%8F%B01.0%E8%B5%84%E6%BA%90%E4%B8%AD%E5%BF%83%E4%BA%8B%E4%BB%B6%E6%BA%90%E8%AE%BE%E8%AE%A1/">
+<span class="md-ellipsis">
+    基础平台1.0资源中心事件源设计
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="目录" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#111">
+    1.1.1 系统后台服务
+  </a>
+<nav aria-label="1.1.1 系统后台服务" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#1111">
+    1.1.1.1 通知服务
+  </a>
+<nav aria-label="1.1.1.1 通知服务" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#11111">
+    1.1.1.1.1功能描述
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#11112">
+    1.1.1.1.2功能设计
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#111121">
+    1.1.1.1.2.1事件处理
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#1112">
+    1.1.1.2 邮件服务
+  </a>
+<nav aria-label="1.1.1.2 邮件服务" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#11121">
+    1.1.1.2.1功能描述
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#11122">
+    1.1.1.2.2功能设计
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#111221">
+    1.1.1.2.2.1事件处理
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#1113">
+    1.1.1.3 短信服务
+  </a>
+<nav aria-label="1.1.1.3 短信服务" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#11131">
+    1.1.1.3.1功能描述
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#11132">
+    1.1.1.3.2功能设计
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#111321">
+    1.1.1.3.2.1事件处理
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#1114api">
+    1.1.1.4 API网关
+  </a>
+<nav aria-label="1.1.1.4 API网关" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#11141">
+    1.1.1.4.1权限处理
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#11142">
+    1.1.1.4.2路由配置
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#1115">
+    1.1.1.5 日志服务
+  </a>
+<nav aria-label="1.1.1.5 日志服务" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#11151">
+    1.1.1.5.1功能描述
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#11152">
+    1.1.1.5.2功能设计
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#111521">
+    1.1.1.5.2.1日志外发
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#111522">
+    1.1.1.5.2.2系统登录日志
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#111523">
+    1.1.1.5.2.3系统操作日志
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#111524">
+    1.1.1.5.2.4系统运行日志
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#1116">
+    1.1.1.6 定时任务服务
+  </a>
+<nav aria-label="1.1.1.6 定时任务服务" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#11161">
+    1.1.1.6.1功能描述
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#11162">
+    1.1.1.6.2功能设计
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#1117">
+    1.1.1.7 数据同步服务
+  </a>
+<nav aria-label="1.1.1.7 数据同步服务" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#11171">
+    1.1.1.7.1功能描述
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#11172">
+    1.1.1.7.2功能设计
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#111721">
+    1.1.1.7.2.1能力组件新增事件数据同步
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#111722">
+    1.1.1.7.2.2组织机构增删改事件数据同步
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#111723">
+    1.1.1.7.2.3用户增删改事件数据同步
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#111724">
+    1.1.1.7.2.4资源组增删改事件数据同步
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#111725">
+    1.1.1.7.2.5系统资源增删改事件数据同步
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#111726">
+    1.1.1.7.2.6应用资源增删改事件数据同步
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#111727">
+    1.1.1.7.2.7资源帐号增删改事件数据同步
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#111728">
+    1.1.1.7.2.8资源组关联能力组件数据同步
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#111729">
+    1.1.1.7.2.9资源组取消关联能力组件数据同步
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#1117210">
+    1.1.1.7.2.10能力组件删除事件数据同步
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#1118root">
+    1.1.1.8 系统配置服务(ROOT)
+  </a>
+<nav aria-label="1.1.1.8 系统配置服务(ROOT)" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#11181">
+    1.1.1.8.1功能描述
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#11182">
+    1.1.1.8.2功能设计
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#111821">
+    1.1.1.8.2.1 网络时间配置
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#111822">
+    1.1.1.8.2.2事件处理
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#1119root">
+    1.1.1.9 配置备份服务(ROOT)
+  </a>
+<nav aria-label="1.1.1.9 配置备份服务(ROOT)" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#11191">
+    1.1.1.9.1功能描述
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#11192">
+    1.1.1.9.2功能设计
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#111921">
+    1.1.1.9.2.1定时备份
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#111922">
+    1.1.1.9.2.2事件处理
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#11110root">
+    1.1.1.10 升级服务(ROOT)
+  </a>
+<nav aria-label="1.1.1.10 升级服务(ROOT)" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#111101">
+    1.1.1.10.1功能描述
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#111102">
+    1.1.1.10.2功能设计
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#11111root">
+    1.1.1.11 主备服务(ROOT)
+  </a>
+<nav aria-label="1.1.1.11 主备服务(ROOT)" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#111111">
+    1.1.1.11.1功能描述
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#111112">
+    1.1.1.11.2功能设计
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<!--
+  Copyright (c) 2016-2023 Martin Donath <martin.donath@squidfunk.com>
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to
+  deal in the Software without restriction, including without limitation the
+  rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+  sell copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in
+  all copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+  IN THE SOFTWARE.
+-->
+<!-- Tags -->
+<!-- Actions -->
+<!--
+  Hack: check whether the content contains a h1 headline. If it doesn't, the
+  page title (or respectively site name) is used as the main headline.
+-->
+<h1>基础平台1.0系统后台服务</h1>
+<!-- Page content -->
+<h4 id="111">1.1.1 <strong>系统</strong><strong>后台服务</strong><a class="headerlink" href="#111" title="Permanent link">¶</a></h4>
+<h5 id="1111">1.1.1.1 <strong>通知</strong><strong>服务</strong><a class="headerlink" href="#1111" title="Permanent link">¶</a></h5>
+<h6 id="11111">1.1.1.1.1<strong>功能</strong><strong>描述</strong><a class="headerlink" href="#11111" title="Permanent link">¶</a></h6>
+<p>通知服务监听kafka需发送短信或邮件相关事件,调用系统管理API获取配置的模板完成通知内容组装后发送对应的邮件或短信发送事件(邮件/短信通过不同topic来区分是发送短信还是发送邮件)</p>
+<h6 id="11112">1.1.1.1.2<strong>功能</strong><strong>设计</strong><a class="headerlink" href="#11112" title="Permanent link">¶</a></h6>
+<h6 id="111121">1.1.1.1.2.1<strong>事件</strong><strong>处理</strong><a class="headerlink" href="#111121" title="Permanent link">¶</a></h6>
+<p>1. 短信登录事件</p>
+<p>监控kafka消息队列里短信登录事件,解析消息参数后发送邮件,调用系统服务配置平台参数查询接口完成短信内容组装后(包含消息接受人电话号码,消息内容),发送短信发送事件,短信服务接收到短信发送事件后完成短信发送任务</p>
+<p>2. 邮件登录事件</p>
+<p>监控kafka消息队列里邮件登录事件,解析消息参数后发送邮件,调用系统服务配置平台参数查询接口完成邮件内容组装后(包含消息接受人邮箱地址,消息内容),发送邮件发送事件,邮件服务接收到邮件发送事件后完成邮件发送任务</p>
+<p>3. 主备切换事件</p>
+<p>监控kafka消息队列里主备切换事件,调用系统服务配置平台参数查询接口获取主备告警配置, 若配置了邮件告警完成邮件内容组装后(包含消息接受人邮箱地址,消息内容),发送邮件发送事件,邮件服务接收到邮件发送事件后完成邮件发送任务</p>
+<p>若配置了短信告警完成短信内容组装后(包含消息接受人电话号码,消息内容),发送短信发送事件,短信服务接收到短信发送事件后完成短信发送任务</p>
+<p>4. 改密事件</p>
+<p>监控kafka消息队列里改密事件,调用系统服务配置平台参数查询接口获取改密配置, 若配置了邮件告警完成邮件内容组装后(包含消息接受人邮箱地址,消息内容),发送邮件发送事件,邮件服务接收到邮件发送事件后完成邮件发送任务</p>
+<p>若配置了短信告警完成短信内容组装后(包含消息接受人电话号码,消息内容),发送短信发送事件,短信服务接收到短信发送事件后完成短信发送任务</p>
+<p>5. 账号解锁事件</p>
+<p>监控kafka消息队列里账号解锁事件,调用系统服务配置平台参数查询接口获取账号解锁配置, 若配置了邮件告警完成邮件内容组装后(包含消息接受人邮箱地址,消息内容),发送邮件发送事件,邮件服务接收到邮件发送事件后完成邮件发送任务</p>
+<p>若配置了短信告警完成短信内容组装后(包含消息接受人电话号码,消息内容),发送短信发送事件,短信服务接收到短信发送事件后完成短信发送任务</p>
+<p>6. 能力组件告警事件</p>
+<p>监控kafka消息队列里能力组件告警事件,调用系统服务配置平台参数查询接口获取能力组件告警配置, 若配置了邮件告警完成邮件内容组装后(包含消息接受人邮箱地址,消息内容),发送邮件发送事件,邮件服务接收到邮件发送事件后完成邮件发送任务</p>
+<p>若配置了短信告警完成短信内容组装后(包含消息接受人电话号码,消息内容),发送短信发送事件,短信服务接收到短信发送事件后完成短信发送任务</p>
+<p>7. 服务器告警事件</p>
+<p>监控kafka消息队列里服务器告警事件,调用系统服务配置平台参数查询接口获取服务器告警配置, 若配置了邮件告警完成邮件内容组装后(包含消息接受人邮箱地址,消息内容),发送邮件发送事件,邮件服务接收到邮件发送事件后完成邮件发送任务</p>
+<p>若配置了短信告警完成短信内容组装后(包含消息接受人电话号码,消息内容),发送短信发送事件,短信服务接收到短信发送事件后完成短信发送任务</p>
+<h5 id="1112">1.1.1.2 <strong>邮件</strong><strong>服务</strong><a class="headerlink" href="#1112" title="Permanent link">¶</a></h5>
+<h6 id="11121">1.1.1.2.1<strong>功能</strong><strong>描述</strong><a class="headerlink" href="#11121" title="Permanent link">¶</a></h6>
+<p>监听kafka的邮件发送事件完成邮件发送和服务拨测动作</p>
+<h6 id="11122">1.1.1.2.2<strong>功能</strong><strong>设计</strong><a class="headerlink" href="#11122" title="Permanent link">¶</a></h6>
+<h6 id="111221">1.1.1.2.2.1<strong>事件</strong><strong>处理</strong><a class="headerlink" href="#111221" title="Permanent link">¶</a></h6>
+<p>1. 邮件发送事件</p>
+<p>监控kafka消息队列里的邮件发送事件,当收到邮件发送解析消息参数后发送邮件,发送完成后发送邮件完成事件</p>
+<p>2. 配置拨测事件</p>
+<p>监控kafka消息队列里的 配置拨测事件,当收到配置拨测事件后解析事件参数尝试发送测试邮件后</p>
+<p>重新发送拨测结果事件，系统服务监听事件，完成配置状态更新</p>
+<h5 id="1113">1.1.1.3 <strong>短信</strong><strong>服务</strong><a class="headerlink" href="#1113" title="Permanent link">¶</a></h5>
+<h6 id="11131">1.1.1.3.1<strong>功能</strong><strong>描述</strong><a class="headerlink" href="#11131" title="Permanent link">¶</a></h6>
+<p>监听kafka的短信发送事件完成短信发送和短信配置拨测动作</p>
+<h6 id="11132">1.1.1.3.2<strong>功能</strong><strong>设计</strong><a class="headerlink" href="#11132" title="Permanent link">¶</a></h6>
+<h6 id="111321">1.1.1.3.2.1<strong>事件</strong><strong>处理</strong><a class="headerlink" href="#111321" title="Permanent link">¶</a></h6>
+<p>1. 短信发送事件</p>
+<p>监控kafka消息队列里的短信发送事件,当收到短信发送解析消息参数后发送邮件,发送完成后发送短信完成事件</p>
+<p>2. 配置拨测事件</p>
+<p>监控kafka消息队列里的 配置拨测事件,当收到配置拨测事件后解析事件参数尝试发送测试短信后, 重新发送拨测结果事件，系统服务监听事件,完成配置状态更新</p>
+<h5 id="1114api">1.1.1.4 <strong>API网关</strong><a class="headerlink" href="#1114api" title="Permanent link">¶</a></h5>
+<h6 id="11141">1.1.1.4.1<strong>权限处理</strong><a class="headerlink" href="#11141" title="Permanent link">¶</a></h6>
+<p>权限管理时序图：</p>
+<p> <a class="glightbox" data-desc-position="bottom" data-height="auto" data-width="100%" href="file:////private/var/folders/rl/gchkw9l93p149mmyj8t07w280000gn/T/com.kingsoft.wpsoffice.mac.global/wps-xiaoluo/ksohtml//wps88.jpg"><img alt="" src="file:////private/var/folders/rl/gchkw9l93p149mmyj8t07w280000gn/T/com.kingsoft.wpsoffice.mac.global/wps-xiaoluo/ksohtml//wps88.jpg"/></a></p>
+<p>流程图：</p>
+<p> <a class="glightbox" data-desc-position="bottom" data-height="auto" data-width="100%" href="file:////private/var/folders/rl/gchkw9l93p149mmyj8t07w280000gn/T/com.kingsoft.wpsoffice.mac.global/wps-xiaoluo/ksohtml//wps89.png"><img alt="" src="file:////private/var/folders/rl/gchkw9l93p149mmyj8t07w280000gn/T/com.kingsoft.wpsoffice.mac.global/wps-xiaoluo/ksohtml//wps89.png"/></a></p>
+<p>网关鉴权说明：</p>
+<p>当网关收到请求时，根据URL判断请求是否需要鉴权，不需要鉴权的直接执行反向代理；对于需要鉴权的请求，将请求转发给鉴权服务器校验权限，权限校验通过时鉴权服务器将返回HTTP 200响应（响应头中携带有包含用户信息的）给网关，网关收到[200,300)之间的HTTP 响应码时将请求反向代理到后端服务器；校验失败返回非HTTP [200,300)之间的状态码给网关，网关不会执行后续步骤，直接将鉴权服务器的响应原样返回给客户端。</p>
+<p>鉴权服务器说明：</p>
+<p>鉴权服务器收到鉴权请求，首先判断是否登录。未登录的，返回HTTP重定向到cas登录服务器给网关，网关将重定向返回给客户端，引导客户端去登录，登录成功后cas登录服务器携带票据ticket重定向到网关，网关将请求转发给鉴权服务器，鉴权服务器判断票据是否有效，无效则再次返回登录重定向引导客户端去登录；票据合法则返回重定向设置cookie来标识当前请求已登录，重定向地址为当前请求地址，随后网关再次收到请求并将请求转发给鉴权服务器，鉴权服务器判断已登录，就校验已登录用户是否有权限访问当前URL，校验通过返回HTTP 200 并在响应头中携带用户信息JWT给网关，网关收到[200,300)之间的HTTP 响应码时将请求反向代理到后端服务器；校验失败返回非HTTP 403状态码给网关，网关不会执行后续步骤，直接将鉴权服务器的403响应原样返回给客户端。</p>
+<h6 id="11142">1.1.1.4.2<strong>路由配置</strong><a class="headerlink" href="#11142" title="Permanent link">¶</a></h6>
+<p>网关采用 traefik，路由、路由入口点、service 提供者配置使用静态配置，通过文件配置好，其中service配置为从http 接口中获取，这个http接口由系统管理及组件监控提供。service 对应的应用地址，由各个模块在自己的配置文件中配置好并在启动的时候自动将信息注册到 zookeeper 中，系统管理和组件监控服务在启动时除了将自身注册到zookeeper中，还会配置一个提供traefik service信息的api，这个api在收到请求时会从zookeeper中近乎实时的（本地缓存1-2秒）读取服务注册的信息然后组装成traefik 网关需要的service信息，traefik将会5s定时从这个api中取出service的配置，从而做到服务发现实现动态路由；当服务离线后，zookeeper中的service信息将会被自动删除，traefik从http 接口中获取到的service信息将会减少，从而感知到服务离线；当系统管理或者组件监控其中一个服务离线，对traefik 无影响，当两个都离线时，traefik无法获取新的service信息，traefik已有的老的service信息不会改变，直到系统管理和组件监控服务其中之一或全部重新上线。如下图所示：</p>
+<p><a class="glightbox" data-desc-position="bottom" data-height="auto" data-width="100%" href="file:////private/var/folders/rl/gchkw9l93p149mmyj8t07w280000gn/T/com.kingsoft.wpsoffice.mac.global/wps-xiaoluo/ksohtml//wps90.png"><img alt="" src="file:////private/var/folders/rl/gchkw9l93p149mmyj8t07w280000gn/T/com.kingsoft.wpsoffice.mac.global/wps-xiaoluo/ksohtml//wps90.png"/></a></p>
+<h5 id="1115">1.1.1.5 <strong>日志</strong><strong>服务</strong><a class="headerlink" href="#1115" title="Permanent link">¶</a></h5>
+<h6 id="11151">1.1.1.5.1<strong>功能</strong><strong>描述</strong><a class="headerlink" href="#11151" title="Permanent link">¶</a></h6>
+<p>系统日志服务为后台服务，提供所有子系统和服务的日志记录功能。所有子系统和服务把日志通过消息中心给系统日志服务，由系统日志服务完成日志持久化及日志外发动作。系统登录日志和系统操作日志清理在定时任务组件中处理。</p>
+<h6 id="11152">1.1.1.5.2<strong>功能</strong><strong>设计</strong><a class="headerlink" href="#11152" title="Permanent link">¶</a></h6>
+<h6 id="111521">1.1.1.5.2.1<strong>日志外发</strong><a class="headerlink" href="#111521" title="Permanent link">¶</a></h6>
+<p>外发日志格式为json，当从kafka订阅收到日志的时候，根据日志外发配置决定是否外发、通过何种协议外发，确定外发及外发协议后将日志提交到外发日志队列中，交由日志外发线程池异步发送，不影响后续从kafka收日志。发送的json包含 content（日志内容，从kafka收到的日志内容）、type（日志类型，系统登录日志、系统操作日志、系统运行日志、能力组件日志）、module（日志所属模块，用户管理、系统管理、资源管理）字段。</p>
+<h6 id="111522">1.1.1.5.2.2<strong>系统登录日志</strong><a class="headerlink" href="#111522" title="Permanent link">¶</a></h6>
+<p>订阅kafka系统登录日志相关 topic，收到日志后记录到数据库系统登录日志表中。</p>
+<h6 id="111523">1.1.1.5.2.3<strong>系统操作日志</strong><a class="headerlink" href="#111523" title="Permanent link">¶</a></h6>
+<p>订阅kafka系统操作日志相关 topic，收到日志后记录到数据库系统操作日志表中。</p>
+<h6 id="111524">1.1.1.5.2.4<strong>系统运行日志</strong><a class="headerlink" href="#111524" title="Permanent link">¶</a></h6>
+<p>订阅kafka系统运行日志相关 topic，收到日志后通过log4j记录到文件中，日志保留最近七天。</p>
+<h5 id="1116">1.1.1.6 <strong>定时</strong><strong>任务服务</strong><a class="headerlink" href="#1116" title="Permanent link">¶</a></h5>
+<h6 id="11161">1.1.1.6.1<strong>功能</strong><strong>描述</strong><a class="headerlink" href="#11161" title="Permanent link">¶</a></h6>
+<p>完成用户核查等固定频率任务</p>
+<h6 id="11162">1.1.1.6.2<strong>功能</strong><strong>设计</strong><a class="headerlink" href="#11162" title="Permanent link">¶</a></h6>
+<ol>
+<li>用户核查任务</li>
+</ol>
+<p>调用用户管理API对用户进行僵尸，孤儿相关核查任务</p>
+<ol start="2">
+<li>能力组件状态采集</li>
+</ol>
+<p>能力组件包括2018堡垒机，ASCG</p>
+<p>1.调用系统管理服务能力组件API获取能力组件的配置信息，然后调用能力组件状态采集接口完成状态数据采集,最后调用系统管理服务接口上报能力组件状态数据</p>
+<p>2. 调用系统管理能力服务组件API获取能力组件的配置信息，然后调用版本查询接口完成查询能力组件版本信息,最后调用系统管理服务接口上报能力组件版本信息</p>
+<ol start="3">
+<li>调用系统服务参数配置接口获取服务磁盘阈值配置信息，检测系统是否需要清理系统操作日志、系统登录日志，当磁盘使用达到90%的时候，一次删除一天的系统登录日志和系统操作日志，直到磁盘使用低于90%</li>
+</ol>
+<h5 id="1117">1.1.1.7 <strong>数据</strong><strong>同步服务</strong><a class="headerlink" href="#1117" title="Permanent link">¶</a></h5>
+<h6 id="11171">1.1.1.7.1<strong>功能</strong><strong>描述</strong><a class="headerlink" href="#11171" title="Permanent link">¶</a></h6>
+<p>日志服务监听kafka用户服务,资源服务数据变更事件后补齐数据调用系统服务API查询对应的能力组件配置,调用各能力组件接口完成用户数据,资源数据同步</p>
+<h6 id="11172">1.1.1.7.2<strong>功能</strong><strong>设计</strong><a class="headerlink" href="#11172" title="Permanent link">¶</a></h6>
+<p>1.堡垒机数据同步</p>
+<p>2.ASCG数据同步</p>
+<h6 id="111721">1.1.1.7.2.1<strong>能力组件新增事件数据同步</strong><a class="headerlink" href="#111721" title="Permanent link">¶</a></h6>
+<p>1、 调用堡垒机或ASCG接口通知它们已经在基础平台上进行了注册。</p>
+<p>2、 调用用户管理服务组织机构查询查询接口获取所有组织机构信息，然后将组织信息封装，调用堡垒机、ASCG组织机构新增接口同步组织机构数据到能力组件。</p>
+<p>3、 调用用户管理服务用户查询接口获取所有用户信息，然后将用户信息封装，调用堡垒机、ASCG用户新增接口同步用户数据到能力组件。</p>
+<h6 id="111722">1.1.1.7.2.2<strong>组织机构增删改事件数据同步</strong><a class="headerlink" href="#111722" title="Permanent link">¶</a></h6>
+<p>1、 新增组织机构事件：从事件中拿到新增的组织机构信息，封装数据，然后调用堡垒机、ASCG新增组织机构接口同步组织机构数据。</p>
+<p>2、 修改组织机构事件：从事件中拿到修改的组织机构信息，封装数据，然后调用堡垒机、ASCG修改组织机构接口同步组织机构数据。</p>
+<p>3、 删除组织机构事件：从事件中拿到删除的组织机构信息，封装数据，然后调用堡垒机、ASCG删除组织机构接口同步组织机构数据。</p>
+<h6 id="111723">1.1.1.7.2.3<strong>用户增删改事件数据同步</strong><a class="headerlink" href="#111723" title="Permanent link">¶</a></h6>
+<p>1、 新增用户事件：从事件中拿到新增的用户信息，封装数据，然后调用堡垒机、ASCG新增用户接口同步用户数据。</p>
+<p>2、 修改用户事件：从事件中拿到修改的用户信息，封装数据，然后调用堡垒机、ASCG修改用户接口同步用户数据。</p>
+<p>3、 删除用户事件：从事件中拿到删除的用户信息，封装数据，然后调用堡垒机、ASCG删除用户接口同步用户数据。</p>
+<h6 id="111724">1.1.1.7.2.4<strong>资源组增删改事件数据同步</strong><a class="headerlink" href="#111724" title="Permanent link">¶</a></h6>
+<p>1、 新增资源组事件：从事件中拿到新增的资源组信息，封装数据，然后调用堡垒机新增资源组接口同步资源组数据。</p>
+<p>2、 修改资源组事件：从事件中拿到修改的资源组信息，封装数据，然后调用堡垒机修改资源组接口同步资源组数据。</p>
+<p>3、 删除资源组事件：从事件中拿到删除的资源组信息，封装数据，然后调用堡垒机删除资源组接口同步资源组数据。</p>
+<h6 id="111725">1.1.1.7.2.5<strong>系统资源增删改事件数据同步</strong><a class="headerlink" href="#111725" title="Permanent link">¶</a></h6>
+<p>1、 新增系统资源事件：从事件中拿到新增的资源信息，封装数据，然后调用堡垒机新增资源接口同步资源数据；从事件中拿到资源绑定的协议信息，然后调用堡垒机服务新增接口。</p>
+<p>2、 修改系统资源事件：从事件中拿到修改的资源信息，封装数据，然后调用堡垒机修改资源接口同步资源数据；从事件中拿到资源绑定的协议信息，与原来资源下绑定的协议信息进行比对，如果有新增的协议，那么调用堡垒机协议新增接口，如果是修改的协议，那么调用堡垒机协议修改接口，如果是删除的协议，那么调用堡垒机协议删除接口。</p>
+<p>3、 删除系统资源事件：从事件中拿到删除的资源信息，封装数据，然后调用堡垒机删除资源接口同步资源数据。</p>
+<h6 id="111726">1.1.1.7.2.6<strong>应用资源增删改事件数据同步</strong><a class="headerlink" href="#111726" title="Permanent link">¶</a></h6>
+<p>1、 新增应用资源事件：从事件中拿到新增的资源信息，封装数据，然后调用ASCG新增资源接口同步资源数据。</p>
+<p>2、 修改应用资源事件：从事件中拿到修改的资源信息，封装数据，然后调用ASCG修改资源接口同步资源数据。</p>
+<p>3、 删除应用资源事件：从事件中拿到删除的资源信息，封装数据，然后调用ASCG删除资源接口同步资源数据。</p>
+<h6 id="111727">1.1.1.7.2.7<strong>资源帐号增删改事件数据同步</strong><a class="headerlink" href="#111727" title="Permanent link">¶</a></h6>
+<p>1、 新增帐号事件：从事件中拿到新增的帐号信息，封装数据，然后调用堡垒机、ASCG新增帐号接口同步帐号数据。</p>
+<p>2、 修改帐号事件：从事件中拿到修改的帐号信息，封装数据，然后调用堡垒机、ASCG修改帐号接口同步帐号数据。</p>
+<p>3、 删除帐号事件：从事件中拿到删除的帐号信息，封装数据，然后调用堡垒机、ASCG删除帐号接口同步帐号数据。</p>
+<h6 id="111728">1.1.1.7.2.8<strong>资源组关联能力组件数据同步</strong><a class="headerlink" href="#111728" title="Permanent link">¶</a></h6>
+<p>1、 调用资源管理服务获取关联的资源组信息，然后封装数据，调用堡垒机资源组新增接口同步资源组信息到堡垒机。（ASCG不需要同步资源组数据）</p>
+<p>2、 调用资源管理服务获取资源组下的所有资源，然后封装数据，调用堡垒机或ASCG资源新增接口同步资源信息到堡垒机或ASCG。如果是系统资源，那么从获取到的资源信息中拿到协议信息，调用堡垒机协议新增接口同步协议信息到堡垒机。</p>
+<p>3、 调用资源管理服务获取资源组下资源的所有帐号信息，然后封装数据，调用堡垒机或ASCG帐号新增接口同步帐号信息到堡垒机或ASCG。</p>
+<h6 id="111729">1.1.1.7.2.9<strong>资源组取消关联能力组件数据同步</strong><a class="headerlink" href="#111729" title="Permanent link">¶</a></h6>
+<p>1、 调用资源管理服务获取资源组下资源的所有帐号信息，然后封装数据，调用堡垒机或ASCG帐号删除接口同步帐号信息到堡垒机或ASCG。</p>
+<p>2、 调用资源管理服务获取资源组下的所有资源，然后封装数据，调用堡垒机或ASCG资源删除接口同步资源信息到堡垒机或ASCG。</p>
+<p>3、 调用资源管理服务获取取消关联的资源组信息，然后封装数据，调用堡垒机资源组删除接口同步资源组信息到堡垒机。</p>
+<h6 id="1117210">1.1.1.7.2.10<strong>能力组件删除事件数据同步</strong><a class="headerlink" href="#1117210" title="Permanent link">¶</a></h6>
+<p>1、 调用堡垒机或ASCG接口通知它们已经在基础平台上取消了注册。</p>
+<p>2、 至于能力组件需不需要删除由基础平台同步的数据由能力组件自行决定。</p>
+<h5 id="1118root">1.1.1.8 <strong>系统</strong><strong>配置服务</strong><strong>(ROOT)</strong><a class="headerlink" href="#1118root" title="Permanent link">¶</a></h5>
+<h6 id="11181">1.1.1.8.1<strong>功能</strong><strong>描述</strong><a class="headerlink" href="#11181" title="Permanent link">¶</a></h6>
+<p>该服务运行在宿主机上,提供网络,时间和主机上运行的组件状态,主机CPU 内存 磁盘使用率上报,以及监听kafka事件实现系统网络配置,时间配置,电源配置功能</p>
+<h6 id="11182">1.1.1.8.2<strong>功能设计</strong><a class="headerlink" href="#11182" title="Permanent link">¶</a></h6>
+<h6 id="111821">1.1.1.8.2.1 <strong>网络时间</strong><strong>配置</strong><a class="headerlink" href="#111821" title="Permanent link">¶</a></h6>
+<p>1.服务启动时,通过系统调用获取当前主机的网络配置信息和时间配置信息,调用系统管理网络配置接口上报当前机器网络配置信息,网络配置包括IP,NETMASK,GATEWAY,DNS以及接口速率,时间配置信息包含当前系统所在时区和当前系统支持的时区,NTP启用/禁用状态,NTP服务器地址,系统服务通过读取数据库网络获取时间配置和网络的配置信息</p>
+<p>2.系统服务在启动后每30s上报一次网络配置,时间配置,以及系统状态数据(CPU负载,磁盘信息,内存),以及系统运行组件状态信息</p>
+<h6 id="111822">1.1.1.8.2.2<strong>事件</strong><strong>处理</strong><a class="headerlink" href="#111822" title="Permanent link">¶</a></h6>
+<p>1.网络配置事件</p>
+<p>系统配置服务监控kafka消息队列里的 网络配置事件,当收到网络配置事件</p>
+<p>l 根据消息参数中的主机标识判断是否与本机匹配,如果匹配调用系统API修改主机的网络配置</p>
+<p>l 发送网络配置完成事件</p>
+<p>2.时间配置事件</p>
+<p>系统配置服务监控kafka消息队列里的 时间配置事件,当收到事件配置事件</p>
+<p>根据消息参数中的主机标识判断是否与本机匹配,如果匹配后调用系统API修改主机的时间配置</p>
+<p>3.电源配置事件</p>
+<p>系统配置服务监控kafka消息队列里的 电源配置事件,当收到事件配置事件</p>
+<p>根据消息参数中的主机标识判断是否与本机匹配,如果匹配后调用系统API重启或关闭主机</p>
+<p>4.网络变更完成事件</p>
+<p>更新hosts文件中对应的 域名和ip的映射关系</p>
+<p>5.服务启动事件</p>
+<p>系统配置服务监控kafka消息队列里的 服务启停事件,当收到事件配置事件读取对应的事件参数调用supervisor API 完成服务启停后调用系统组件接口上报对应的组件状态信息</p>
+<h5 id="1119root">1.1.1.9 <strong>配置</strong><strong>备份服务</strong><strong>(ROOT)</strong><a class="headerlink" href="#1119root" title="Permanent link">¶</a></h5>
+<h6 id="11191">1.1.1.9.1<strong>功能</strong><strong>描述</strong><a class="headerlink" href="#11191" title="Permanent link">¶</a></h6>
+<p>该服务运行在宿主机上,完成定时备份数据库,以及监听kafka的手工配置备份事件和恢复配置备份事件</p>
+<h6 id="11192">1.1.1.9.2<strong>功能</strong><strong>设计</strong><a class="headerlink" href="#11192" title="Permanent link">¶</a></h6>
+<h6 id="111921">1.1.1.9.2.1<strong>定时</strong><strong>备份</strong><a class="headerlink" href="#111921" title="Permanent link">¶</a></h6>
+<p>1.服务启动是已固定频率2小时,读取配置文件中的表集合通过pg_dump命令来完成配置备份</p>
+<p>2. 具体备份表：除了系统操作日志表、登录日志表、系统在线用户表 都需要备份</p>
+<h6 id="111922">1.1.1.9.2.2<strong>事件处理</strong><a class="headerlink" href="#111922" title="Permanent link">¶</a></h6>
+<p>1. 手动备份事件</p>
+<p>监控kafka消息队列里的 手动备份事件,当收到事件配置事件读取配置文件中的表集合通过pg_dump命令来完成配置备份,文件备份路径/data/database/backup/ </p>
+<p>备份完成后发送配置完成事件后调用系统管理服务接口上报配置备份信息(备份时间,备份文件大小,备份文件路径)</p>
+<p>2. 恢复备份事件</p>
+<p>监控kafka消息队列里的 恢复备份事件,当收到恢复备份事件调用pg_dump命令完成恢复备份配置</p>
+<p>恢复备份配置完成后发送恢复备份配置完成事件 </p>
+<h5 id="11110root">1.1.1.10 <strong>升级</strong><strong>服务</strong><strong>(ROOT)</strong><a class="headerlink" href="#11110root" title="Permanent link">¶</a></h5>
+<h6 id="111101">1.1.1.10.1<strong>功能</strong><strong>描述</strong><a class="headerlink" href="#111101" title="Permanent link">¶</a></h6>
+<p>该服务运行在宿主机上,监听kafka的升级事件完成系统升级功能</p>
+<h6 id="111102">1.1.1.10.2<strong>功能</strong><strong>设计</strong><a class="headerlink" href="#111102" title="Permanent link">¶</a></h6>
+<p>监控kafka消息队列里的升级事件,解析事件参数,通过http接口下载相关升级包,解压执行升级包中的install.sh脚本完成升级。备份、覆盖文件和重启服务功能在脚本内实现,升级服务只解压升级包和调用install.sh脚本</p>
+<h5 id="11111root">1.1.1.11 <strong>主备</strong><strong>服务</strong><strong>(ROOT)</strong><a class="headerlink" href="#11111root" title="Permanent link">¶</a></h5>
+<p>该服务运行在宿主机上,查看主备章节描述</p>
+<h6 id="111111">1.1.1.11.1<strong>功能</strong><strong>描述</strong><a class="headerlink" href="#111111" title="Permanent link">¶</a></h6>
+<h6 id="111112">1.1.1.11.2<strong>功能</strong><strong>设计</strong><a class="headerlink" href="#111112" title="Permanent link">¶</a></h6>
+<!-- Source file information -->
+<!-- taken from 
+https://github.com/squidfunk/mkdocs-material/blob/master/src/partials/source-file.html -->
+<hr/>
+<div class="md-source-file">
+<small>
+<!-- mkdocs-git-revision-date-localized-plugin -->
+<u>最后更新</u> :
+        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">2023年9月20日</span>
+<!-- mkdocs-git-revision-date-plugin -->
+<br/>
+<u>创建日期</u> :
+        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">2023年9月20日</span>
+<br/>
+<u>Auteur</u> : 罗潇
+        
+        
+    </small>
+</div>
+<!-- Was this page helpful? -->
+<!-- Comment system -->
+<!-- Giscus -->
+<!-- Giscus -->
+<script> 
+    try {
+      const index = document.querySelector('h1').innerHTML;
+      if (index === "Index") {
+        document.querySelector('h1').innerHTML = "基础平台1.0系统后台服务";
+      }
+    } catch (error) {
+      // console.log(error);
+    }
+  </script>
+</article>
+</div>
+</div>
+<button class="md-top md-icon" data-md-component="top" hidden="" type="button">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"></path></svg>
+            回到页面顶部
+          </button>
+</main>
+<footer class="md-footer">
+<div class="md-footer-meta md-typeset">
+<div class="md-footer-meta__inner md-grid">
+<div class="md-copyright">
+<div class="md-copyright__highlight">
+      Copyright © 2022 - 2023 启明星辰-天榕
+    </div>
+</div>
+</div>
+</div>
+</footer>
+</div>
+<div class="md-dialog" data-md-component="dialog">
+<div class="md-dialog__inner md-typeset"></div>
+</div>
+<script id="__config" type="application/json">{"base": "../..", "features": ["navigation.indexes", "navigation.top", "navigation.tabs", "navigation.tabs.sticky", "navigation.expand", "navigation.path", "search.suggest", "search.highlight", "search.share", "content.code.copy", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.dfff1995.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": {"provider": "mike"}}</script>
+<script src="../../assets/javascripts/bundle.dff1b7c8.min.js"></script>
+<script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
+</html>

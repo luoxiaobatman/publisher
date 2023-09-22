@@ -1,0 +1,1842 @@
+
+<!DOCTYPE html>
+
+<html class="no-js" lang="zh">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<meta content="基础平台" name="description"/>
+<meta content="罗潇" name="author"/>
+<link href="../%E5%9F%BA%E7%A1%80%E5%B9%B3%E5%8F%B01.0%E5%9F%BA%E4%BA%8B%E4%BB%B6%E6%BA%90%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3/" rel="prev"/>
+<link href="../%E5%9F%BA%E7%A1%80%E5%B9%B3%E5%8F%B01.0%E7%94%A8%E6%88%B7api%E8%AE%BE%E8%AE%A1/" rel="next"/>
+<link href="../../assets/meta/favicon.ico" rel="icon"/>
+<meta content="mkdocs-1.5.3, mkdocs-material-9.3.1" name="generator"/>
+<title>基础平台1.0接口设计规范 - 基础平台</title>
+<link href="../../assets/stylesheets/main.046329b4.min.css" rel="stylesheet"/>
+<link href="../../assets/stylesheets/palette.85d0ee34.min.css" rel="stylesheet"/>
+<style>:root{--md-annotation-icon:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22 12a10 10 0 0 1-10 10A10 10 0 0 1 2 12 10 10 0 0 1 12 2a10 10 0 0 1 10 10M6 13h8l-3.5 3.5 1.42 1.42L17.84 12l-5.92-5.92L10.5 7.5 14 11H6v2Z"/></svg>');}</style>
+<link href="../../assets/css/custom_attributes.css" rel="stylesheet"/>
+<script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+<script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.min.js"></script>
+<script src="https://unpkg.com/tippy.js@6/dist/tippy-bundle.umd.js"></script>
+<link href="https://unpkg.com/tippy.js@6/animations/scale-subtle.css" rel="stylesheet"/>
+<link href="https://unpkg.com/tippy.js@6/themes/translucent.css" rel="stylesheet"/>
+<link crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" referrerpolicy="no-referrer" rel="stylesheet"/>
+<meta content="None" name="site_url"/>
+<meta content="基础平台1.0接口设计规范" property="og:title"/>
+<meta content="基础平台1.0接口设计规范" name="twitter:title"/>
+<meta content="基础平台" name="og:description"/>
+<meta content="基础平台" name="twitter:description"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Noneassets/meta/SEO.png" property="og:image"/>
+<meta content="Noneassets/meta/SEO.png" name="twitter:image"/>
+<link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+            html.glightbox-open { overflow: initial; height: 100%; }
+            .gslide-title { margin-top: 0px; user-select: text; }
+            .gslide-desc { color: #666; user-select: text; }
+            .gslide-image img { background: white; }
+            
+                .gscrollbar-fixer { padding-right: 15px; }
+                .gdesc-inner { font-size: 0.75rem; }
+                body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+                body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+                body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}
+                </style><script src="../../assets/javascripts/glightbox.min.js"></script></head>
+<body data-md-color-accent="light-blue" data-md-color-primary="teal" data-md-color-scheme="default" dir="ltr">
+<script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+<input autocomplete="off" class="md-toggle" data-md-toggle="drawer" id="__drawer" type="checkbox"/>
+<input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
+<label class="md-overlay" for="__drawer"></label>
+<div data-md-component="skip">
+<a class="md-skip" href="#11">
+          跳转至
+        </a>
+</div>
+<div data-md-component="announce">
+</div>
+<div data-md-color-scheme="default" data-md-component="outdated" hidden="">
+</div>
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+<nav aria-label="页眉" class="md-header__inner md-grid">
+<a aria-label="基础平台" class="md-header__button md-logo" data-md-component="logo" href="../.." title="基础平台">
+<img alt="logo" src="../../assets/meta/favicons.png"/>
+</a>
+<label class="md-header__button md-icon" for="__drawer">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"></path></svg>
+</label>
+<div class="md-header__title" data-md-component="header-title">
+<div class="md-header__ellipsis">
+<div class="md-header__topic">
+<span class="md-ellipsis">
+            基础平台
+          </span>
+</div>
+<div class="md-header__topic" data-md-component="header-topic">
+<span class="md-ellipsis">
+            
+              基础平台1.0接口设计规范
+            
+          </span>
+</div>
+</div>
+</div>
+<form class="md-header__option" data-md-component="palette">
+<input aria-label="Switch to dark mode" class="md-option" data-md-color-accent="light-blue" data-md-color-media="(prefers-color-scheme: light)" data-md-color-primary="teal" data-md-color-scheme="default" id="__palette_1" name="__palette" type="radio"/>
+<label class="md-header__button md-icon" for="__palette_2" hidden="" title="Switch to dark mode">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6zm0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4zM7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"></path></svg>
+</label>
+<input aria-label="Switch to light mode" class="md-option" data-md-color-accent="indigo" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-primary="blue" data-md-color-scheme="slate" id="__palette_2" name="__palette" type="radio"/>
+<label class="md-header__button md-icon" for="__palette_1" hidden="" title="Switch to light mode">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3Z"></path></svg>
+</label>
+</form>
+<label class="md-header__button md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"></path></svg>
+</label>
+<div class="md-search" data-md-component="search" role="dialog">
+<label class="md-search__overlay" for="__search"></label>
+<div class="md-search__inner" role="search">
+<form class="md-search__form" name="search">
+<input aria-label="搜索" autocapitalize="off" autocomplete="off" autocorrect="off" class="md-search__input" data-md-component="search-query" name="query" placeholder="搜索" required="" spellcheck="false" type="text"/>
+<label class="md-search__icon md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"></path></svg>
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"></path></svg>
+</label>
+<nav aria-label="查找" class="md-search__options">
+<a aria-label="分享" class="md-search__icon md-icon" data-clipboard="" data-clipboard-text="" data-md-component="search-share" href="javascript:void(0)" tabindex="-1" title="分享">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7 0-.24-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91 1.61 0 2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08Z"></path></svg>
+</a>
+<button aria-label="清空当前内容" class="md-search__icon md-icon" tabindex="-1" title="清空当前内容" type="reset">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"></path></svg>
+</button>
+</nav>
+<div class="md-search__suggest" data-md-component="search-suggest"></div>
+</form>
+<div class="md-search__output">
+<div class="md-search__scrollwrap" data-md-scrollfix="">
+<div class="md-search-result" data-md-component="search-result">
+<div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+<ol class="md-search-result__list" role="presentation"></ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+</nav>
+<nav aria-label="标签" class="md-tabs" data-md-component="tabs">
+<div class="md-grid">
+<ul class="md-tabs__list">
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="../../%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/%E5%9F%BA%E7%A1%80%E5%B9%B3%E5%8F%B01.0/">
+          
+  
+    
+  
+  架构设计
+
+        </a>
+</li>
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="../../%E6%A6%82%E8%A6%81%E8%AE%BE%E8%AE%A1/%E5%9F%BA%E7%A1%80%E5%B9%B3%E5%8F%B01.0%E6%80%BB%E4%BD%93%E8%AE%BE%E8%AE%A1/">
+          
+  
+    
+  
+  概要设计
+
+        </a>
+</li>
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="../../%E8%AF%A6%E7%BB%86%E8%AE%BE%E8%AE%A1/%E5%B8%90%E5%8F%B7%E6%A0%B8%E6%9F%A5%E6%94%B9%E7%9B%B8%E5%85%B3/">
+          
+  
+    
+  
+  详细设计
+
+        </a>
+</li>
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="../../%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BE%E8%AE%A1/">
+          
+  
+    
+  
+  数据库设计
+
+        </a>
+</li>
+<li class="md-tabs__item md-tabs__item--active">
+<a class="md-tabs__link" href="../%E5%9F%BA%E7%A1%80%E5%B9%B3%E5%8F%B01.0%E5%9F%BA%E4%BA%8B%E4%BB%B6%E6%BA%90%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3/">
+          
+  
+    
+  
+  接口设计
+
+        </a>
+</li>
+</ul>
+</div>
+</nav>
+</header>
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="导航栏" class="md-nav md-nav--primary md-nav--lifted" data-md-level="0">
+<label class="md-nav__title" for="__drawer">
+<a aria-label="基础平台" class="md-nav__button md-logo" data-md-component="logo" href="../.." title="基础平台">
+<img alt="logo" src="../../assets/meta/favicons.png"/>
+</a>
+    基础平台
+  </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_1" type="checkbox"/>
+<label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+<span class="md-ellipsis">
+    架构设计
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_1_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_1">
+<span class="md-nav__icon md-icon"></span>
+            架构设计
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/%E5%9F%BA%E7%A1%80%E5%B9%B3%E5%8F%B01.0/">
+<span class="md-ellipsis">
+    基础平台1.0
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_2" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+<span class="md-ellipsis">
+    概要设计
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_2">
+<span class="md-nav__icon md-icon"></span>
+            概要设计
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_2_1" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+<span class="md-ellipsis">
+    基础平台1.0
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_1_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_1">
+<span class="md-nav__icon md-icon"></span>
+            基础平台1.0
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../%E6%A6%82%E8%A6%81%E8%AE%BE%E8%AE%A1/%E5%9F%BA%E7%A1%80%E5%B9%B3%E5%8F%B01.0%E6%80%BB%E4%BD%93%E8%AE%BE%E8%AE%A1/">
+<span class="md-ellipsis">
+    基础平台1.0总体设计
+  </span>
+</a>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_2_1_2" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_1_2" id="__nav_2_1_2_label" tabindex="0">
+<span class="md-ellipsis">
+    功能设计
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_1_2_label" class="md-nav" data-md-level="3">
+<label class="md-nav__title" for="__nav_2_1_2">
+<span class="md-nav__icon md-icon"></span>
+            功能设计
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../%E6%A6%82%E8%A6%81%E8%AE%BE%E8%AE%A1/%E5%9F%BA%E7%A1%80%E5%B9%B3%E5%8F%B01.0%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86/">
+<span class="md-ellipsis">
+    基础平台1.0用户管理
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../%E6%A6%82%E8%A6%81%E8%AE%BE%E8%AE%A1/%E5%9F%BA%E7%A1%80%E5%B9%B3%E5%8F%B01.0%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86/">
+<span class="md-ellipsis">
+    基础平台1.0系统管理
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../%E6%A6%82%E8%A6%81%E8%AE%BE%E8%AE%A1/%E5%9F%BA%E7%A1%80%E5%B9%B3%E5%8F%B01.0%E8%B5%84%E4%BA%A7%E7%AE%A1%E7%90%86/">
+<span class="md-ellipsis">
+    基础平台1.0资产管理
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../%E6%A6%82%E8%A6%81%E8%AE%BE%E8%AE%A1/%E5%9F%BA%E7%A1%80%E5%B9%B3%E5%8F%B01.0%E7%B3%BB%E7%BB%9F%E5%90%8E%E5%8F%B0%E6%9C%8D%E5%8A%A1/">
+<span class="md-ellipsis">
+    基础平台1.0系统后台服务
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_3" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+<span class="md-ellipsis">
+    详细设计
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_3_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_3">
+<span class="md-nav__icon md-icon"></span>
+            详细设计
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_3_1" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+<span class="md-ellipsis">
+    基础平台1.0
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_3_1_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_3_1">
+<span class="md-nav__icon md-icon"></span>
+            基础平台1.0
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../%E8%AF%A6%E7%BB%86%E8%AE%BE%E8%AE%A1/%E5%B8%90%E5%8F%B7%E6%A0%B8%E6%9F%A5%E6%94%B9%E7%9B%B8%E5%85%B3/">
+<span class="md-ellipsis">
+    帐号核查改相关
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_4" type="checkbox"/>
+<div class="md-nav__link md-nav__container">
+<a class="md-nav__link" href="../../%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BE%E8%AE%A1/">
+<span class="md-ellipsis">
+    数据库设计
+  </span>
+</a>
+</div>
+<nav aria-expanded="false" aria-labelledby="__nav_4_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_4">
+<span class="md-nav__icon md-icon"></span>
+            数据库设计
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--active md-nav__item--nested">
+<input checked="" class="md-nav__toggle md-toggle" id="__nav_5" type="checkbox"/>
+<label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+<span class="md-ellipsis">
+    接口设计
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="true" aria-labelledby="__nav_5_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_5">
+<span class="md-nav__icon md-icon"></span>
+            接口设计
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item md-nav__item--active md-nav__item--nested">
+<input checked="" class="md-nav__toggle md-toggle" id="__nav_5_1" type="checkbox"/>
+<label class="md-nav__link" for="__nav_5_1" id="__nav_5_1_label" tabindex="0">
+<span class="md-ellipsis">
+    基础平台1.0
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="true" aria-labelledby="__nav_5_1_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_5_1">
+<span class="md-nav__icon md-icon"></span>
+            基础平台1.0
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../%E5%9F%BA%E7%A1%80%E5%B9%B3%E5%8F%B01.0%E5%9F%BA%E4%BA%8B%E4%BB%B6%E6%BA%90%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3/">
+<span class="md-ellipsis">
+    基础平台1.0基事件源设计文档
+  </span>
+</a>
+</li>
+<li class="md-nav__item md-nav__item--active">
+<input class="md-nav__toggle md-toggle" id="__toc" type="checkbox"/>
+<label class="md-nav__link md-nav__link--active" for="__toc">
+<span class="md-ellipsis">
+    基础平台1.0接口设计规范
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<a class="md-nav__link md-nav__link--active" href="./">
+<span class="md-ellipsis">
+    基础平台1.0接口设计规范
+  </span>
+</a>
+<nav aria-label="目录" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#11">
+    1.1 概述
+  </a>
+<nav aria-label="1.1 概述" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#111">
+    1.1.1 编写目的
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#112">
+    1.1.2 读者
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#113">
+    1.1.3 要求
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#114">
+    1.1.4 相关术语
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#12">
+    1.2 设计说明
+  </a>
+<nav aria-label="1.2 设计说明" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#121">
+    1.2.1 设计目标
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#13">
+    1.3 基本约定
+  </a>
+<nav aria-label="1.3 基本约定" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#131">
+    1.3.1 服务地址
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#132">
+    1.3.2 命名约束
+  </a>
+<nav aria-label="1.3.2 命名约束" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#1321api">
+    1.3.2.1  API命名
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#1322">
+    1.3.2.2  参数命名
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#133">
+    1.3.3 版本控制
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#134">
+    1.3.4 资源名称
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#135">
+    1.3.5 认证授权
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#136">
+    1.3.6 统一方法
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#137">
+    1.3.7 请求约束
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#138">
+    1.3.8 响应约束
+  </a>
+<nav aria-label="1.3.8 响应约束" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#1381">
+    1.3.8.1  报文示例
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#1382">
+    1.3.8.2  报文说明
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#1383">
+    1.3.8.3  统一约束
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#139">
+    1.3.9 错误码
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#1310">
+    1.3.10 错误重试
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#1311">
+    1.3.11 字符集约定
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#1312jsonp">
+    1.3.12 JSONP支持
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#1313">
+    1.3.13 国际化支持
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#1314">
+    1.3.14 资源表示约束
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#1315404">
+    1.3.15 404使用约束
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#1316">
+    1.3.16 取值约束
+  </a>
+<nav aria-label="1.3.16 取值约束" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#13161">
+    1.3.16.1 数据类型
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#13162">
+    1.3.16.2 空值
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#13163">
+    1.3.16.3 日期*时间约定*
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#14">
+    1.4 特定场景约定
+  </a>
+<nav aria-label="1.4 特定场景约定" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#141">
+    1.4.1 分页排序
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#142">
+    1.4.2 树形结构
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#15">
+    1.5 附录
+  </a>
+<nav aria-label="1.5 附录" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#151http">
+    1.5.1 HTTP常用响应码·
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#152">
+    1.5.2 错误码分配表
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#153">
+    1.5.3 参考文档
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../%E5%9F%BA%E7%A1%80%E5%B9%B3%E5%8F%B01.0%E7%94%A8%E6%88%B7api%E8%AE%BE%E8%AE%A1/">
+<span class="md-ellipsis">
+    基础平台1.0用户api设计
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../%E5%9F%BA%E7%A1%80%E5%B9%B3%E5%8F%B01.0%E7%B3%BB%E7%BB%9Fapi%E8%AE%BE%E8%AE%A1/">
+<span class="md-ellipsis">
+    基础平台1.0系统api设计
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../%E5%9F%BA%E7%A1%80%E5%B9%B3%E5%8F%B01.0%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86%E4%BA%8B%E4%BB%B6%E6%BA%90%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3/">
+<span class="md-ellipsis">
+    基础平台1.0系统管理事件源设计文档
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../%E5%9F%BA%E7%A1%80%E5%B9%B3%E5%8F%B01.0%E8%B5%84%E6%BA%90%E4%B8%AD%E5%BF%83API%E6%8E%A5%E5%8F%A3%E8%AE%BE%E8%AE%A1/">
+<span class="md-ellipsis">
+    基础平台1.0资源中心API接口设计
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../%E5%9F%BA%E7%A1%80%E5%B9%B3%E5%8F%B01.0%E8%B5%84%E6%BA%90%E4%B8%AD%E5%BF%83%E4%BA%8B%E4%BB%B6%E6%BA%90%E8%AE%BE%E8%AE%A1/">
+<span class="md-ellipsis">
+    基础平台1.0资源中心事件源设计
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="目录" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#11">
+    1.1 概述
+  </a>
+<nav aria-label="1.1 概述" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#111">
+    1.1.1 编写目的
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#112">
+    1.1.2 读者
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#113">
+    1.1.3 要求
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#114">
+    1.1.4 相关术语
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#12">
+    1.2 设计说明
+  </a>
+<nav aria-label="1.2 设计说明" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#121">
+    1.2.1 设计目标
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#13">
+    1.3 基本约定
+  </a>
+<nav aria-label="1.3 基本约定" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#131">
+    1.3.1 服务地址
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#132">
+    1.3.2 命名约束
+  </a>
+<nav aria-label="1.3.2 命名约束" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#1321api">
+    1.3.2.1  API命名
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#1322">
+    1.3.2.2  参数命名
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#133">
+    1.3.3 版本控制
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#134">
+    1.3.4 资源名称
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#135">
+    1.3.5 认证授权
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#136">
+    1.3.6 统一方法
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#137">
+    1.3.7 请求约束
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#138">
+    1.3.8 响应约束
+  </a>
+<nav aria-label="1.3.8 响应约束" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#1381">
+    1.3.8.1  报文示例
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#1382">
+    1.3.8.2  报文说明
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#1383">
+    1.3.8.3  统一约束
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#139">
+    1.3.9 错误码
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#1310">
+    1.3.10 错误重试
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#1311">
+    1.3.11 字符集约定
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#1312jsonp">
+    1.3.12 JSONP支持
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#1313">
+    1.3.13 国际化支持
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#1314">
+    1.3.14 资源表示约束
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#1315404">
+    1.3.15 404使用约束
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#1316">
+    1.3.16 取值约束
+  </a>
+<nav aria-label="1.3.16 取值约束" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#13161">
+    1.3.16.1 数据类型
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#13162">
+    1.3.16.2 空值
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#13163">
+    1.3.16.3 日期*时间约定*
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#14">
+    1.4 特定场景约定
+  </a>
+<nav aria-label="1.4 特定场景约定" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#141">
+    1.4.1 分页排序
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#142">
+    1.4.2 树形结构
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#15">
+    1.5 附录
+  </a>
+<nav aria-label="1.5 附录" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#151http">
+    1.5.1 HTTP常用响应码·
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#152">
+    1.5.2 错误码分配表
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#153">
+    1.5.3 参考文档
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<!--
+  Copyright (c) 2016-2023 Martin Donath <martin.donath@squidfunk.com>
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to
+  deal in the Software without restriction, including without limitation the
+  rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+  sell copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in
+  all copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+  IN THE SOFTWARE.
+-->
+<!-- Tags -->
+<!-- Actions -->
+<!--
+  Hack: check whether the content contains a h1 headline. If it doesn't, the
+  page title (or respectively site name) is used as the main headline.
+-->
+<h1>基础平台1.0接口设计规范</h1>
+<!-- Page content -->
+<h3 id="11">1.1 <strong>概</strong><strong>述</strong><a class="headerlink" href="#11" title="Permanent link">¶</a></h3>
+<h4 id="111">1.1.1 <strong>编写目的</strong><a class="headerlink" href="#111" title="Permanent link">¶</a></h4>
+<p>为了更好地推进前后端分离的技术理念，统一后端暴露API的方式、风格；在前后端解耦的原则下，即能保障接口开发的独立性，又能保障接口特性的一致性。该文档基于业界先进的使用理念，对RESTful API的命名方式、版本控制、请求、响应等相关细节做了统一性约束。具体细节请阅读后文中的描述。</p>
+<h4 id="112">1.1.2 <strong>读者</strong><a class="headerlink" href="#112" title="Permanent link">¶</a></h4>
+<p>产品经理、项目经理、开发设计工程师、测试设计工程师、开发工程师、测试工程师；</p>
+<h4 id="113">1.1.3 <strong>要求</strong><a class="headerlink" href="#113" title="Permanent link">¶</a></h4>
+<p>架构师：在产品系统层面做相关性设计、引导，保障规范的可落地性。</p>
+<p>产品经理：在产品需求层面保障需求特性的细节内容同规范的一致性。</p>
+<p>后端开发：严格遵循规范内容，保障平台暴露接口的一致性。</p>
+<p>前端开发：严格遵循规范内容，保障平台暴露接口的一致性。</p>
+<p>测试：严格按照规则内容对各模块暴露API进行规范性测试，保障平台暴露接口的一致性。</p>
+<h4 id="114">1.1.4 <strong>相关术语</strong><a class="headerlink" href="#114" title="Permanent link">¶</a></h4>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>REST</td>
+<td>一种基于HTTP协议的API约束规则</td>
+</tr>
+<tr>
+<td>Resource</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="12">1.2 <strong>设计</strong><strong>说</strong><strong>明</strong><a class="headerlink" href="#12" title="Permanent link">¶</a></h3>
+<h4 id="121">1.2.1 <strong>设计</strong><strong>目标</strong><a class="headerlink" href="#121" title="Permanent link">¶</a></h4>
+<ul>
+<li>保障前端、后端。测试（自动化）对接口一致性的要求</li>
+</ul>
+<h3 id="13">1.3 <strong>基本约定</strong><a class="headerlink" href="#13" title="Permanent link">¶</a></h3>
+<h4 id="131">1.3.1 <strong>服务</strong><strong>地址</strong><a class="headerlink" href="#131" title="Permanent link">¶</a></h4>
+<p><a href="http://waf_ip:waf_port/api.version/rest/">{schema}://{host}:{port}/{prefix}<strong>/{version}/{resource}</strong></a></p>
+<p>如：<a href="http://10.65.10.1:8080/api/v1/dashborads">http://10.65.10.1:8080/api/v1/dashborads</a></p>
+<table>
+<thead>
+<tr>
+<th><strong>字段</strong></th>
+<th><strong>说明</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>schema</td>
+<td>API接口支持的协议（http或https）</td>
+</tr>
+<tr>
+<td>host</td>
+<td>提供API服务的主机名称或IP</td>
+</tr>
+<tr>
+<td>port</td>
+<td>提供API服务的主机端口</td>
+</tr>
+<tr>
+<td>prefix</td>
+<td>系统API服务的前缀，如/api</td>
+</tr>
+<tr>
+<td>version</td>
+<td>API的版本号，后文有具体的命名规则</td>
+</tr>
+<tr>
+<td>resource</td>
+<td>资源名称，后文有具体的命名规则</td>
+</tr>
+</tbody>
+</table>
+<h4 id="132">1.3.2 <strong>命名</strong><strong>约束</strong><a class="headerlink" href="#132" title="Permanent link">¶</a></h4>
+<h5 id="1321api">1.3.2.1  <strong>API命名</strong><a class="headerlink" href="#1321api" title="Permanent link">¶</a></h5>
+<p>API名称（资源名称）若无特殊需求场景，均要求采用小写加连字符命名。</p>
+<ul>
+<li>
+<p>仅限使用小写字母、数字、英文连字符（-）</p>
+</li>
+<li>
+<p>单词之间以英文连字符（-）连接</p>
+</li>
+</ul>
+<p>如：/api/v1/asset-group/dev1</p>
+<h5 id="1322">1.3.2.2  <strong>参数</strong><strong>命名</strong><a class="headerlink" href="#1322" title="Permanent link">¶</a></h5>
+<p>API请求、响应参数中参数名称若无特殊需求场景，均要求采用小驼峰命名法，即：</p>
+<ul>
+<li>
+<p>仅限使用大小写字母、数字</p>
+</li>
+<li>
+<p>单词要求首字母大写，但打头的单词小写</p>
+</li>
+</ul>
+<p>如：</p>
+<p>{</p>
+<p>  “groupName”: “dev”,</p>
+<p>  “groupId”: “82ec1585-89f5-48b9-818e-a16f43c09ed1”</p>
+<p>}</p>
+<h4 id="133">1.3.3 <strong>版本</strong><strong>控制</strong><a class="headerlink" href="#133" title="Permanent link">¶</a></h4>
+<p>API的版本控制由各API服务提供方进行控制，版本演进格式约定为：vN(N=1,2,3…)</p>
+<p>如：v1, v2</p>
+<p><em>注__：__在因__产品__版本__演进__而导致__功能特性迭代__的__场景下，__同一特性__的__API__遵循版本升级策略，__以__做到向后兼容__，最大__限度保障__已有__业务逻辑的__可用性__。</em></p>
+<h4 id="134">1.3.4 <strong>资源名称</strong><a class="headerlink" href="#134" title="Permanent link">¶</a></h4>
+<p>REST接口通过资源（Resources）来暴露数据（data）和算法（algorithms），对资源名称的抽象拥有一定的方法论，可参考 <a href="https://ieeexplore.ieee.org/document/5365234/">《Restful Web Services》</a> 中对此话题的描述。我们这里有以下约束规则：</p>
+<p>1) 资源名称中不允许出现动词</p>
+<p>2) 用路径遍历来表达资源的层次结构，如：/parent/child</p>
+<p>3) 父级用资源的复数形式表示，如：/users/1234</p>
+<p>4) 在路径变量里加上标点符号（仅限英文逗号和英文分号），以消除误解</p>
+<p>如：/users/1,2 </p>
+<p>5) 用查询变量（条件参数）表达算法的输入，如：/search?<strong>page=1&amp;num=20</strong></p>
+<p>6) 资源名称为变量参数时，用{resourceId}表示</p>
+<p>如：/users/{userId}</p>
+<p>7) 资源名称中的”/”必须转义，否则可能会引起服务端错误地识别资源，例如：GET <a href="http://1.1.1.1/api/v1/interfaces/G1/1%20，其中想表示G1/1">http://1.1.1.1/api/v1/interfaces/G1/1 ，其中想表示G1/1</a>资源，但服务端可能会错误地识别此资源。</p>
+<p>8) 不允许以”/”作为API结尾</p>
+<p>9) 资源名称为复数时，其响应必为列表；资源名称为单数时，其响应必为字典。</p>
+<p>如：</p>
+<p>GET /api/v1/users</p>
+<p>响应为：<br/>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-0-1" id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="p">[</span><span class="w">  </span>
+<a href="#__codelineno-0-2" id="__codelineno-0-2" name="__codelineno-0-2"></a><span class="w">  </span><span class="p">{</span><span class="w">  </span>
+<a href="#__codelineno-0-3" id="__codelineno-0-3" name="__codelineno-0-3"></a><span class="w">    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1001</span><span class="p">,</span><span class="w">  </span>
+<a href="#__codelineno-0-4" id="__codelineno-0-4" name="__codelineno-0-4"></a><span class="w">    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"john"</span><span class="w">  </span>
+<a href="#__codelineno-0-5" id="__codelineno-0-5" name="__codelineno-0-5"></a><span class="w">  </span><span class="p">},</span><span class="w">  </span>
+<a href="#__codelineno-0-6" id="__codelineno-0-6" name="__codelineno-0-6"></a><span class="w">  </span><span class="p">{</span><span class="w">  </span>
+<a href="#__codelineno-0-7" id="__codelineno-0-7" name="__codelineno-0-7"></a><span class="w">    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1002</span><span class="p">,</span><span class="w">  </span>
+<a href="#__codelineno-0-8" id="__codelineno-0-8" name="__codelineno-0-8"></a><span class="w">    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">  </span>
+<a href="#__codelineno-0-9" id="__codelineno-0-9" name="__codelineno-0-9"></a><span class="w">  </span><span class="p">}</span><span class="w">  </span>
+<a href="#__codelineno-0-10" id="__codelineno-0-10" name="__codelineno-0-10"></a><span class="p">]</span>
+</code></pre></div><br/>
+GET /api/v1/users/profile</p>
+<p>响应为：<br/>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-1-1" id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="p">{</span>
+<a href="#__codelineno-1-2" id="__codelineno-1-2" name="__codelineno-1-2"></a><span class="w">    </span><span class="nt">"id"</span><span class="p">:</span><span class="mi">1001</span><span class="p">,</span>
+<a href="#__codelineno-1-3" id="__codelineno-1-3" name="__codelineno-1-3"></a><span class="w">    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"john"</span><span class="p">,</span>
+<a href="#__codelineno-1-4" id="__codelineno-1-4" name="__codelineno-1-4"></a><span class="p">}</span>
+</code></pre></div></p>
+<h3 id="135">1.3.5 <strong>认证</strong><strong>授权</strong><a class="headerlink" href="#135" title="Permanent link">¶</a></h3>
+<p>推荐使用token方式，将token放入header头即</p>
+<p>Authorization：token</p>
+<p>Token的生成有业务确定</p>
+<h3 id="136">1.3.6 <strong>统一方法</strong><a class="headerlink" href="#136" title="Permanent link">¶</a></h3>
+<p>REST API操作使用统一的HTTP方法，以保证操作的一致性。具体限定如下：</p>
+<table>
+<thead>
+<tr>
+<th>HTTP方法</th>
+<th>CRUD类型</th>
+<th>描述</th>
+<th>实现约束</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>POST</td>
+<td>CREATE</td>
+<td>创建一个新的资源</td>
+<td>视接口功能</td>
+</tr>
+<tr>
+<td>GET</td>
+<td>RETRIEVE</td>
+<td>获取指定资源的表示</td>
+<td>视接口功能</td>
+</tr>
+<tr>
+<td>PUT</td>
+<td>UPDATE</td>
+<td>更新指定资源</td>
+<td>视接口功能</td>
+</tr>
+<tr>
+<td>DELETE</td>
+<td>DELETE</td>
+<td>删除指定资源</td>
+<td>视接口功能</td>
+</tr>
+<tr>
+<td>OPTIONS</td>
+<td>N/A</td>
+<td>获取指定资源支持的HTTP方法</td>
+<td>必须</td>
+</tr>
+</tbody>
+</table>
+<h3 id="137">1.3.7 <strong>请求</strong><strong>约束</strong><a class="headerlink" href="#137" title="Permanent link">¶</a></h3>
+<ul>
+<li>
+<p>资源的表示数据均以消息主体的形式隐式暴露，如新建用户时的用户数据</p>
+</li>
+<li>
+<p>非资源的表示数据均以条件参数的形式显式暴露，如认证信息、过滤条件</p>
+</li>
+</ul>
+<p>² 条件参数：URL中跟在 ? 后面形如key1=value1<strong>&amp;</strong>key2=value2的参数，其编码格式为：application/x-www-form-urlencoded</p>
+<p>² 如果无特殊说明请求content-type用json 即Content-Type: application/json</p>
+<h3 id="138">1.3.8 <strong>响应</strong><strong>约束</strong><a class="headerlink" href="#138" title="Permanent link">¶</a></h3>
+<p>如调用方在请求头Accept中无具体指定，所有API响应数据类型默认为：application/json；否则以请求头中Accept指定的数据格式响应。其它约束规则如下：</p>
+<ul>
+<li>
+<p>以HTTP标准响应码为API调用成功与否的唯一判断依据</p>
+</li>
+<li>
+<p>API调用成功，则响应数据为请求资源本身的描述，特定场景详见：<a href="./#1.4-特定场景约定" title="1.4 特定场景约定">1.4 特定场景约定</a></p>
+</li>
+<li>
+<p>API调用失败，则响应数据为失败描述</p>
+</li>
+<li>
+<p>仅在获取单一资源对象时，响应结果使用字典</p>
+</li>
+</ul>
+<p>如：GET /api/v1/dashboards/asset</p>
+<ul>
+<li>获取结果是多资源对象时，响应结果使用数组</li>
+</ul>
+<p>如：GET /api/v1/dashboards</p>
+<h4 id="1381">1.3.8.1  <strong>报文示例</strong><a class="headerlink" href="#1381" title="Permanent link">¶</a></h4>
+<p><strong>成功</strong>：</p>
+<p>HTTP/1.1 200 OK</p>
+<p>Content-Type: application/json; charset=”UTF-8”</p>
+<p>Content-Length: XXXX</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-2-1" id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="p">{</span>
+<a href="#__codelineno-2-2" id="__codelineno-2-2" name="__codelineno-2-2"></a><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<a href="#__codelineno-2-3" id="__codelineno-2-3" name="__codelineno-2-3"></a><span class="nt">"userName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"john"</span><span class="p">,</span>
+<a href="#__codelineno-2-4" id="__codelineno-2-4" name="__codelineno-2-4"></a><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"123@"</span><span class="p">,</span>
+<a href="#__codelineno-2-5" id="__codelineno-2-5" name="__codelineno-2-5"></a><span class="p">}</span>
+</code></pre></div>
+<p><strong>失败</strong>：</p>
+<p>HTTP/1.1 500 INTERNAL SERVER ERROR</p>
+<p>Content-Type: application/json; charset=”UTF-8”</p>
+<p>Content-Length: XXXX</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-3-1" id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="p">{</span>
+<a href="#__codelineno-3-2" id="__codelineno-3-2" name="__codelineno-3-2"></a>
+<a href="#__codelineno-3-3" id="__codelineno-3-3" name="__codelineno-3-3"></a><span class="nt">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+<a href="#__codelineno-3-4" id="__codelineno-3-4" name="__codelineno-3-4"></a>
+<a href="#__codelineno-3-5" id="__codelineno-3-5" name="__codelineno-3-5"></a><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"参数不合法"</span><span class="p">,</span>
+<a href="#__codelineno-3-6" id="__codelineno-3-6" name="__codelineno-3-6"></a>
+<a href="#__codelineno-3-7" id="__codelineno-3-7" name="__codelineno-3-7"></a><span class="nt">"details"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span>
+<a href="#__codelineno-3-8" id="__codelineno-3-8" name="__codelineno-3-8"></a>
+<a href="#__codelineno-3-9" id="__codelineno-3-9" name="__codelineno-3-9"></a><span class="p">}</span>
+</code></pre></div>
+<h4 id="1382">1.3.8.2  <strong>报文</strong><strong>说明</strong><a class="headerlink" href="#1382" title="Permanent link">¶</a></h4>
+<table>
+<thead>
+<tr>
+<th>消息头部</th>
+<th>响应码</th>
+<th>标准的HTTP响应码，仅2xx表示请求成功，请求成功时消息体为响应数据域</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>消息类型</td>
+<td>若请求方未指定，默认为：application/json</td>
+<td></td>
+</tr>
+<tr>
+<td>消息主体</td>
+<td>响应码为2xx时，消息主体为响应数据域，非2xx时返回如下结构</td>
+<td></td>
+</tr>
+<tr>
+<td>code</td>
+<td>异常错误码</td>
+<td></td>
+</tr>
+<tr>
+<td>message</td>
+<td>异常错误描述信息</td>
+<td></td>
+</tr>
+<tr>
+<td>detail</td>
+<td>异常的补充描述信息 非必须</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h4 id="1383">1.3.8.3  <strong>统一</strong><strong>约束</strong><a class="headerlink" href="#1383" title="Permanent link">¶</a></h4>
+<table>
+<thead>
+<tr>
+<th><strong>HTTP方法</strong></th>
+<th><strong>响应数据</strong></th>
+<th><strong>描述</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>POST</td>
+<td>Resource Format</td>
+<td>Response-body域包含新建资源的完整表示(可选)</td>
+</tr>
+<tr>
+<td>GET</td>
+<td>Resource Format</td>
+<td>Response-body域包含指定资源的请求表示(可选)</td>
+</tr>
+<tr>
+<td>PUT</td>
+<td>Resource Format</td>
+<td>Response-body域包含指定资源的完整表示(可选)</td>
+</tr>
+<tr>
+<td>DELETE</td>
+<td>N/A</td>
+<td>Response-body域无资源表示数据</td>
+</tr>
+<tr>
+<td>OPTIONS</td>
+<td>N/A</td>
+<td>无响应消息主体</td>
+</tr>
+</tbody>
+</table>
+<h3 id="139">1.3.9 <strong>错误码</strong><a class="headerlink" href="#139" title="Permanent link">¶</a></h3>
+<p>错误码用于在系统出现异常、错误、故障等非正常状态时，保障对外暴露问题的一致性，统一由前端根据错误码描述信息展示对应的Tip信息。</p>
+<p>另，错误码信息会出现在调试日志中，要求合理使用错误码，为精准定位、分析问题服务，切勿滥用。</p>
+<p>此部分具体错误码参照附录部分</p>
+<h3 id="1310">1.3.10 <strong>错误重试</strong><a class="headerlink" href="#1310" title="Permanent link">¶</a></h3>
+<p>客户端应该在遇到500，503和504错误的时候重试。 最小延迟应为1s，除非另有说明。 对于429错误，客户端可能会以最少30秒的延迟重试。对于所有其他错误，重试可能不适用-首先确保您的请求是幂等的，并检查错误消息指引。</p>
+<h3 id="1311">1.3.11 <strong>字符集</strong><strong>约定</strong><a class="headerlink" href="#1311" title="Permanent link">¶</a></h3>
+<ul>
+<li>
+<p>REST接口请求、响应数据默认均以UTF-8字符集编码。</p>
+</li>
+<li>
+<p>如果请求头无Accept-Charset字段，则响应为默认编码；否则，以请求编码响应。</p>
+</li>
+</ul>
+<p>如：Accept-Charset: GB2312,utf-8;q=0.7,*;q=0.7</p>
+<h3 id="1312jsonp">1.3.12 <strong>JSONP</strong><strong>支持</strong><a class="headerlink" href="#1312jsonp" title="Permanent link">¶</a></h3>
+<p>若在某些特定场景中需要使用JSONP，遵循以下约束即可：</p>
+<ul>
+<li>
+<p>支持JSONP的API必须在条件参数中暴露callback关键字，如：callback=callbackFunc</p>
+</li>
+<li>
+<p>支持JSONP的API必须指定响应头参数：</p>
+</li>
+</ul>
+<p>Content-type: application/javascript</p>
+<h3 id="1313">1.3.13 <strong>国际化</strong><strong>支持</strong><a class="headerlink" href="#1313" title="Permanent link">¶</a></h3>
+<p>简体中文：zh_CN</p>
+<p>繁体中文：zh_TW</p>
+<p>英文    ：en_US</p>
+<p>API的国际化要支持页面直接调用（无法指定HTTP头）、跨域调用（无法指定Cookie）的场景，因此要支持以下两种方式（默认为简体中文）：</p>
+<ul>
+<li>在HTTP请求头中由Accept-Language字段表示，如：</li>
+</ul>
+<p>Accept-Language: zh-cn,zh;q=0.5</p>
+<ul>
+<li>在条件参数中表示，如: locale=zh_CN</li>
+</ul>
+<p> </p>
+<h3 id="1314">1.3.14 <strong>资源表示</strong><strong>约束</strong><a class="headerlink" href="#1314" title="Permanent link">¶</a></h3>
+<p>API的请求、响应参数以JSON表示时：</p>
+<ul>
+<li>
+<p>字符型参数中不允许出现数字表示</p>
+</li>
+<li>
+<p>参数值要求能见名知意，具有可读性</p>
+</li>
+<li>
+<p>布尔型参数不允许以字符串形式表示</p>
+</li>
+<li>
+<p>空值统一以空字符串表示：”“，不允许出现null, undefined, None等</p>
+</li>
+<li>
+<p>时间统一以Linux秒级时间戳表示</p>
+</li>
+</ul>
+<h3 id="1315404">1.3.15 <strong>404使用</strong><strong>约束</strong><a class="headerlink" href="#1315404" title="Permanent link">¶</a></h3>
+<p>HTTP标准响应码404用于表示访问的资源对象不存在，即URL不存在，并不适用检索、筛选场景下未找到匹配的数据，切勿滥用404。示例如下：</p>
+<p>1. GET /api/v1/dashboards/asset/top-10-assets-by-risk</p>
+<p>2. GET /api/v1/views?viewId=top-10-assets-by-risk</p>
+<p>其中，请求1表示获取资产仪表板下视图top-10-assets-by-risk的数据，响应码为404时表示不存在这个视图。</p>
+<p>请求2表示从全部视图中检索标识为top-10-assets-by-risk的视图，响应码为404时表示/api/v1/views对应的资源对象不存在，并不能用于表示没有找到标识为top-10-assets-by-risk的视图;若要标识没有找到，只需在响应数据中将结果集置为空即可。</p>
+<h3 id="1316">1.3.16 <strong>取值</strong><strong>约束</strong><a class="headerlink" href="#1316" title="Permanent link">¶</a></h3>
+<h4 id="13161">1.3.16.1 <strong>数据</strong><strong>类型</strong><a class="headerlink" href="#13161" title="Permanent link">¶</a></h4>
+<p>REST API以JSON数据作为载体，因此在接口的请求、响应报文中，凡是参数取值的数据类型不应超出以下类型（在JSON的表达能力之内）：</p>
+<table>
+<thead>
+<tr>
+<th>数据类型</th>
+<th>描述</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>String</strong></td>
+<td>字符型；双引号包裹的Unicode字符和反斜杠转义字符</td>
+<td>“hello”<br/><br/>“\u4f60\u597d”</td>
+</tr>
+<tr>
+<td><strong>Number</strong></td>
+<td>数值型；双精度浮点型格式</td>
+<td>1234<br/><br/>123.22</td>
+</tr>
+<tr>
+<td><strong>Boolean</strong></td>
+<td>布尔型；true 或 false</td>
+<td>true<br/><br/>false</td>
+</tr>
+<tr>
+<td><strong>Object</strong></td>
+<td>对象型；无序的键值对集合</td>
+<td>{“a”:1, “b”:true}</td>
+</tr>
+<tr>
+<td><strong>Array</strong></td>
+<td>数据型；有序的值序列</td>
+<td>[1,2,3,4]</td>
+</tr>
+<tr>
+<td><strong>null</strong></td>
+<td>空</td>
+<td>null</td>
+</tr>
+</tbody>
+</table>
+<h4 id="13162">1.3.16.2 <strong>空值</strong><a class="headerlink" href="#13162" title="Permanent link">¶</a></h4>
+<p>如上，JSON定义了一种数据类型null，用来表示空（什么都没有）。在其它大多数编程语言中，也有许多类似的表示，如：Null,NULL,nil,None。为了保证接口的一致性，对空值做如下约束：</p>
+<ul>
+<li>
+<p>字符型参数空值：”“</p>
+</li>
+<li>
+<p>数值型参数空值：0</p>
+</li>
+<li>
+<p>对象型参数空值：{}</p>
+</li>
+<li>
+<p>数组型参数空值：[]</p>
+</li>
+<li>
+<p>布尔型数据不允许存在空值</p>
+</li>
+</ul>
+<p><em>注__：此条约定需在做数据表设计、数据插入__编辑__时__设定__默认值。</em></p>
+<h4 id="13163">1.3.16.3 <strong>日期</strong><strong>*</strong><em>时间约定</em>*<a class="headerlink" href="#13163" title="Permanent link">¶</a></h4>
+<p>通常情况下，对于日期\时间在不同的国家、不同的业务场景下会有相当多种类的不同表示，为保证接口的一致性，对日期\时间做如下约束：</p>
+<ul>
+<li>
+<p>接口层面统一使用GMT/UTC时间戳（即Unix时间戳）传递日期\时间</p>
+</li>
+<li>
+<p>建议后端时间存储也采用GMT/UTC时间戳方案</p>
+</li>
+<li>
+<p>前端根据用户的时区、业务场景自行处理呈现</p>
+</li>
+<li>
+<p>时间戳可按具体的业务场景选择秒级、毫秒级</p>
+</li>
+</ul>
+<h2 id="14">1.4 特定场景约定<a class="headerlink" href="#14" title="Permanent link">¶</a></h2>
+<h3 id="141">1.4.1 <strong>分页排序</strong><a class="headerlink" href="#141" title="Permanent link">¶</a></h3>
+<p>分页排序在前后端交互过程中极为普遍，为保障不同模块前后端间交互的一致性，对此场景的请求响应做如下约束：</p>
+<p>请求约束：</p>
+<ul>
+<li>
+<p>分页参数：?<strong>page</strong>=5&amp;<strong>size</strong>=100</p>
+</li>
+<li>
+<p>排序参数：?<strong>orderBy</strong>=field1,-field2,field3</p>
+</li>
+<li>
+<p>筛选参数：?<strong>field1</strong>=1&amp;<strong>field2</strong>=2</p>
+</li>
+</ul>
+<p>参数说明：</p>
+<table>
+<thead>
+<tr>
+<th><strong>参数</strong></th>
+<th><strong>描述</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>page</td>
+<td>指定请求的页数，如page=5表示请求第5页的数据</td>
+</tr>
+<tr>
+<td>size</td>
+<td>指定每页的数量，如size=100表示每页限定100条数据</td>
+</tr>
+<tr>
+<td>orderBy</td>
+<td>指定排序的字段，需要多值排序时，多个字段以英文逗号分隔，默认为升序排序，排序优先级自左至右降低；字段名称前以英文连字符打头时，表明按该字段值降序排序。<br/><br/>如：<strong>orderBy</strong>=field1,-field2,field3表示按字段field1升序,field2降序，field3升序进行排序。</td>
+</tr>
+<tr>
+<td>fieldN</td>
+<td>指定其它筛选条件的字段</td>
+</tr>
+</tbody>
+</table>
+<p>响应约束：<br/>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-4-1" id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="p">{</span><span class="w">  </span>
+<a href="#__codelineno-4-2" id="__codelineno-4-2" name="__codelineno-4-2"></a><span class="w">  </span><span class="nt">"page"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">  </span>
+<a href="#__codelineno-4-3" id="__codelineno-4-3" name="__codelineno-4-3"></a><span class="w">  </span><span class="nt">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">  </span>
+<a href="#__codelineno-4-4" id="__codelineno-4-4" name="__codelineno-4-4"></a><span class="w">  </span><span class="nt">"orderBy"</span><span class="p">:</span><span class="w"> </span><span class="s2">"field1,-field2,field3"</span><span class="p">,</span><span class="w">  </span>
+<a href="#__codelineno-4-5" id="__codelineno-4-5" name="__codelineno-4-5"></a><span class="w">  </span><span class="nt">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">110000</span><span class="p">,</span><span class="w">  </span>
+<a href="#__codelineno-4-6" id="__codelineno-4-6" name="__codelineno-4-6"></a><span class="w">  </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">  </span>
+<a href="#__codelineno-4-7" id="__codelineno-4-7" name="__codelineno-4-7"></a><span class="w">    </span><span class="p">{},</span><span class="w">  </span>
+<a href="#__codelineno-4-8" id="__codelineno-4-8" name="__codelineno-4-8"></a><span class="w">    </span><span class="p">{}</span><span class="w">  </span>
+<a href="#__codelineno-4-9" id="__codelineno-4-9" name="__codelineno-4-9"></a><span class="w">  </span><span class="p">]</span><span class="w">  </span>
+<a href="#__codelineno-4-10" id="__codelineno-4-10" name="__codelineno-4-10"></a><span class="p">}</span>
+</code></pre></div></p>
+<p>参数说明：</p>
+<table>
+<thead>
+<tr>
+<th><strong>参数</strong></th>
+<th><strong>描述</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>page</td>
+<td>客户端指定的请求页数，必须项</td>
+</tr>
+<tr>
+<td>size</td>
+<td>客户端指定的每页数量，必须项</td>
+</tr>
+<tr>
+<td>orderBy</td>
+<td>客户端指定的排序字段，如客户端有指定则为必须项</td>
+</tr>
+<tr>
+<td>total</td>
+<td>符合客户端筛选条件的数据总条数</td>
+</tr>
+<tr>
+<td>data</td>
+<td>客户端指定页数的数据内容，若没有符合筛选条件的数据，则以空数组表示</td>
+</tr>
+</tbody>
+</table>
+<h3 id="142">1.4.2 <strong>树形</strong><strong>结构</strong><a class="headerlink" href="#142" title="Permanent link">¶</a></h3>
+<p>树形结构也是在前后端交互过程中极为普遍的一种数据结构，同理也对其数据结构做如下约束：</p>
+<p>示例：<br/>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-5-1" id="__codelineno-5-1" name="__codelineno-5-1"></a><span class="p">[</span><span class="w">  </span>
+<a href="#__codelineno-5-2" id="__codelineno-5-2" name="__codelineno-5-2"></a><span class="w">  </span><span class="p">{</span><span class="w">  </span>
+<a href="#__codelineno-5-3" id="__codelineno-5-3" name="__codelineno-5-3"></a><span class="w">    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">  </span>
+<a href="#__codelineno-5-4" id="__codelineno-5-4" name="__codelineno-5-4"></a><span class="w">    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"全部"</span><span class="p">,</span><span class="w">  </span>
+<a href="#__codelineno-5-5" id="__codelineno-5-5" name="__codelineno-5-5"></a><span class="w">    </span><span class="nt">"parent"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">  </span>
+<a href="#__codelineno-5-6" id="__codelineno-5-6" name="__codelineno-5-6"></a><span class="w">    </span><span class="nt">"children"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">  </span>
+<a href="#__codelineno-5-7" id="__codelineno-5-7" name="__codelineno-5-7"></a><span class="w">      </span><span class="p">{</span><span class="w">  </span>
+<a href="#__codelineno-5-8" id="__codelineno-5-8" name="__codelineno-5-8"></a><span class="w">        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">  </span>
+<a href="#__codelineno-5-9" id="__codelineno-5-9" name="__codelineno-5-9"></a><span class="w">        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"主机资产"</span><span class="p">,</span><span class="w">  </span>
+<a href="#__codelineno-5-10" id="__codelineno-5-10" name="__codelineno-5-10"></a><span class="w">        </span><span class="nt">"parent"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">  </span>
+<a href="#__codelineno-5-11" id="__codelineno-5-11" name="__codelineno-5-11"></a><span class="w">        </span><span class="nt">"children"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">  </span>
+<a href="#__codelineno-5-12" id="__codelineno-5-12" name="__codelineno-5-12"></a><span class="w">          </span><span class="p">{</span><span class="w">  </span>
+<a href="#__codelineno-5-13" id="__codelineno-5-13" name="__codelineno-5-13"></a><span class="w">            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">  </span>
+<a href="#__codelineno-5-14" id="__codelineno-5-14" name="__codelineno-5-14"></a><span class="w">            </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"研发一部"</span><span class="p">,</span><span class="w">  </span>
+<a href="#__codelineno-5-15" id="__codelineno-5-15" name="__codelineno-5-15"></a><span class="w">            </span><span class="nt">"parent"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="w">  </span>
+<a href="#__codelineno-5-16" id="__codelineno-5-16" name="__codelineno-5-16"></a><span class="w">          </span><span class="p">}</span><span class="w">  </span>
+<a href="#__codelineno-5-17" id="__codelineno-5-17" name="__codelineno-5-17"></a><span class="w">        </span><span class="p">]</span><span class="w">  </span>
+<a href="#__codelineno-5-18" id="__codelineno-5-18" name="__codelineno-5-18"></a><span class="w">      </span><span class="p">},</span><span class="w">  </span>
+<a href="#__codelineno-5-19" id="__codelineno-5-19" name="__codelineno-5-19"></a><span class="w">      </span><span class="p">{</span><span class="w">  </span>
+<a href="#__codelineno-5-20" id="__codelineno-5-20" name="__codelineno-5-20"></a><span class="w">        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">  </span>
+<a href="#__codelineno-5-21" id="__codelineno-5-21" name="__codelineno-5-21"></a><span class="w">        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"网站资产"</span><span class="p">,</span><span class="w">  </span>
+<a href="#__codelineno-5-22" id="__codelineno-5-22" name="__codelineno-5-22"></a><span class="w">        </span><span class="nt">"parent"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">  </span>
+<a href="#__codelineno-5-23" id="__codelineno-5-23" name="__codelineno-5-23"></a><span class="w">        </span><span class="nt">"children"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">  </span>
+<a href="#__codelineno-5-24" id="__codelineno-5-24" name="__codelineno-5-24"></a><span class="w">      </span><span class="p">}</span><span class="w">  </span>
+<a href="#__codelineno-5-25" id="__codelineno-5-25" name="__codelineno-5-25"></a><span class="w">    </span><span class="p">]</span><span class="w">  </span>
+<a href="#__codelineno-5-26" id="__codelineno-5-26" name="__codelineno-5-26"></a><span class="w">  </span><span class="p">}</span><span class="w">  </span>
+<a href="#__codelineno-5-27" id="__codelineno-5-27" name="__codelineno-5-27"></a><span class="p">]</span>
+</code></pre></div></p>
+<p>参数说明：</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>节点唯一标识，同一颗树种不允许重复</td>
+</tr>
+<tr>
+<td>name</td>
+<td>节点名称</td>
+</tr>
+<tr>
+<td>parent</td>
+<td>节点父节点的唯一标识，根节点父节点取值为null</td>
+</tr>
+<tr>
+<td>children</td>
+<td>节点的子节点，列表</td>
+</tr>
+</tbody>
+</table>
+<h2 id="15">1.5 <strong>附录</strong><a class="headerlink" href="#15" title="Permanent link">¶</a></h2>
+<h3 id="151http">1.5.1 <strong>HTTP</strong><strong>常用</strong><strong>响应码·</strong><a class="headerlink" href="#151http" title="Permanent link">¶</a></h3>
+<table>
+<thead>
+<tr>
+<th>响应码</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>200</td>
+<td>OK – 操作顺利完成</td>
+</tr>
+<tr>
+<td>201</td>
+<td>Created – 客户端请求成功创建了一个新资源时，可发送此响应码</td>
+</tr>
+<tr>
+<td>204</td>
+<td>No Content – 服务器端拒绝对PUT、POST或DELETE请求返回任何状态信息或表示，可发送此响应码</td>
+</tr>
+<tr>
+<td>301</td>
+<td>Moved Permanently – 客户端触发的动作引起资源URI变化时发送此响应码，或者客户端请求一个资源的旧url时也发送此响应码</td>
+</tr>
+<tr>
+<td>400</td>
+<td>Bad Request – 客户端请求参数不合法</td>
+</tr>
+<tr>
+<td>401</td>
+<td>Unauthorized – 客户端试图操作一个受保护资源，却又没有提供正确的认证证书，可发送此响应码</td>
+</tr>
+<tr>
+<td>403</td>
+<td>Forbidden – 客户端请求正确，认证也正确，但由于请求资源只允许在指定时间段内，或者只允许指定IP的用户访问，可发送此响应码</td>
+</tr>
+<tr>
+<td>404</td>
+<td>Not Found – 客户端请求的资源不存在</td>
+</tr>
+<tr>
+<td>405</td>
+<td>Method Not Allowed – 客户端试图使用一个本资源不支持的HTTP方法时，可发送此响应码</td>
+</tr>
+<tr>
+<td>409</td>
+<td>Conflict – 客户端试图执行一个“会导致一个或多个资源处于不一致状态”的操作时，可发送此响应码</td>
+</tr>
+<tr>
+<td>410</td>
+<td>Gone – 服务器知道被请求资源曾经指向一个资源，但该资源现在不存在了，可发送此响应码</td>
+</tr>
+<tr>
+<td>413</td>
+<td>Request Entity Too Large – 客户端发送的表示太大以至于服务器无法处理时，可发送此响应码</td>
+</tr>
+<tr>
+<td>414</td>
+<td>Request-URI Too Long – 客户端请求URL长度超过服务端处理能力时，可发送此响应码</td>
+</tr>
+<tr>
+<td>415</td>
+<td>Unsupported Media Type – 客户端在发送表示时采用了一个服务端无法理解的媒体类型，可发送此响应码</td>
+</tr>
+<tr>
+<td>500</td>
+<td>Internal Server Error – 服务器端发生未知故障</td>
+</tr>
+<tr>
+<td>503</td>
+<td>Service Unavailable – 服务器正常，但由于下层服务不正常（如系统资源不足或正在遭受大量恶意请求）以至于不能全部处理，可发送此响应码</td>
+</tr>
+</tbody>
+</table>
+<p> </p>
+<h3 id="152">1.5.2 <strong>错误码</strong><strong>分配表</strong><a class="headerlink" href="#152" title="Permanent link">¶</a></h3>
+<table>
+<thead>
+<tr>
+<th>错误码段</th>
+<th>模块名称</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0 - 9999</td>
+<td>平台框架使用 参照下面表格中定义的错误码</td>
+</tr>
+<tr>
+<td>10000 - 99999</td>
+<td>其它模块使用 有业务自己定义</td>
+</tr>
+<tr>
+<td>……</td>
+<td>……</td>
+</tr>
+</tbody>
+</table>
+<p>下面列举了状态码code及http 对应关系，该状态码已覆盖大部分场景</p>
+<table>
+<thead>
+<tr>
+<th><strong>错误码 code</strong></th>
+<th><strong>对应http状态码</strong></th>
+<th><strong>错误描述</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>200</td>
+<td></td>
+</tr>
+<tr>
+<td>1</td>
+<td>499</td>
+<td>CANCELLED：操作被取消</td>
+</tr>
+<tr>
+<td>2</td>
+<td>500</td>
+<td>UNKNOWN-未知的错误。 通常是服务器错误</td>
+</tr>
+<tr>
+<td>3</td>
+<td>400</td>
+<td>INVALID_ARGUMENT-客户端指定了无效的参数。 检查错误消息和错误详细信息以获取更多信息。</td>
+</tr>
+<tr>
+<td>4</td>
+<td>504</td>
+<td>DEADLINE_EXCEEDED已超过请求期限。如果重复发生，请考虑降低请求的复杂性。</td>
+</tr>
+<tr>
+<td>5</td>
+<td>404</td>
+<td>NOT_FOUND找不到指定的资源</td>
+</tr>
+<tr>
+<td>6</td>
+<td>409</td>
+<td>ALREADY_EXISTS客户端尝试创建的资源已存在。</td>
+</tr>
+<tr>
+<td>7</td>
+<td>403</td>
+<td>PERMISSION_DENIED客户端没有足够的权限。这可能是因为OAuth令牌没有正确的范围，客户端没有权限，或者客户端项目尚未启用API。</td>
+</tr>
+<tr>
+<td>8</td>
+<td>429</td>
+<td>RESOURCE_EXHAUSTED资源配额达到速率限制。如磁盘已满</td>
+</tr>
+<tr>
+<td>9</td>
+<td>400</td>
+<td>FAILED_PRECONDITION失败具有前提条件<br/><br/>请求不能在当前系统状态下执行，例如删除非空目录。</td>
+</tr>
+<tr>
+<td>10</td>
+<td>409</td>
+<td>ABORTED并发冲突，例如读-修改-写冲突</td>
+</tr>
+<tr>
+<td>11</td>
+<td>400</td>
+<td>OUT_OF_RANGE客户端指定了无效的范围。</td>
+</tr>
+<tr>
+<td>12</td>
+<td>501</td>
+<td>UNIMPLEMENTED服务器未实现该API方法。</td>
+</tr>
+<tr>
+<td>13</td>
+<td>500</td>
+<td>INTERNAL内部服务错误。 通常是服务器错误。</td>
+</tr>
+<tr>
+<td>14</td>
+<td>503</td>
+<td>UNAVAILABLE暂停服务。通常是服务器已经关闭。</td>
+</tr>
+<tr>
+<td>15</td>
+<td>500</td>
+<td>DATA_LOSS不可恢复的数据丢失或数据损坏。 客户端应该向用户报告错误</td>
+</tr>
+<tr>
+<td>16</td>
+<td>401</td>
+<td>UNAUTHENTICATED由于遗失，无效或过期的OAuth令牌而导致请求未通过身份验证。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="153">1.5.3 <strong>参考文档</strong><a class="headerlink" href="#153" title="Permanent link">¶</a></h3>
+<p>规范：</p>
+<p>a) <a href="https://ieeexplore.ieee.org/document/5365234/">RESTful Web Service</a></p>
+<p>b) <a href="https://cloud.google.com/apis/design/">https://cloud.google.com/apis/design/</a></p>
+<p>实例：</p>
+<p>c) <a href="https://docs.github.com/en/rest/reference/repos">https://docs.github.com/en/rest/reference/repos</a></p>
+<p>d) <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.20">https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.20</a></p>
+<!-- Source file information -->
+<!-- taken from 
+https://github.com/squidfunk/mkdocs-material/blob/master/src/partials/source-file.html -->
+<hr/>
+<div class="md-source-file">
+<small>
+<!-- mkdocs-git-revision-date-localized-plugin -->
+<u>最后更新</u> :
+        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">2023年9月21日</span>
+<!-- mkdocs-git-revision-date-plugin -->
+<br/>
+<u>创建日期</u> :
+        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">2023年9月21日</span>
+<br/>
+<u>Auteur</u> : 罗潇
+        
+        
+    </small>
+</div>
+<!-- Was this page helpful? -->
+<!-- Comment system -->
+<!-- Giscus -->
+<!-- Giscus -->
+<script> 
+    try {
+      const index = document.querySelector('h1').innerHTML;
+      if (index === "Index") {
+        document.querySelector('h1').innerHTML = "基础平台1.0接口设计规范";
+      }
+    } catch (error) {
+      // console.log(error);
+    }
+  </script>
+</article>
+</div>
+</div>
+<button class="md-top md-icon" data-md-component="top" hidden="" type="button">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"></path></svg>
+            回到页面顶部
+          </button>
+</main>
+<footer class="md-footer">
+<div class="md-footer-meta md-typeset">
+<div class="md-footer-meta__inner md-grid">
+<div class="md-copyright">
+<div class="md-copyright__highlight">
+      Copyright © 2022 - 2023 启明星辰-天榕
+    </div>
+</div>
+</div>
+</div>
+</footer>
+</div>
+<div class="md-dialog" data-md-component="dialog">
+<div class="md-dialog__inner md-typeset"></div>
+</div>
+<script id="__config" type="application/json">{"base": "../..", "features": ["navigation.indexes", "navigation.top", "navigation.tabs", "navigation.tabs.sticky", "navigation.expand", "navigation.path", "search.suggest", "search.highlight", "search.share", "content.code.copy", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.dfff1995.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": {"provider": "mike"}}</script>
+<script src="../../assets/javascripts/bundle.dff1b7c8.min.js"></script>
+<script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
+</html>
