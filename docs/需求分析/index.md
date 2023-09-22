@@ -14,35 +14,14 @@ category: 需求分析
 
 [方案讨论](https://venusgroup.feishu.cn/docx/AyFWdH7wjonQnnxAVM8c95Cpnkg)
 
-### 低代码编程
+[[./低代码编程|低代码编程]]
 
-![[../assets/img/agent.svg|100%]]
+[[./运行时功能|运行时功能]]
 
+[[./编程实践和api封装|编程实践和api封装]]
 
-### 运行时功能
+[[./多租户|多租户]]
 
-[点击跳转功能清单列表](https://venusgroup.feishu.cn/docx/DeT3dud3moNOoUxjGu4cMRvhnVb)
+[[./兼容性与服务质量|兼容性与服务质量]]
 
-![[../assets/img/function.svg|100%]]
-
-
-### 编程实践和api封装
-
-![[../assets/img/layer.svg|100%]]
-
-
-### 多租户
-
-![[../assets/img/rent.svg|100%]]
-
-
-### 兼容性与服务质量
-
-![[../assets/img/update.svg|100%]]
-
-
-
-### 中间件封装
-
-![[../assets/img/middleware.svg|100%]]
-
+[[./中间件封装|中间件封装]]
