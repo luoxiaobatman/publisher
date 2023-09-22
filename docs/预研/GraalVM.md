@@ -207,9 +207,8 @@ public class MyApplication {
     String home() {
         return "Hello World!";
     }
-    // (1)
     public static void main(String[] args) {
-        SpringApplication.run(MyApplication.class, args);
+        SpringApplication.run(MyApplication.class, args); // (1)
     }
 
 }
