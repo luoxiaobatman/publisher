@@ -414,8 +414,27 @@
 <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
 <li class="md-nav__item">
 <a class="md-nav__link" href="#_1">
-    物理架构图
+    物理架构
   </a>
+<nav aria-label="物理架构" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_2">
+    单机部署
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_3">
+    分布式部署
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_4">
+    容器化部署
+  </a>
+</li>
+</ul>
+</nav>
 </li>
 </ul>
 </nav>
@@ -578,8 +597,27 @@
 <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
 <li class="md-nav__item">
 <a class="md-nav__link" href="#_1">
-    物理架构图
+    物理架构
   </a>
+<nav aria-label="物理架构" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_2">
+    单机部署
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_3">
+    分布式部署
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_4">
+    容器化部署
+  </a>
+</li>
+</ul>
+</nav>
 </li>
 </ul>
 </nav>
@@ -617,9 +655,20 @@
 -->
 <h1>物理架构图</h1>
 <!-- Page content -->
-<h2 id="_1">物理架构图<a class="headerlink" href="#_1" title="Permanent link">¶</a></h2>
-<p>每一个物理组件列上(分单机, 集群, 容器), 都是怎么交互的</p>
-<p>要说明系统升级, 资源优化, 部署优化都是怎么做的</p>
+<h2 id="_1"><strong>物理架构</strong><a class="headerlink" href="#_1" title="Permanent link">¶</a></h2>
+<p>基础平台通过支持单机(盒子)部署、分布式部署和云化部署。容器化部署适用于云环境，由客户方提供容器化部署的基础设施及中间件。</p>
+<p>具体部署方式有产品自行决定，基础平台只负责支持以上三种部署方式。</p>
+<h3 id="_2"><strong>单机部署</strong><a class="headerlink" href="#_2" title="Permanent link">¶</a></h3>
+<p><a class="glightbox" data-desc-position="bottom" data-height="auto" data-width="100%" href="../../assets/img/Pasted%20image%2020230925182014.png"><img alt="Pasted image 20230925182014" src="../../assets/img/Pasted%20image%2020230925182014.png" title="Pasted image 20230925182014"/></a></p>
+<p>单机部署直接在宿主服务器执行一键安装脚本即可完成安装。网关，用户服务、资源服务、系统服务、产品服务以及各种中间件，数据库都运行一个硬件服务器。单机部署资源要求底，部署简单，运维便捷。</p>
+<p>单机部署情况下，服务直接运行在宿主机，不采用容器部署方式。虽然不能做好进程隔离，但是部署方便，只依赖Java虚拟机。</p>
+<h3 id="_3"><strong>分布式部署</strong><a class="headerlink" href="#_3" title="Permanent link">¶</a></h3>
+<p><a class="glightbox" data-desc-position="bottom" data-height="auto" data-width="100%" href="../../assets/img/Pasted%20image%2020230925182025.png"><img alt="Pasted image 20230925182025" src="../../assets/img/Pasted%20image%2020230925182025.png" title="Pasted image 20230925182025"/></a></p>
+<p>分布式部署在各个宿主服务器执行所属服务的安装脚本。服务，中间件，数据库都可以运行在不同物理服务器。相较于单机部署， 资源要求高，部署复杂，运维难度大，但是能支持高性能，高并发的需求，而且组件间运行隔离，不相互影响。</p>
+<p>分布式部署情况下，为充分利用资源，降低网络消耗，建议将静态网关和API网关部署在一台服务器上，数据库作为数据持久化节点，读写压力大，建议独占部署，这样对操作系统做针对于优化，比如关闭透明大页，关闭swap等。</p>
+<h3 id="_4"><strong>容器化部署</strong><a class="headerlink" href="#_4" title="Permanent link">¶</a></h3>
+<p><a class="glightbox" data-desc-position="bottom" data-height="auto" data-width="100%" href="../../assets/img/Pasted%20image%2020230925182040.png"><img alt="Pasted image 20230925182040" src="../../assets/img/Pasted%20image%2020230925182040.png" title="Pasted image 20230925182040"/></a></p>
+<p>容器化部署是由用户提供部署云环境，产品服务不在提供安装脚本，而是通过一个个组件镜像发布。由于云环境运维由用户负责，系统服务不在提供网络配置，时间配置等涉及操作系统交互的功能，所以系统服务镜像不再依赖系统平台。</p>
 <!-- Source file information -->
 <!-- taken from 
 https://github.com/squidfunk/mkdocs-material/blob/master/src/partials/source-file.html -->
@@ -628,7 +677,7 @@ https://github.com/squidfunk/mkdocs-material/blob/master/src/partials/source-fil
 <small>
 <!-- mkdocs-git-revision-date-localized-plugin -->
 <u>最后更新</u> :
-        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">2023年9月22日</span>
+        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">2023年9月25日</span>
 <!-- mkdocs-git-revision-date-plugin -->
 <br/>
 <u>创建日期</u> :

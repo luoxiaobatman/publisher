@@ -400,8 +400,36 @@
 <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
 <li class="md-nav__item">
 <a class="md-nav__link" href="#_1">
+    运行架构
+  </a>
+<nav aria-label="运行架构" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_2">
     运行架构图
   </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_3">
+    控制流组织
+  </a>
+<nav aria-label="控制流组织" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_4">
+    身份认证
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#ip">
+    IP修改
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
 </li>
 </ul>
 </nav>
@@ -578,8 +606,36 @@
 <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
 <li class="md-nav__item">
 <a class="md-nav__link" href="#_1">
+    运行架构
+  </a>
+<nav aria-label="运行架构" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_2">
     运行架构图
   </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_3">
+    控制流组织
+  </a>
+<nav aria-label="控制流组织" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_4">
+    身份认证
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#ip">
+    IP修改
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
 </li>
 </ul>
 </nav>
@@ -617,12 +673,39 @@
 -->
 <h1>运行架构图</h1>
 <!-- Page content -->
-<h2 id="_1">运行架构图<a class="headerlink" href="#_1" title="Permanent link">¶</a></h2>
-<p>指明从操作系统到前端, 里面都有什么东西在提供什么服务</p>
-<p>一次请求的调用链路</p>
-<p>系统是怎么初始化的, activity图和时序图, 依然是一大一小</p>
-<p>外部服务调用链路</p>
-<p>内部服务调用链路</p>
+<h2 id="_1"><strong>运行架构</strong><a class="headerlink" href="#_1" title="Permanent link">¶</a></h2>
+<p>关注系统内部逻辑结构、处理流程，展示各组件的交互和通信方式及其协议等，面向系统设计、开发人员。</p>
+<h3 id="_2"><strong>运行架构图</strong><a class="headerlink" href="#_2" title="Permanent link">¶</a></h3>
+<p>系统运行如下：</p>
+<p><a class="glightbox" data-desc-position="bottom" data-height="auto" data-width="100%" href="../../assets/img/Pasted%20image%2020230925181828.png"><img alt="Pasted image 20230925181828" src="../../assets/img/Pasted%20image%2020230925181828.png" title="Pasted image 20230925181828"/></a></p>
+<ul>
+<li>
+<p>基础平台整体基于iTR系统平台提供的运行环境，中间件等运行，服务层以微服务方式运行。</p>
+</li>
+<li>
+<p>服务网关：spring cloud gateway实现，用于服务的注册与发现，监控检查，身份认证，接口鉴权，请求路由以及负载均衡等，是整个服务集群的服务暴露点。</p>
+</li>
+<li>
+<p>微服务：包含基础平台自带用户服务，资产服务，系统服务，以及各产品的业务服务模块应用。</p>
+</li>
+<li>
+<p>反向代理：nginx中间件，部署静态资源、动态请求转发、https等功能。</p>
+</li>
+</ul>
+<h3 id="_3"><strong>控制流组织</strong><a class="headerlink" href="#_3" title="Permanent link">¶</a></h3>
+<h4 id="_4"><strong>身份认证</strong><a class="headerlink" href="#_4" title="Permanent link">¶</a></h4>
+<p><a class="glightbox" data-desc-position="bottom" data-height="auto" data-width="100%" href="../../assets/img/Pasted%20image%2020230925181852.png"><img alt="Pasted image 20230925181852" src="../../assets/img/Pasted%20image%2020230925181852.png" title="Pasted image 20230925181852"/></a></p>
+<p>1. 服务网关采用非阻塞式编程，响应式结果处理。Restful接口调用不会占用线程进行同步等待结果，这样提高线程池的线程的利用率。</p>
+<p>2. 其他服务采用标准Spring MVC编程，阻塞式编程，响应请求期间都会独占一个线程。</p>
+<p>3. 网关和服务都有独立请求线程池，线程池的线程上限都可以动态配置。网关的线程池由Netty控制，服务的线程池由Tomcat控制。</p>
+<p>4. 网关、服务之间调用采用Restful接口，底层依赖Http协议。</p>
+<p>5. 网关会采用限流进行自我保护，限流上线为100/s。网关考虑引入缓存，但这会导致业务流程更复杂，用户服务变用户信息后需通知网关清理缓存。</p>
+<p>6. 用户服务查询用户信息添加缓存，避免大量认证冲垮Postgresql。用户信息变更清理缓存，但是在一个服务操作，操作相对简单并且稳定。</p>
+<h4 id="ip"><strong>IP修改</strong><a class="headerlink" href="#ip" title="Permanent link">¶</a></h4>
+<p><a class="glightbox" data-desc-position="bottom" data-height="auto" data-width="100%" href="../../assets/img/Pasted%20image%2020230925181908.png"><img alt="Pasted image 20230925181908" src="../../assets/img/Pasted%20image%2020230925181908.png" title="Pasted image 20230925181908"/></a></p>
+<p>1. 系统服务调用系统平台接口时需要加锁，保证同一时间只能一个操作修改IP。</p>
+<p>2. 网关服务在用户会话中缓存用户权限信息，避免频繁调用用户服务查询权限。</p>
+<p>系统服务和系统平台交互采用同步串行方式，虽然会一直占用一个线程，但是同步编程更简单，更稳定，响应更及时。</p>
 <!-- Source file information -->
 <!-- taken from 
 https://github.com/squidfunk/mkdocs-material/blob/master/src/partials/source-file.html -->
@@ -631,7 +714,7 @@ https://github.com/squidfunk/mkdocs-material/blob/master/src/partials/source-fil
 <small>
 <!-- mkdocs-git-revision-date-localized-plugin -->
 <u>最后更新</u> :
-        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">2023年9月22日</span>
+        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">2023年9月25日</span>
 <!-- mkdocs-git-revision-date-plugin -->
 <br/>
 <u>创建日期</u> :
