@@ -5,13 +5,13 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
-<meta content="基础平台" name="description"/>
+<meta content="基础平台2.0逻辑架构图" name="description"/>
 <meta content="罗潇" name="author"/>
-<link href="../%E4%BA%A7%E5%93%81%E9%9B%86%E6%88%90.%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1.p1/" rel="prev"/>
-<link href="../%E5%89%8D%E7%AB%AF%E4%BB%A3%E7%A0%81%E7%BB%93%E6%9E%84.%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1.p1/" rel="next"/>
+<link href="../%E5%9F%BA%E7%A1%80%E5%B9%B3%E5%8F%B02.0%E8%BF%90%E8%A1%8C%E6%9E%B6%E6%9E%84%E5%9B%BE/" rel="prev"/>
+<link href="../../%E6%A6%82%E8%A6%81%E8%AE%BE%E8%AE%A1/" rel="next"/>
 <link href="../../assets/meta/favicon.ico" rel="icon"/>
 <meta content="mkdocs-1.5.3, mkdocs-material-9.3.1" name="generator"/>
-<title>分布式部署.架构设计.p1 - 基础平台</title>
+<title>逻辑架构图 - 基础平台</title>
 <link href="../../assets/stylesheets/main.046329b4.min.css" rel="stylesheet"/>
 <link href="../../assets/stylesheets/palette.85d0ee34.min.css" rel="stylesheet"/>
 <style>:root{--md-annotation-icon:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22 12a10 10 0 0 1-10 10A10 10 0 0 1 2 12 10 10 0 0 1 12 2a10 10 0 0 1 10 10M6 13h8l-3.5 3.5 1.42 1.42L17.84 12l-5.92-5.92L10.5 7.5 14 11H6v2Z"/></svg>');}</style>
@@ -23,10 +23,10 @@
 <link href="https://unpkg.com/tippy.js@6/themes/translucent.css" rel="stylesheet"/>
 <link crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" referrerpolicy="no-referrer" rel="stylesheet"/>
 <meta content="None" name="site_url"/>
-<meta content="分布式部署.架构设计.p1" property="og:title"/>
-<meta content="分布式部署.架构设计.p1" name="twitter:title"/>
-<meta content="基础平台" name="og:description"/>
-<meta content="基础平台" name="twitter:description"/>
+<meta content="逻辑架构图" property="og:title"/>
+<meta content="逻辑架构图" name="twitter:title"/>
+<meta content="基础平台2.0逻辑架构图" name="description"/>
+<meta content="基础平台2.0逻辑架构图" name="twitter:description"/>
 <meta content="summary_large_image" name="twitter:card"/>
 <meta content="Noneassets/meta/SEO.png" property="og:image"/>
 <meta content="Noneassets/meta/SEO.png" name="twitter:image"/>
@@ -48,9 +48,6 @@
 <input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
 <label class="md-overlay" for="__drawer"></label>
 <div data-md-component="skip">
-<a class="md-skip" href="#_1">
-          跳转至
-        </a>
 </div>
 <div data-md-component="announce">
 </div>
@@ -74,7 +71,7 @@
 <div class="md-header__topic" data-md-component="header-topic">
 <span class="md-ellipsis">
             
-              分布式部署.架构设计.p1
+              逻辑架构图
             
           </span>
 </div>
@@ -138,8 +135,8 @@
 
         </a>
 </li>
-<li class="md-tabs__item">
-<a class="md-tabs__link" href="../../%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/%E5%9F%BA%E7%A1%80%E5%B9%B3%E5%8F%B02.0/">
+<li class="md-tabs__item md-tabs__item--active">
+<a class="md-tabs__link" href="../%E5%9F%BA%E7%A1%80%E5%B9%B3%E5%8F%B02.0/">
           
   
     
@@ -299,22 +296,22 @@
 </ul>
 </nav>
 </li>
-<li class="md-nav__item md-nav__item--nested">
-<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_2" type="checkbox"/>
+<li class="md-nav__item md-nav__item--active md-nav__item--nested">
+<input checked="" class="md-nav__toggle md-toggle" id="__nav_2" type="checkbox"/>
 <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
 <span class="md-ellipsis">
     架构设计
   </span>
 <span class="md-nav__icon md-icon"></span>
 </label>
-<nav aria-expanded="false" aria-labelledby="__nav_2_label" class="md-nav" data-md-level="1">
+<nav aria-expanded="true" aria-labelledby="__nav_2_label" class="md-nav" data-md-level="1">
 <label class="md-nav__title" for="__nav_2">
 <span class="md-nav__icon md-icon"></span>
             架构设计
           </label>
 <ul class="md-nav__list" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link" href="../../%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/%E5%9F%BA%E7%A1%80%E5%B9%B3%E5%8F%B02.0/">
+<a class="md-nav__link" href="../%E5%9F%BA%E7%A1%80%E5%B9%B3%E5%8F%B02.0/">
 <span class="md-ellipsis">
     基础平台2.0
   </span>
@@ -468,17 +465,6 @@
 <div class="md-sidebar__scrollwrap">
 <div class="md-sidebar__inner">
 <nav aria-label="目录" class="md-nav md-nav--secondary">
-<label class="md-nav__title" for="__toc">
-<span class="md-nav__icon md-icon"></span>
-      目录
-    </label>
-<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#_1">
-    分布式部署
-  </a>
-</li>
-</ul>
 </nav>
 </div>
 </div>
@@ -512,36 +498,9 @@
   Hack: check whether the content contains a h1 headline. If it doesn't, the
   page title (or respectively site name) is used as the main headline.
 -->
-<h1>分布式部署.架构设计.p1</h1>
+<h1>逻辑架构图</h1>
 <!-- Page content -->
-<h4 id="_1">分布式部署<a class="headerlink" href="#_1" title="Permanent link">¶</a></h4>
-<p><a class="glightbox" data-desc-position="bottom" data-height="auto" data-width="100%" href="../../assets/img/Pasted%20image%2020230920141412.png"><img alt="Pasted image 20230920141412" src="../../assets/img/Pasted%20image%2020230920141412.png" title="Pasted image 20230920141412"/></a></p>
-<p>分布式部署的情况下，优先安装DB、缓存中心和消息中心，在安装其他服务的时候必须指定DB、缓存中心和消息中心的地址。</p>
-<p>各服务安装后，主动上报自身地址到缓存中心，由缓存中心统一维护所有服务的地址（DB地址除外），供API网关路由查找各服务时使用，同时向消息中心上报服务地址。</p>
-<ul>
-<li>服务地址变更</li>
-</ul>
-<p>系统管理所在的服务器，通过前端界面修改本服务器地址，驱动后台系统配置服务完成本服务地址变更、向消息中心上报地址变更事件、更新缓存中心缓存的本服务的地址。</p>
-<p>其他服务所在的服务器，通过后台管理菜单修改服务器地址，同样驱动系统配置服务完成本服务器的地址变更，其他逻辑与界面修改地址相同。</p>
-<p>当服务地址变更时，被通知者的系统配置服务订阅消息中心其他服务地址变更事件，并更新本地的host文件，用于各服务交互通信时使用。各服务通信时使用域名进行通信，不使用IP地址，避免IP地址变更导致的频繁切换访问地址。</p>
-<ul>
-<li>部署约束</li>
-</ul>
-<p>分布式部署情况下，以下服务要和系统管理部署在同一个服务器上</p>
-<p>1) 系统日志服务，系统管理提供管理界面需要下载系统日志服务在本机记录的日志。</p>
-<p>2) NTP时间服务器和系统管理部署在一台服务器上，方便通过界面配置NTP。</p>
-<ul>
-<li>时间配置</li>
-</ul>
-<p>系统管理所在的服务器安装NTP时间服务器，通过系统管理可以实现以下几种方式的时间配置。</p>
-<p>1） 以国家授权中心时间为准</p>
-<p>2） 以我们部署的NTP服务器时间为准</p>
-<p>3） 手工配置时间</p>
-<p>分布式部署情况下，其他服务器作为客户端同步系统管理所在的服务器的时间，无论以上哪种方式配置时间，都可以达到分布式的各服务器时间一致的效果。</p>
-<ul>
-<li>安全性考虑</li>
-</ul>
-<p>分布式部署情况下，消息中心和缓存中心考虑通过IP绑定和使用非默认端口的方式实现安全控制，防止外部地址非法访问和恶意扫描。</p>
+<p>基础平台2.0逻辑架构图</p>
 <!-- Source file information -->
 <!-- taken from 
 https://github.com/squidfunk/mkdocs-material/blob/master/src/partials/source-file.html -->
@@ -550,7 +509,7 @@ https://github.com/squidfunk/mkdocs-material/blob/master/src/partials/source-fil
 <small>
 <!-- mkdocs-git-revision-date-localized-plugin -->
 <u>最后更新</u> :
-        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">2023年9月20日</span>
+        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">2023年9月22日</span>
 <!-- mkdocs-git-revision-date-plugin -->
 <br/>
 <u>创建日期</u> :
@@ -569,7 +528,7 @@ https://github.com/squidfunk/mkdocs-material/blob/master/src/partials/source-fil
     try {
       const index = document.querySelector('h1').innerHTML;
       if (index === "Index") {
-        document.querySelector('h1').innerHTML = "分布式部署.架构设计.p1";
+        document.querySelector('h1').innerHTML = "逻辑架构图";
       }
     } catch (error) {
       // console.log(error);
