@@ -1,0 +1,2389 @@
+
+<!DOCTYPE html>
+
+<html class="no-js" lang="zh">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<meta content="基础平台" name="description"/>
+<meta content="罗潇" name="author"/>
+<link href="../../%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BE%E8%AE%A1/" rel="prev"/>
+<link href="../%E5%9F%BA%E7%A1%80%E5%B9%B3%E5%8F%B01.0%E6%8E%A5%E5%8F%A3%E8%AE%BE%E8%AE%A1%E8%A7%84%E8%8C%83/" rel="next"/>
+<link href="../../assets/meta/favicon.ico" rel="icon"/>
+<meta content="mkdocs-1.5.3, mkdocs-material-9.3.1" name="generator"/>
+<title>基础平台1.0基事件源设计文档 - 基础平台</title>
+<link href="../../assets/stylesheets/main.046329b4.min.css" rel="stylesheet"/>
+<link href="../../assets/stylesheets/palette.85d0ee34.min.css" rel="stylesheet"/>
+<style>:root{--md-annotation-icon:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22 12a10 10 0 0 1-10 10A10 10 0 0 1 2 12 10 10 0 0 1 12 2a10 10 0 0 1 10 10M6 13h8l-3.5 3.5 1.42 1.42L17.84 12l-5.92-5.92L10.5 7.5 14 11H6v2Z"/></svg>');}</style>
+<link href="../../assets/css/custom_attributes.css" rel="stylesheet"/>
+<script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+<script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.min.js"></script>
+<script src="https://unpkg.com/tippy.js@6/dist/tippy-bundle.umd.js"></script>
+<link href="https://unpkg.com/tippy.js@6/animations/scale-subtle.css" rel="stylesheet"/>
+<link href="https://unpkg.com/tippy.js@6/themes/translucent.css" rel="stylesheet"/>
+<link crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" referrerpolicy="no-referrer" rel="stylesheet"/>
+<meta content="None" name="site_url"/>
+<meta content="基础平台1.0基事件源设计文档" property="og:title"/>
+<meta content="基础平台1.0基事件源设计文档" name="twitter:title"/>
+<meta content="基础平台" name="og:description"/>
+<meta content="基础平台" name="twitter:description"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Noneassets/meta/SEO.png" property="og:image"/>
+<meta content="Noneassets/meta/SEO.png" name="twitter:image"/>
+<link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+            html.glightbox-open { overflow: initial; height: 100%; }
+            .gslide-title { margin-top: 0px; user-select: text; }
+            .gslide-desc { color: #666; user-select: text; }
+            .gslide-image img { background: white; }
+            
+                .gscrollbar-fixer { padding-right: 15px; }
+                .gdesc-inner { font-size: 0.75rem; }
+                body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+                body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+                body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}
+                </style><script src="../../assets/javascripts/glightbox.min.js"></script></head>
+<body data-md-color-accent="light-blue" data-md-color-primary="teal" data-md-color-scheme="default" dir="ltr">
+<script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+<input autocomplete="off" class="md-toggle" data-md-toggle="drawer" id="__drawer" type="checkbox"/>
+<input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
+<label class="md-overlay" for="__drawer"></label>
+<div data-md-component="skip">
+<a class="md-skip" href="#_1">
+          跳转至
+        </a>
+</div>
+<div data-md-component="announce">
+</div>
+<div data-md-color-scheme="default" data-md-component="outdated" hidden="">
+</div>
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+<nav aria-label="页眉" class="md-header__inner md-grid">
+<a aria-label="基础平台" class="md-header__button md-logo" data-md-component="logo" href="../.." title="基础平台">
+<img alt="logo" src="../../assets/meta/favicons.png"/>
+</a>
+<label class="md-header__button md-icon" for="__drawer">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"></path></svg>
+</label>
+<div class="md-header__title" data-md-component="header-title">
+<div class="md-header__ellipsis">
+<div class="md-header__topic">
+<span class="md-ellipsis">
+            基础平台
+          </span>
+</div>
+<div class="md-header__topic" data-md-component="header-topic">
+<span class="md-ellipsis">
+            
+              基础平台1.0基事件源设计文档
+            
+          </span>
+</div>
+</div>
+</div>
+<form class="md-header__option" data-md-component="palette">
+<input aria-label="Switch to dark mode" class="md-option" data-md-color-accent="light-blue" data-md-color-media="(prefers-color-scheme: light)" data-md-color-primary="teal" data-md-color-scheme="default" id="__palette_1" name="__palette" type="radio"/>
+<label class="md-header__button md-icon" for="__palette_2" hidden="" title="Switch to dark mode">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6zm0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4zM7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"></path></svg>
+</label>
+<input aria-label="Switch to light mode" class="md-option" data-md-color-accent="indigo" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-primary="blue" data-md-color-scheme="slate" id="__palette_2" name="__palette" type="radio"/>
+<label class="md-header__button md-icon" for="__palette_1" hidden="" title="Switch to light mode">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3Z"></path></svg>
+</label>
+</form>
+<label class="md-header__button md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"></path></svg>
+</label>
+<div class="md-search" data-md-component="search" role="dialog">
+<label class="md-search__overlay" for="__search"></label>
+<div class="md-search__inner" role="search">
+<form class="md-search__form" name="search">
+<input aria-label="搜索" autocapitalize="off" autocomplete="off" autocorrect="off" class="md-search__input" data-md-component="search-query" name="query" placeholder="搜索" required="" spellcheck="false" type="text"/>
+<label class="md-search__icon md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"></path></svg>
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"></path></svg>
+</label>
+<nav aria-label="查找" class="md-search__options">
+<a aria-label="分享" class="md-search__icon md-icon" data-clipboard="" data-clipboard-text="" data-md-component="search-share" href="javascript:void(0)" tabindex="-1" title="分享">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7 0-.24-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91 1.61 0 2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08Z"></path></svg>
+</a>
+<button aria-label="清空当前内容" class="md-search__icon md-icon" tabindex="-1" title="清空当前内容" type="reset">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"></path></svg>
+</button>
+</nav>
+<div class="md-search__suggest" data-md-component="search-suggest"></div>
+</form>
+<div class="md-search__output">
+<div class="md-search__scrollwrap" data-md-scrollfix="">
+<div class="md-search-result" data-md-component="search-result">
+<div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+<ol class="md-search-result__list" role="presentation"></ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+</nav>
+<nav aria-label="标签" class="md-tabs" data-md-component="tabs">
+<div class="md-grid">
+<ul class="md-tabs__list">
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="../../%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/%E5%9F%BA%E7%A1%80%E5%B9%B3%E5%8F%B01.0/">
+          
+  
+    
+  
+  架构设计
+
+        </a>
+</li>
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="../../%E6%A6%82%E8%A6%81%E8%AE%BE%E8%AE%A1/%E5%9F%BA%E7%A1%80%E5%B9%B3%E5%8F%B01.0%E6%80%BB%E4%BD%93%E8%AE%BE%E8%AE%A1/">
+          
+  
+    
+  
+  概要设计
+
+        </a>
+</li>
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="../../%E8%AF%A6%E7%BB%86%E8%AE%BE%E8%AE%A1/%E5%B8%90%E5%8F%B7%E6%A0%B8%E6%9F%A5%E6%94%B9%E7%9B%B8%E5%85%B3/">
+          
+  
+    
+  
+  详细设计
+
+        </a>
+</li>
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="../../%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BE%E8%AE%A1/">
+          
+  
+    
+  
+  数据库设计
+
+        </a>
+</li>
+<li class="md-tabs__item md-tabs__item--active">
+<a class="md-tabs__link" href="./">
+          
+  
+    
+  
+  接口设计
+
+        </a>
+</li>
+</ul>
+</div>
+</nav>
+</header>
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="导航栏" class="md-nav md-nav--primary md-nav--lifted" data-md-level="0">
+<label class="md-nav__title" for="__drawer">
+<a aria-label="基础平台" class="md-nav__button md-logo" data-md-component="logo" href="../.." title="基础平台">
+<img alt="logo" src="../../assets/meta/favicons.png"/>
+</a>
+    基础平台
+  </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_1" type="checkbox"/>
+<label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+<span class="md-ellipsis">
+    架构设计
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_1_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_1">
+<span class="md-nav__icon md-icon"></span>
+            架构设计
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/%E5%9F%BA%E7%A1%80%E5%B9%B3%E5%8F%B01.0/">
+<span class="md-ellipsis">
+    基础平台1.0
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_2" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+<span class="md-ellipsis">
+    概要设计
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_2">
+<span class="md-nav__icon md-icon"></span>
+            概要设计
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item md-nav__item--section md-nav__item--nested">
+<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_2_1" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+<span class="md-ellipsis">
+    基础平台1.0
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_1_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_1">
+<span class="md-nav__icon md-icon"></span>
+            基础平台1.0
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../%E6%A6%82%E8%A6%81%E8%AE%BE%E8%AE%A1/%E5%9F%BA%E7%A1%80%E5%B9%B3%E5%8F%B01.0%E6%80%BB%E4%BD%93%E8%AE%BE%E8%AE%A1/">
+<span class="md-ellipsis">
+    基础平台1.0总体设计
+  </span>
+</a>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_2_1_2" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_1_2" id="__nav_2_1_2_label" tabindex="0">
+<span class="md-ellipsis">
+    功能设计
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_1_2_label" class="md-nav" data-md-level="3">
+<label class="md-nav__title" for="__nav_2_1_2">
+<span class="md-nav__icon md-icon"></span>
+            功能设计
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../%E6%A6%82%E8%A6%81%E8%AE%BE%E8%AE%A1/%E5%9F%BA%E7%A1%80%E5%B9%B3%E5%8F%B01.0%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86/">
+<span class="md-ellipsis">
+    基础平台1.0用户管理
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../%E6%A6%82%E8%A6%81%E8%AE%BE%E8%AE%A1/%E5%9F%BA%E7%A1%80%E5%B9%B3%E5%8F%B01.0%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86/">
+<span class="md-ellipsis">
+    基础平台1.0系统管理
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../%E6%A6%82%E8%A6%81%E8%AE%BE%E8%AE%A1/%E5%9F%BA%E7%A1%80%E5%B9%B3%E5%8F%B01.0%E8%B5%84%E4%BA%A7%E7%AE%A1%E7%90%86/">
+<span class="md-ellipsis">
+    基础平台1.0资产管理
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../%E6%A6%82%E8%A6%81%E8%AE%BE%E8%AE%A1/%E5%9F%BA%E7%A1%80%E5%B9%B3%E5%8F%B01.0%E7%B3%BB%E7%BB%9F%E5%90%8E%E5%8F%B0%E6%9C%8D%E5%8A%A1/">
+<span class="md-ellipsis">
+    基础平台1.0系统后台服务
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_3" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+<span class="md-ellipsis">
+    详细设计
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_3_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_3">
+<span class="md-nav__icon md-icon"></span>
+            详细设计
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item md-nav__item--section md-nav__item--nested">
+<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_3_1" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+<span class="md-ellipsis">
+    基础平台1.0
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_3_1_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_3_1">
+<span class="md-nav__icon md-icon"></span>
+            基础平台1.0
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../%E8%AF%A6%E7%BB%86%E8%AE%BE%E8%AE%A1/%E5%B8%90%E5%8F%B7%E6%A0%B8%E6%9F%A5%E6%94%B9%E7%9B%B8%E5%85%B3/">
+<span class="md-ellipsis">
+    帐号核查改相关
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_4" type="checkbox"/>
+<div class="md-nav__link md-nav__container">
+<a class="md-nav__link" href="../../%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BE%E8%AE%A1/">
+<span class="md-ellipsis">
+    数据库设计
+  </span>
+</a>
+</div>
+<nav aria-expanded="false" aria-labelledby="__nav_4_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_4">
+<span class="md-nav__icon md-icon"></span>
+            数据库设计
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--active md-nav__item--nested">
+<input checked="" class="md-nav__toggle md-toggle" id="__nav_5" type="checkbox"/>
+<label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+<span class="md-ellipsis">
+    接口设计
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="true" aria-labelledby="__nav_5_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_5">
+<span class="md-nav__icon md-icon"></span>
+            接口设计
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+<input checked="" class="md-nav__toggle md-toggle" id="__nav_5_1" type="checkbox"/>
+<label class="md-nav__link" for="__nav_5_1" id="__nav_5_1_label" tabindex="0">
+<span class="md-ellipsis">
+    基础平台1.0
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="true" aria-labelledby="__nav_5_1_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_5_1">
+<span class="md-nav__icon md-icon"></span>
+            基础平台1.0
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item md-nav__item--active">
+<input class="md-nav__toggle md-toggle" id="__toc" type="checkbox"/>
+<label class="md-nav__link md-nav__link--active" for="__toc">
+<span class="md-ellipsis">
+    基础平台1.0基事件源设计文档
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<a class="md-nav__link md-nav__link--active" href="./">
+<span class="md-ellipsis">
+    基础平台1.0基事件源设计文档
+  </span>
+</a>
+<nav aria-label="目录" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_1">
+    事件列表
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_2">
+    用户管理
+  </a>
+<nav aria-label="用户管理" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_3">
+    用户管理事件列表
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_4">
+    用户管理事件说明
+  </a>
+<nav aria-label="用户管理事件说明" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_5">
+    新增用户
+  </a>
+<nav aria-label="新增用户" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_6">
+    事件源
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_7">
+    删除用户
+  </a>
+<nav aria-label="删除用户" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_8">
+    事件源
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_9">
+    修改用户
+  </a>
+<nav aria-label="修改用户" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_10">
+    事件源
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_11">
+    导入用户
+  </a>
+<nav aria-label="导入用户" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_12">
+    事件源
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_13">
+    导出用户
+  </a>
+<nav aria-label="导出用户" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_14">
+    事件源
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_15">
+    用户核查
+  </a>
+<nav aria-label="用户核查" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_16">
+    用户核查事件列表
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_17">
+    用户核查事件说明
+  </a>
+<nav aria-label="用户核查事件说明" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_18">
+    新增用户核查任务
+  </a>
+<nav aria-label="新增用户核查任务" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_19">
+    事件源
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_20">
+    删除用户核查任务
+  </a>
+<nav aria-label="删除用户核查任务" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_21">
+    事件源
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_22">
+    修改用户核查任务
+  </a>
+<nav aria-label="修改用户核查任务" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_23">
+    事件源
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_24">
+    组织管理
+  </a>
+<nav aria-label="组织管理" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_25">
+    组织管理事件列表
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_26">
+    组织管理事件说明
+  </a>
+<nav aria-label="组织管理事件说明" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_27">
+    新增组织
+  </a>
+<nav aria-label="新增组织" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_28">
+    事件源
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_29">
+    删除组织
+  </a>
+<nav aria-label="删除组织" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_30">
+    事件源
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_31">
+    修改组织
+  </a>
+<nav aria-label="修改组织" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_32">
+    事件源
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_33">
+    导入组织
+  </a>
+<nav aria-label="导入组织" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_34">
+    事件源
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_35">
+    导出组织
+  </a>
+<nav aria-label="导出组织" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_36">
+    事件源
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_37">
+    口令策略管理
+  </a>
+<nav aria-label="口令策略管理" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_38">
+    口令策略管理事件列表
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_39">
+    口令策略事件说明
+  </a>
+<nav aria-label="口令策略事件说明" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_40">
+    修改口令策略
+  </a>
+<nav aria-label="修改口令策略" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_41">
+    事件源
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#otp">
+    OTP管理
+  </a>
+<nav aria-label="OTP管理" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#otp_1">
+    OTP管理事件列表
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#otp_2">
+    OTP管理事件说明
+  </a>
+<nav aria-label="OTP管理事件说明" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#otp_3">
+    新增OTP
+  </a>
+<nav aria-label="新增OTP" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_42">
+    事件源
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#otp_4">
+    删除OTP
+  </a>
+<nav aria-label="删除OTP" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_43">
+    事件源
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#otp_5">
+    修改OTP
+  </a>
+<nav aria-label="修改OTP" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_44">
+    事件源
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#otp_6">
+    导入OTP
+  </a>
+<nav aria-label="导入OTP" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_45">
+    事件源
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#otp_7">
+    导出OTP
+  </a>
+<nav aria-label="导出OTP" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_46">
+    事件源
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_47">
+    扩展属性管理
+  </a>
+<nav aria-label="扩展属性管理" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_48">
+    扩展属性管理事件列表
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_49">
+    扩展属性管理事件说明
+  </a>
+<nav aria-label="扩展属性管理事件说明" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_50">
+    新增扩展属性
+  </a>
+<nav aria-label="新增扩展属性" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_51">
+    事件源
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_52">
+    删除扩展属性
+  </a>
+<nav aria-label="删除扩展属性" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_53">
+    事件源
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_54">
+    修改扩展属性
+  </a>
+<nav aria-label="修改扩展属性" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_55">
+    事件源
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../%E5%9F%BA%E7%A1%80%E5%B9%B3%E5%8F%B01.0%E6%8E%A5%E5%8F%A3%E8%AE%BE%E8%AE%A1%E8%A7%84%E8%8C%83/">
+<span class="md-ellipsis">
+    基础平台1.0接口设计规范
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../%E5%9F%BA%E7%A1%80%E5%B9%B3%E5%8F%B01.0%E7%94%A8%E6%88%B7api%E8%AE%BE%E8%AE%A1/">
+<span class="md-ellipsis">
+    基础平台1.0用户api设计
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../%E5%9F%BA%E7%A1%80%E5%B9%B3%E5%8F%B01.0%E7%B3%BB%E7%BB%9Fapi%E8%AE%BE%E8%AE%A1/">
+<span class="md-ellipsis">
+    基础平台1.0系统api设计
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../%E5%9F%BA%E7%A1%80%E5%B9%B3%E5%8F%B01.0%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86%E4%BA%8B%E4%BB%B6%E6%BA%90%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3/">
+<span class="md-ellipsis">
+    基础平台1.0系统管理事件源设计文档
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../%E5%9F%BA%E7%A1%80%E5%B9%B3%E5%8F%B01.0%E8%B5%84%E6%BA%90%E4%B8%AD%E5%BF%83API%E6%8E%A5%E5%8F%A3%E8%AE%BE%E8%AE%A1/">
+<span class="md-ellipsis">
+    基础平台1.0资源中心API接口设计
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../%E5%9F%BA%E7%A1%80%E5%B9%B3%E5%8F%B01.0%E8%B5%84%E6%BA%90%E4%B8%AD%E5%BF%83%E4%BA%8B%E4%BB%B6%E6%BA%90%E8%AE%BE%E8%AE%A1/">
+<span class="md-ellipsis">
+    基础平台1.0资源中心事件源设计
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="目录" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_1">
+    事件列表
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_2">
+    用户管理
+  </a>
+<nav aria-label="用户管理" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_3">
+    用户管理事件列表
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_4">
+    用户管理事件说明
+  </a>
+<nav aria-label="用户管理事件说明" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_5">
+    新增用户
+  </a>
+<nav aria-label="新增用户" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_6">
+    事件源
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_7">
+    删除用户
+  </a>
+<nav aria-label="删除用户" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_8">
+    事件源
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_9">
+    修改用户
+  </a>
+<nav aria-label="修改用户" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_10">
+    事件源
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_11">
+    导入用户
+  </a>
+<nav aria-label="导入用户" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_12">
+    事件源
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_13">
+    导出用户
+  </a>
+<nav aria-label="导出用户" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_14">
+    事件源
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_15">
+    用户核查
+  </a>
+<nav aria-label="用户核查" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_16">
+    用户核查事件列表
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_17">
+    用户核查事件说明
+  </a>
+<nav aria-label="用户核查事件说明" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_18">
+    新增用户核查任务
+  </a>
+<nav aria-label="新增用户核查任务" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_19">
+    事件源
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_20">
+    删除用户核查任务
+  </a>
+<nav aria-label="删除用户核查任务" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_21">
+    事件源
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_22">
+    修改用户核查任务
+  </a>
+<nav aria-label="修改用户核查任务" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_23">
+    事件源
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_24">
+    组织管理
+  </a>
+<nav aria-label="组织管理" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_25">
+    组织管理事件列表
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_26">
+    组织管理事件说明
+  </a>
+<nav aria-label="组织管理事件说明" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_27">
+    新增组织
+  </a>
+<nav aria-label="新增组织" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_28">
+    事件源
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_29">
+    删除组织
+  </a>
+<nav aria-label="删除组织" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_30">
+    事件源
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_31">
+    修改组织
+  </a>
+<nav aria-label="修改组织" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_32">
+    事件源
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_33">
+    导入组织
+  </a>
+<nav aria-label="导入组织" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_34">
+    事件源
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_35">
+    导出组织
+  </a>
+<nav aria-label="导出组织" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_36">
+    事件源
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_37">
+    口令策略管理
+  </a>
+<nav aria-label="口令策略管理" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_38">
+    口令策略管理事件列表
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_39">
+    口令策略事件说明
+  </a>
+<nav aria-label="口令策略事件说明" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_40">
+    修改口令策略
+  </a>
+<nav aria-label="修改口令策略" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_41">
+    事件源
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#otp">
+    OTP管理
+  </a>
+<nav aria-label="OTP管理" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#otp_1">
+    OTP管理事件列表
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#otp_2">
+    OTP管理事件说明
+  </a>
+<nav aria-label="OTP管理事件说明" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#otp_3">
+    新增OTP
+  </a>
+<nav aria-label="新增OTP" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_42">
+    事件源
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#otp_4">
+    删除OTP
+  </a>
+<nav aria-label="删除OTP" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_43">
+    事件源
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#otp_5">
+    修改OTP
+  </a>
+<nav aria-label="修改OTP" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_44">
+    事件源
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#otp_6">
+    导入OTP
+  </a>
+<nav aria-label="导入OTP" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_45">
+    事件源
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#otp_7">
+    导出OTP
+  </a>
+<nav aria-label="导出OTP" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_46">
+    事件源
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_47">
+    扩展属性管理
+  </a>
+<nav aria-label="扩展属性管理" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_48">
+    扩展属性管理事件列表
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_49">
+    扩展属性管理事件说明
+  </a>
+<nav aria-label="扩展属性管理事件说明" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_50">
+    新增扩展属性
+  </a>
+<nav aria-label="新增扩展属性" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_51">
+    事件源
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_52">
+    删除扩展属性
+  </a>
+<nav aria-label="删除扩展属性" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_53">
+    事件源
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_54">
+    修改扩展属性
+  </a>
+<nav aria-label="修改扩展属性" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_55">
+    事件源
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<!--
+  Copyright (c) 2016-2023 Martin Donath <martin.donath@squidfunk.com>
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to
+  deal in the Software without restriction, including without limitation the
+  rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+  sell copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in
+  all copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+  IN THE SOFTWARE.
+-->
+<!-- Tags -->
+<!-- Actions -->
+<!--
+  Hack: check whether the content contains a h1 headline. If it doesn't, the
+  page title (or respectively site name) is used as the main headline.
+-->
+<h1>基础平台1.0基事件源设计文档</h1>
+<!-- Page content -->
+<h3 id="_1">事件列表<a class="headerlink" href="#_1" title="Permanent link">¶</a></h3>
+<table>
+<thead>
+<tr>
+<th>序号</th>
+<th>topic</th>
+<th>action</th>
+<th>desc</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>user-management.user</td>
+<td>add</td>
+<td>新增用户</td>
+</tr>
+<tr>
+<td>2</td>
+<td>user-management.user</td>
+<td>delete</td>
+<td>删除用户</td>
+</tr>
+<tr>
+<td>3</td>
+<td>user-management.user</td>
+<td>update</td>
+<td>修改用户</td>
+</tr>
+<tr>
+<td>4</td>
+<td>user-management.user</td>
+<td>import</td>
+<td>导入用户列表</td>
+</tr>
+<tr>
+<td>5</td>
+<td>user-management.user</td>
+<td>export</td>
+<td>导出用户列表</td>
+</tr>
+<tr>
+<td>6</td>
+<td>user-management.user-audit-task</td>
+<td>add</td>
+<td>新增用户核查任务</td>
+</tr>
+<tr>
+<td>7</td>
+<td>user-management.user-audit-task</td>
+<td>update</td>
+<td>修改用户核查任务</td>
+</tr>
+<tr>
+<td>8</td>
+<td>user-management.user-audit-task</td>
+<td>delete</td>
+<td>删除用户核查任务</td>
+</tr>
+<tr>
+<td>9</td>
+<td>user-management.org</td>
+<td>add</td>
+<td>新增组织</td>
+</tr>
+<tr>
+<td>10</td>
+<td>user-management.org</td>
+<td>delete</td>
+<td>删除组织</td>
+</tr>
+<tr>
+<td>11</td>
+<td>user-management.org</td>
+<td>update</td>
+<td>修改组织</td>
+</tr>
+<tr>
+<td>12</td>
+<td>user-management.org</td>
+<td>import</td>
+<td>导入组织列表</td>
+</tr>
+<tr>
+<td>13</td>
+<td>user-management.org</td>
+<td>export</td>
+<td>导出组织列表</td>
+</tr>
+<tr>
+<td>14</td>
+<td>user-management.password-policy</td>
+<td>update</td>
+<td>修改口令策略</td>
+</tr>
+<tr>
+<td>15</td>
+<td>user-management.otp</td>
+<td>add</td>
+<td>新增otp</td>
+</tr>
+<tr>
+<td>16</td>
+<td>user-management.otp</td>
+<td>update</td>
+<td>修改otp</td>
+</tr>
+<tr>
+<td>17</td>
+<td>user-management.otp</td>
+<td>delete</td>
+<td>删除otp</td>
+</tr>
+<tr>
+<td>18</td>
+<td>user-management.otp</td>
+<td>import</td>
+<td>导入otp</td>
+</tr>
+<tr>
+<td>19</td>
+<td>user-management.otp</td>
+<td>export</td>
+<td>导出otp</td>
+</tr>
+<tr>
+<td>20</td>
+<td>user-management.ext-attribute</td>
+<td>add</td>
+<td>新增扩展属性</td>
+</tr>
+<tr>
+<td>21</td>
+<td>user-management.ext-attribute</td>
+<td>delete</td>
+<td>删除扩展属性</td>
+</tr>
+<tr>
+<td>22</td>
+<td>user-management.ext-attribute</td>
+<td>update</td>
+<td>修改扩展属性</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_2">用户管理<a class="headerlink" href="#_2" title="Permanent link">¶</a></h3>
+<h4 id="_3">用户管理事件列表<a class="headerlink" href="#_3" title="Permanent link">¶</a></h4>
+<table>
+<thead>
+<tr>
+<th>序号</th>
+<th>topic</th>
+<th>action</th>
+<th>desc</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>user-management.user</td>
+<td>add</td>
+<td>新增用户</td>
+</tr>
+<tr>
+<td>2</td>
+<td>user-management.user</td>
+<td>delete</td>
+<td>删除用户</td>
+</tr>
+<tr>
+<td>3</td>
+<td>user-management.user</td>
+<td>update</td>
+<td>修改用户</td>
+</tr>
+<tr>
+<td>4</td>
+<td>user-management.user</td>
+<td>import</td>
+<td>导入用户列表</td>
+</tr>
+<tr>
+<td>5</td>
+<td>user-management.user</td>
+<td>export</td>
+<td>导出用户列表</td>
+</tr>
+</tbody>
+</table>
+<h4 id="_4">用户管理事件说明<a class="headerlink" href="#_4" title="Permanent link">¶</a></h4>
+<h5 id="_5">新增用户<a class="headerlink" href="#_5" title="Permanent link">¶</a></h5>
+<h6 id="_6">事件源<a class="headerlink" href="#_6" title="Permanent link">¶</a></h6>
+<blockquote>
+<p><code>topic</code>:user-management.user</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-0-1" id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="p">{</span>
+<a href="#__codelineno-0-2" id="__codelineno-0-2" name="__codelineno-0-2"></a><span class="nt">"action"</span><span class="p">:</span><span class="s2">"add"</span><span class="p">,</span>
+<a href="#__codelineno-0-3" id="__codelineno-0-3" name="__codelineno-0-3"></a><span class="nt">"sendTime"</span><span class="p">:</span><span class="s2">"2021-03-09 14:24:34"</span><span class="p">,</span>
+<a href="#__codelineno-0-4" id="__codelineno-0-4" name="__codelineno-0-4"></a><span class="nt">"operator"</span><span class="p">:</span><span class="s2">"admin"</span><span class="p">,</span>
+<a href="#__codelineno-0-5" id="__codelineno-0-5" name="__codelineno-0-5"></a><span class="nt">"srcIp"</span><span class="p">:</span><span class="s2">"192.168.1.2"</span><span class="p">,</span>
+<a href="#__codelineno-0-6" id="__codelineno-0-6" name="__codelineno-0-6"></a><span class="nt">"describe"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span>
+<a href="#__codelineno-0-7" id="__codelineno-0-7" name="__codelineno-0-7"></a><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<a href="#__codelineno-0-8" id="__codelineno-0-8" name="__codelineno-0-8"></a><span class="w">    </span><span class="p">{</span>
+<a href="#__codelineno-0-9" id="__codelineno-0-9" name="__codelineno-0-9"></a><span class="w">        </span><span class="nt">"id"</span><span class="p">:</span><span class="s2">"用户ID"</span><span class="p">,</span>
+<a href="#__codelineno-0-10" id="__codelineno-0-10" name="__codelineno-0-10"></a><span class="w">        </span><span class="nt">"mainAcctName"</span><span class="p">:</span><span class="s2">"zhangsan"</span><span class="p">,</span>
+<a href="#__codelineno-0-11" id="__codelineno-0-11" name="__codelineno-0-11"></a><span class="w">        </span><span class="nt">"personName"</span><span class="p">:</span><span class="s2">"张三"</span><span class="p">,</span>
+<a href="#__codelineno-0-12" id="__codelineno-0-12" name="__codelineno-0-12"></a><span class="w">        </span><span class="nt">"mainAcctPwd"</span><span class="p">:</span><span class="s2">"117711"</span><span class="p">,</span>
+<a href="#__codelineno-0-13" id="__codelineno-0-13" name="__codelineno-0-13"></a><span class="w">        </span><span class="nt">"beginTime"</span><span class="p">:</span><span class="s2">"2021-03-09 15:10:23"</span><span class="p">,</span>
+<a href="#__codelineno-0-14" id="__codelineno-0-14" name="__codelineno-0-14"></a><span class="w">        </span><span class="nt">"expireTime"</span><span class="p">:</span><span class="s2">"2022-03-09 15:10:23"</span><span class="p">,</span>
+<a href="#__codelineno-0-15" id="__codelineno-0-15" name="__codelineno-0-15"></a><span class="w">        </span><span class="nt">"mobile"</span><span class="p">:</span><span class="s2">"13800380038"</span><span class="p">,</span>
+<a href="#__codelineno-0-16" id="__codelineno-0-16" name="__codelineno-0-16"></a><span class="w">        </span><span class="nt">"email"</span><span class="p">:</span><span class="s2">"abc@abc.com"</span><span class="p">,</span>
+<a href="#__codelineno-0-17" id="__codelineno-0-17" name="__codelineno-0-17"></a><span class="w">        </span><span class="nt">"orgPath"</span><span class="p">:</span><span class="s2">"/一级组织/二级组织/三级组织"</span><span class="p">,</span>
+<a href="#__codelineno-0-18" id="__codelineno-0-18" name="__codelineno-0-18"></a><span class="w">        </span><span class="s2">"content"</span><span class="err">：</span><span class="p">{</span>
+<a href="#__codelineno-0-19" id="__codelineno-0-19" name="__codelineno-0-19"></a><span class="w">            </span><span class="s2">"key1"</span><span class="err">：</span><span class="s2">"value1"</span><span class="p">,</span>
+<a href="#__codelineno-0-20" id="__codelineno-0-20" name="__codelineno-0-20"></a><span class="w">            </span><span class="s2">"key2"</span><span class="err">：</span><span class="s2">"value2"</span><span class="p">,</span>
+<a href="#__codelineno-0-21" id="__codelineno-0-21" name="__codelineno-0-21"></a><span class="w">            </span><span class="s2">"key3"</span><span class="err">：</span><span class="s2">"value3"</span>
+<a href="#__codelineno-0-22" id="__codelineno-0-22" name="__codelineno-0-22"></a><span class="w">         </span><span class="p">}</span>
+<a href="#__codelineno-0-23" id="__codelineno-0-23" name="__codelineno-0-23"></a><span class="w">     </span><span class="p">}</span>
+<a href="#__codelineno-0-24" id="__codelineno-0-24" name="__codelineno-0-24"></a><span class="w">  </span><span class="p">]</span>
+<a href="#__codelineno-0-25" id="__codelineno-0-25" name="__codelineno-0-25"></a><span class="p">}</span>
+</code></pre></div>
+<h4 id="_7">删除用户<a class="headerlink" href="#_7" title="Permanent link">¶</a></h4>
+<h5 id="_8">事件源<a class="headerlink" href="#_8" title="Permanent link">¶</a></h5>
+<blockquote>
+<p><code>topic</code>:user-management.user</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-1-1" id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="p">{</span>
+<a href="#__codelineno-1-2" id="__codelineno-1-2" name="__codelineno-1-2"></a><span class="nt">"action"</span><span class="p">:</span><span class="s2">"delete"</span><span class="p">,</span>
+<a href="#__codelineno-1-3" id="__codelineno-1-3" name="__codelineno-1-3"></a><span class="nt">"sendTime"</span><span class="p">:</span><span class="s2">"2021-03-09 14:24:34"</span><span class="p">,</span>
+<a href="#__codelineno-1-4" id="__codelineno-1-4" name="__codelineno-1-4"></a><span class="nt">"operator"</span><span class="p">:</span><span class="s2">"admin"</span><span class="p">,</span>
+<a href="#__codelineno-1-5" id="__codelineno-1-5" name="__codelineno-1-5"></a><span class="nt">"srcIp"</span><span class="p">:</span><span class="s2">"192.168.1.2"</span><span class="p">,</span>
+<a href="#__codelineno-1-6" id="__codelineno-1-6" name="__codelineno-1-6"></a><span class="nt">"describe"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span>
+<a href="#__codelineno-1-7" id="__codelineno-1-7" name="__codelineno-1-7"></a><span class="nt">"data"</span><span class="p">:[</span>
+<a href="#__codelineno-1-8" id="__codelineno-1-8" name="__codelineno-1-8"></a><span class="w">    </span><span class="p">{</span>
+<a href="#__codelineno-1-9" id="__codelineno-1-9" name="__codelineno-1-9"></a><span class="w">        </span><span class="nt">"id"</span><span class="p">:</span><span class="s2">"用户ID"</span>
+<a href="#__codelineno-1-10" id="__codelineno-1-10" name="__codelineno-1-10"></a><span class="w">    </span><span class="p">},</span>
+<a href="#__codelineno-1-11" id="__codelineno-1-11" name="__codelineno-1-11"></a><span class="w">    </span><span class="p">{</span>
+<a href="#__codelineno-1-12" id="__codelineno-1-12" name="__codelineno-1-12"></a><span class="w">        </span><span class="nt">"id"</span><span class="p">:</span><span class="s2">"用户ID"</span>
+<a href="#__codelineno-1-13" id="__codelineno-1-13" name="__codelineno-1-13"></a><span class="w">    </span><span class="p">}</span><span class="w">  </span>
+<a href="#__codelineno-1-14" id="__codelineno-1-14" name="__codelineno-1-14"></a><span class="w"> </span><span class="p">]</span>
+<a href="#__codelineno-1-15" id="__codelineno-1-15" name="__codelineno-1-15"></a><span class="p">}</span>
+</code></pre></div>
+<h4 id="_9">修改用户<a class="headerlink" href="#_9" title="Permanent link">¶</a></h4>
+<h5 id="_10">事件源<a class="headerlink" href="#_10" title="Permanent link">¶</a></h5>
+<blockquote>
+<p><code>topic</code>:user-management.user</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-2-1" id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="p">{</span>
+<a href="#__codelineno-2-2" id="__codelineno-2-2" name="__codelineno-2-2"></a><span class="nt">"action"</span><span class="p">:</span><span class="s2">"update"</span><span class="p">,</span>
+<a href="#__codelineno-2-3" id="__codelineno-2-3" name="__codelineno-2-3"></a><span class="nt">"sendTime"</span><span class="p">:</span><span class="s2">"2021-03-09 14:24:34"</span><span class="p">,</span>
+<a href="#__codelineno-2-4" id="__codelineno-2-4" name="__codelineno-2-4"></a><span class="nt">"operator"</span><span class="p">:</span><span class="s2">"admin"</span><span class="p">,</span>
+<a href="#__codelineno-2-5" id="__codelineno-2-5" name="__codelineno-2-5"></a><span class="nt">"srcIp"</span><span class="p">:</span><span class="s2">"192.168.1.2"</span><span class="p">,</span>
+<a href="#__codelineno-2-6" id="__codelineno-2-6" name="__codelineno-2-6"></a><span class="nt">"describe"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span>
+<a href="#__codelineno-2-7" id="__codelineno-2-7" name="__codelineno-2-7"></a><span class="nt">"data"</span><span class="p">:[</span>
+<a href="#__codelineno-2-8" id="__codelineno-2-8" name="__codelineno-2-8"></a><span class="w">    </span><span class="p">{</span>
+<a href="#__codelineno-2-9" id="__codelineno-2-9" name="__codelineno-2-9"></a><span class="w">    </span><span class="nt">"id"</span><span class="p">:</span><span class="s2">"用户ID"</span><span class="p">,</span>
+<a href="#__codelineno-2-10" id="__codelineno-2-10" name="__codelineno-2-10"></a><span class="w">    </span><span class="nt">"mainAcctName"</span><span class="p">:</span><span class="s2">"zhangsan"</span><span class="p">,</span>
+<a href="#__codelineno-2-11" id="__codelineno-2-11" name="__codelineno-2-11"></a><span class="w">    </span><span class="nt">"personName"</span><span class="p">:</span><span class="s2">"张三"</span><span class="p">,</span>
+<a href="#__codelineno-2-12" id="__codelineno-2-12" name="__codelineno-2-12"></a><span class="w">    </span><span class="nt">"mainAcctPwd"</span><span class="p">:</span><span class="s2">"117711"</span><span class="p">,</span>
+<a href="#__codelineno-2-13" id="__codelineno-2-13" name="__codelineno-2-13"></a><span class="w">    </span><span class="nt">"beginTime"</span><span class="p">:</span><span class="s2">"2021-03-09 15:10:23"</span><span class="p">,</span>
+<a href="#__codelineno-2-14" id="__codelineno-2-14" name="__codelineno-2-14"></a><span class="w">    </span><span class="nt">"expireTime"</span><span class="p">:</span><span class="s2">"2022-03-09 15:10:23"</span><span class="p">,</span>
+<a href="#__codelineno-2-15" id="__codelineno-2-15" name="__codelineno-2-15"></a><span class="w">    </span><span class="nt">"mobile"</span><span class="p">:</span><span class="s2">"13800380038"</span><span class="p">,</span>
+<a href="#__codelineno-2-16" id="__codelineno-2-16" name="__codelineno-2-16"></a><span class="w">    </span><span class="nt">"email"</span><span class="p">:</span><span class="s2">"abc@abc.com"</span><span class="p">,</span>
+<a href="#__codelineno-2-17" id="__codelineno-2-17" name="__codelineno-2-17"></a><span class="w">    </span><span class="nt">"orgPath"</span><span class="p">:</span><span class="s2">"/一级组织/二级组织/三级组织"</span><span class="p">,</span>
+<a href="#__codelineno-2-18" id="__codelineno-2-18" name="__codelineno-2-18"></a><span class="w">     </span><span class="s2">"content"</span><span class="err">：</span><span class="p">{</span>
+<a href="#__codelineno-2-19" id="__codelineno-2-19" name="__codelineno-2-19"></a><span class="w">        </span><span class="s2">"key1"</span><span class="err">：</span><span class="s2">"value1"</span><span class="p">,</span>
+<a href="#__codelineno-2-20" id="__codelineno-2-20" name="__codelineno-2-20"></a><span class="w">        </span><span class="s2">"key2"</span><span class="err">：</span><span class="s2">"value2"</span><span class="p">,</span>
+<a href="#__codelineno-2-21" id="__codelineno-2-21" name="__codelineno-2-21"></a><span class="w">        </span><span class="s2">"key3"</span><span class="err">：</span><span class="s2">"value3"</span>
+<a href="#__codelineno-2-22" id="__codelineno-2-22" name="__codelineno-2-22"></a><span class="w">        </span><span class="p">}</span>
+<a href="#__codelineno-2-23" id="__codelineno-2-23" name="__codelineno-2-23"></a><span class="w">    </span><span class="p">}</span>
+<a href="#__codelineno-2-24" id="__codelineno-2-24" name="__codelineno-2-24"></a><span class="w"> </span><span class="p">]</span>
+<a href="#__codelineno-2-25" id="__codelineno-2-25" name="__codelineno-2-25"></a><span class="p">}</span>
+</code></pre></div>
+<h4 id="_11">导入用户<a class="headerlink" href="#_11" title="Permanent link">¶</a></h4>
+<h5 id="_12">事件源<a class="headerlink" href="#_12" title="Permanent link">¶</a></h5>
+<blockquote>
+<p><code>topic</code>:user-management.user</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-3-1" id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="p">{</span>
+<a href="#__codelineno-3-2" id="__codelineno-3-2" name="__codelineno-3-2"></a><span class="nt">"action"</span><span class="p">:</span><span class="s2">"import"</span><span class="p">,</span>
+<a href="#__codelineno-3-3" id="__codelineno-3-3" name="__codelineno-3-3"></a><span class="nt">"sendTime"</span><span class="p">:</span><span class="s2">"2021-03-09 14:24:34"</span><span class="p">,</span>
+<a href="#__codelineno-3-4" id="__codelineno-3-4" name="__codelineno-3-4"></a><span class="nt">"operator"</span><span class="p">:</span><span class="s2">"admin"</span><span class="p">,</span>
+<a href="#__codelineno-3-5" id="__codelineno-3-5" name="__codelineno-3-5"></a><span class="nt">"srcIp"</span><span class="p">:</span><span class="s2">"192.168.1.2"</span><span class="p">,</span>
+<a href="#__codelineno-3-6" id="__codelineno-3-6" name="__codelineno-3-6"></a><span class="nt">"describe"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span>
+<a href="#__codelineno-3-7" id="__codelineno-3-7" name="__codelineno-3-7"></a><span class="nt">"data"</span><span class="p">:[</span>
+<a href="#__codelineno-3-8" id="__codelineno-3-8" name="__codelineno-3-8"></a><span class="w">   </span><span class="p">{</span>
+<a href="#__codelineno-3-9" id="__codelineno-3-9" name="__codelineno-3-9"></a><span class="w">     </span><span class="nt">"id"</span><span class="p">:</span><span class="s2">"用户ID"</span><span class="p">,</span>
+<a href="#__codelineno-3-10" id="__codelineno-3-10" name="__codelineno-3-10"></a><span class="w">     </span><span class="nt">"mainAcctName"</span><span class="p">:</span><span class="s2">"zhangsan"</span><span class="p">,</span>
+<a href="#__codelineno-3-11" id="__codelineno-3-11" name="__codelineno-3-11"></a><span class="w">     </span><span class="nt">"personName"</span><span class="p">:</span><span class="s2">"张三"</span><span class="p">,</span>
+<a href="#__codelineno-3-12" id="__codelineno-3-12" name="__codelineno-3-12"></a><span class="w">     </span><span class="nt">"mainAcctPwd"</span><span class="p">:</span><span class="s2">"117711"</span><span class="p">,</span>
+<a href="#__codelineno-3-13" id="__codelineno-3-13" name="__codelineno-3-13"></a><span class="w">     </span><span class="nt">"beginTime"</span><span class="p">:</span><span class="s2">"2021-03-09 15:10:23"</span><span class="p">,</span>
+<a href="#__codelineno-3-14" id="__codelineno-3-14" name="__codelineno-3-14"></a><span class="w">     </span><span class="nt">"expireTime"</span><span class="p">:</span><span class="s2">"2022-03-09 15:10:23"</span><span class="p">,</span>
+<a href="#__codelineno-3-15" id="__codelineno-3-15" name="__codelineno-3-15"></a><span class="w">     </span><span class="nt">"mobile"</span><span class="p">:</span><span class="s2">"13800380038"</span><span class="p">,</span>
+<a href="#__codelineno-3-16" id="__codelineno-3-16" name="__codelineno-3-16"></a><span class="w">     </span><span class="nt">"email"</span><span class="p">:</span><span class="s2">"abc@abc.com"</span><span class="p">,</span>
+<a href="#__codelineno-3-17" id="__codelineno-3-17" name="__codelineno-3-17"></a><span class="w">     </span><span class="nt">"orgPath"</span><span class="p">:</span><span class="s2">"/一级组织/二级组织/三级组织"</span><span class="p">,</span>
+<a href="#__codelineno-3-18" id="__codelineno-3-18" name="__codelineno-3-18"></a><span class="w">     </span><span class="s2">"content"</span><span class="err">：</span><span class="p">{</span>
+<a href="#__codelineno-3-19" id="__codelineno-3-19" name="__codelineno-3-19"></a><span class="w">        </span><span class="s2">"key1"</span><span class="err">：</span><span class="s2">"value1"</span><span class="p">,</span>
+<a href="#__codelineno-3-20" id="__codelineno-3-20" name="__codelineno-3-20"></a><span class="w">        </span><span class="s2">"key2"</span><span class="err">：</span><span class="s2">"value2"</span><span class="p">,</span>
+<a href="#__codelineno-3-21" id="__codelineno-3-21" name="__codelineno-3-21"></a><span class="w">        </span><span class="s2">"key3"</span><span class="err">：</span><span class="s2">"value3"</span>
+<a href="#__codelineno-3-22" id="__codelineno-3-22" name="__codelineno-3-22"></a><span class="w">        </span><span class="p">}</span>
+<a href="#__codelineno-3-23" id="__codelineno-3-23" name="__codelineno-3-23"></a><span class="w">    </span><span class="p">}</span>
+<a href="#__codelineno-3-24" id="__codelineno-3-24" name="__codelineno-3-24"></a><span class="w"> </span><span class="p">]</span>
+<a href="#__codelineno-3-25" id="__codelineno-3-25" name="__codelineno-3-25"></a><span class="p">}</span>
+</code></pre></div>
+<h4 id="_13">导出用户<a class="headerlink" href="#_13" title="Permanent link">¶</a></h4>
+<h5 id="_14">事件源<a class="headerlink" href="#_14" title="Permanent link">¶</a></h5>
+<blockquote>
+<p><code>topic</code>:user-management.user</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-4-1" id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="p">{</span>
+<a href="#__codelineno-4-2" id="__codelineno-4-2" name="__codelineno-4-2"></a><span class="nt">"action"</span><span class="p">:</span><span class="s2">"export"</span><span class="p">,</span>
+<a href="#__codelineno-4-3" id="__codelineno-4-3" name="__codelineno-4-3"></a><span class="nt">"sendTime"</span><span class="p">:</span><span class="s2">"2021-03-09 14:24:34"</span><span class="p">,</span>
+<a href="#__codelineno-4-4" id="__codelineno-4-4" name="__codelineno-4-4"></a><span class="nt">"operator"</span><span class="p">:</span><span class="s2">"admin"</span><span class="p">,</span>
+<a href="#__codelineno-4-5" id="__codelineno-4-5" name="__codelineno-4-5"></a><span class="nt">"srcIp"</span><span class="p">:</span><span class="s2">"192.168.1.2"</span><span class="p">,</span>
+<a href="#__codelineno-4-6" id="__codelineno-4-6" name="__codelineno-4-6"></a><span class="nt">"describe"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span>
+<a href="#__codelineno-4-7" id="__codelineno-4-7" name="__codelineno-4-7"></a><span class="nt">"data"</span><span class="p">:[</span>
+<a href="#__codelineno-4-8" id="__codelineno-4-8" name="__codelineno-4-8"></a><span class="w">   </span><span class="p">{</span>
+<a href="#__codelineno-4-9" id="__codelineno-4-9" name="__codelineno-4-9"></a><span class="w">     </span><span class="nt">"id"</span><span class="p">:</span><span class="s2">"用户ID"</span><span class="p">,</span>
+<a href="#__codelineno-4-10" id="__codelineno-4-10" name="__codelineno-4-10"></a><span class="w">     </span><span class="nt">"mainAcctName"</span><span class="p">:</span><span class="s2">"zhangsan"</span><span class="p">,</span>
+<a href="#__codelineno-4-11" id="__codelineno-4-11" name="__codelineno-4-11"></a><span class="w">     </span><span class="nt">"personName"</span><span class="p">:</span><span class="s2">"张三"</span><span class="p">,</span>
+<a href="#__codelineno-4-12" id="__codelineno-4-12" name="__codelineno-4-12"></a><span class="w">     </span><span class="nt">"mainAcctPwd"</span><span class="p">:</span><span class="s2">"117711"</span><span class="p">,</span>
+<a href="#__codelineno-4-13" id="__codelineno-4-13" name="__codelineno-4-13"></a><span class="w">     </span><span class="nt">"beginTime"</span><span class="p">:</span><span class="s2">"2021-03-09 15:10:23"</span><span class="p">,</span>
+<a href="#__codelineno-4-14" id="__codelineno-4-14" name="__codelineno-4-14"></a><span class="w">     </span><span class="nt">"expireTime"</span><span class="p">:</span><span class="s2">"2022-03-09 15:10:23"</span><span class="p">,</span>
+<a href="#__codelineno-4-15" id="__codelineno-4-15" name="__codelineno-4-15"></a><span class="w">     </span><span class="nt">"mobile"</span><span class="p">:</span><span class="s2">"13800380038"</span><span class="p">,</span>
+<a href="#__codelineno-4-16" id="__codelineno-4-16" name="__codelineno-4-16"></a><span class="w">     </span><span class="nt">"email"</span><span class="p">:</span><span class="s2">"abc@abc.com"</span><span class="p">,</span>
+<a href="#__codelineno-4-17" id="__codelineno-4-17" name="__codelineno-4-17"></a><span class="w">     </span><span class="nt">"orgPath"</span><span class="p">:</span><span class="s2">"/一级组织/二级组织/三级组织"</span><span class="p">,</span>
+<a href="#__codelineno-4-18" id="__codelineno-4-18" name="__codelineno-4-18"></a><span class="w">     </span><span class="s2">"content"</span><span class="err">：</span><span class="p">{</span>
+<a href="#__codelineno-4-19" id="__codelineno-4-19" name="__codelineno-4-19"></a><span class="w">        </span><span class="s2">"key1"</span><span class="err">：</span><span class="s2">"value1"</span><span class="p">,</span>
+<a href="#__codelineno-4-20" id="__codelineno-4-20" name="__codelineno-4-20"></a><span class="w">        </span><span class="s2">"key2"</span><span class="err">：</span><span class="s2">"value2"</span><span class="p">,</span>
+<a href="#__codelineno-4-21" id="__codelineno-4-21" name="__codelineno-4-21"></a><span class="w">        </span><span class="s2">"key3"</span><span class="err">：</span><span class="s2">"value3"</span>
+<a href="#__codelineno-4-22" id="__codelineno-4-22" name="__codelineno-4-22"></a><span class="w">        </span><span class="p">}</span>
+<a href="#__codelineno-4-23" id="__codelineno-4-23" name="__codelineno-4-23"></a><span class="w">    </span><span class="p">}</span>
+<a href="#__codelineno-4-24" id="__codelineno-4-24" name="__codelineno-4-24"></a><span class="w"> </span><span class="p">]</span>
+<a href="#__codelineno-4-25" id="__codelineno-4-25" name="__codelineno-4-25"></a><span class="p">}</span>
+</code></pre></div>
+<h2 id="_15">用户核查<a class="headerlink" href="#_15" title="Permanent link">¶</a></h2>
+<h3 id="_16">用户核查事件列表<a class="headerlink" href="#_16" title="Permanent link">¶</a></h3>
+<table>
+<thead>
+<tr>
+<th>序号</th>
+<th>topic</th>
+<th>action</th>
+<th>desc</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>user-management.user-audit-task</td>
+<td>add</td>
+<td>新增用户核查任务</td>
+</tr>
+<tr>
+<td>2</td>
+<td>user-management.user-audit-task</td>
+<td>delete</td>
+<td>删除用户核查任务</td>
+</tr>
+<tr>
+<td>3</td>
+<td>user-management.user-audit-task</td>
+<td>update</td>
+<td>修改用户核查任务</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_17">用户核查事件说明<a class="headerlink" href="#_17" title="Permanent link">¶</a></h3>
+<h4 id="_18">新增用户核查任务<a class="headerlink" href="#_18" title="Permanent link">¶</a></h4>
+<h5 id="_19">事件源<a class="headerlink" href="#_19" title="Permanent link">¶</a></h5>
+<blockquote>
+<p><code>topic</code>:user-management.user-audit-task</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-5-1" id="__codelineno-5-1" name="__codelineno-5-1"></a><span class="p">{</span>
+<a href="#__codelineno-5-2" id="__codelineno-5-2" name="__codelineno-5-2"></a><span class="nt">"action"</span><span class="p">:</span><span class="s2">"add"</span><span class="p">,</span>
+<a href="#__codelineno-5-3" id="__codelineno-5-3" name="__codelineno-5-3"></a><span class="nt">"sendTime"</span><span class="p">:</span><span class="s2">"2021-03-09 14:24:34"</span><span class="p">,</span>
+<a href="#__codelineno-5-4" id="__codelineno-5-4" name="__codelineno-5-4"></a><span class="nt">"operator"</span><span class="p">:</span><span class="s2">"admin"</span><span class="p">,</span>
+<a href="#__codelineno-5-5" id="__codelineno-5-5" name="__codelineno-5-5"></a><span class="nt">"srcIp"</span><span class="p">:</span><span class="s2">"192.168.1.2"</span><span class="p">,</span>
+<a href="#__codelineno-5-6" id="__codelineno-5-6" name="__codelineno-5-6"></a><span class="nt">"describe"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span>
+<a href="#__codelineno-5-7" id="__codelineno-5-7" name="__codelineno-5-7"></a><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<a href="#__codelineno-5-8" id="__codelineno-5-8" name="__codelineno-5-8"></a><span class="w">    </span><span class="p">{</span>
+<a href="#__codelineno-5-9" id="__codelineno-5-9" name="__codelineno-5-9"></a><span class="w">        </span><span class="nt">"id"</span><span class="p">:</span><span class="s2">"核查任务ID"</span><span class="p">,</span>
+<a href="#__codelineno-5-10" id="__codelineno-5-10" name="__codelineno-5-10"></a><span class="w">        </span><span class="nt">"taskName"</span><span class="p">:</span><span class="s2">"zhangsan"</span><span class="p">,</span>
+<a href="#__codelineno-5-11" id="__codelineno-5-11" name="__codelineno-5-11"></a><span class="w">        </span><span class="nt">"auditType"</span><span class="p">:</span><span class="s2">"normal"</span><span class="p">,</span>
+<a href="#__codelineno-5-12" id="__codelineno-5-12" name="__codelineno-5-12"></a><span class="w">        </span><span class="nt">"taskType"</span><span class="p">:</span><span class="s2">"cycle"</span><span class="p">,</span>
+<a href="#__codelineno-5-13" id="__codelineno-5-13" name="__codelineno-5-13"></a><span class="w">        </span><span class="nt">"taskTypeValue"</span><span class="p">:</span><span class="s2">" * * */10 * *"</span><span class="p">,</span>
+<a href="#__codelineno-5-14" id="__codelineno-5-14" name="__codelineno-5-14"></a><span class="w">        </span><span class="nt">"expireTime"</span><span class="p">:</span><span class="s2">"2021-03-09 15:10:23"</span><span class="p">,</span>
+<a href="#__codelineno-5-15" id="__codelineno-5-15" name="__codelineno-5-15"></a><span class="w">        </span><span class="nt">"org"</span><span class="p">:[</span><span class="s2">"1"</span><span class="p">,</span><span class="s2">"2"</span><span class="p">,</span><span class="s2">"3"</span><span class="p">],</span>
+<a href="#__codelineno-5-16" id="__codelineno-5-16" name="__codelineno-5-16"></a><span class="w">        </span><span class="nt">"email"</span><span class="p">:</span><span class="s2">"abc@abc.com"</span>
+<a href="#__codelineno-5-17" id="__codelineno-5-17" name="__codelineno-5-17"></a><span class="w">    </span><span class="p">}</span>
+<a href="#__codelineno-5-18" id="__codelineno-5-18" name="__codelineno-5-18"></a><span class="w">  </span><span class="p">]</span>
+<a href="#__codelineno-5-19" id="__codelineno-5-19" name="__codelineno-5-19"></a><span class="p">}</span>
+</code></pre></div>
+<h4 id="_20">删除用户核查任务<a class="headerlink" href="#_20" title="Permanent link">¶</a></h4>
+<h5 id="_21">事件源<a class="headerlink" href="#_21" title="Permanent link">¶</a></h5>
+<blockquote>
+<p><code>topic</code>:user-management.user-audit-task</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-6-1" id="__codelineno-6-1" name="__codelineno-6-1"></a><span class="p">{</span>
+<a href="#__codelineno-6-2" id="__codelineno-6-2" name="__codelineno-6-2"></a><span class="nt">"action"</span><span class="p">:</span><span class="s2">"delete"</span><span class="p">,</span>
+<a href="#__codelineno-6-3" id="__codelineno-6-3" name="__codelineno-6-3"></a><span class="nt">"sendTime"</span><span class="p">:</span><span class="s2">"2021-03-09 14:24:34"</span><span class="p">,</span>
+<a href="#__codelineno-6-4" id="__codelineno-6-4" name="__codelineno-6-4"></a><span class="nt">"operator"</span><span class="p">:</span><span class="s2">"admin"</span><span class="p">,</span>
+<a href="#__codelineno-6-5" id="__codelineno-6-5" name="__codelineno-6-5"></a><span class="nt">"srcIp"</span><span class="p">:</span><span class="s2">"192.168.1.2"</span><span class="p">,</span>
+<a href="#__codelineno-6-6" id="__codelineno-6-6" name="__codelineno-6-6"></a><span class="nt">"describe"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span>
+<a href="#__codelineno-6-7" id="__codelineno-6-7" name="__codelineno-6-7"></a><span class="nt">"data"</span><span class="p">:[</span>
+<a href="#__codelineno-6-8" id="__codelineno-6-8" name="__codelineno-6-8"></a><span class="w">    </span><span class="p">{</span>
+<a href="#__codelineno-6-9" id="__codelineno-6-9" name="__codelineno-6-9"></a><span class="w">        </span><span class="nt">"id"</span><span class="p">:</span><span class="s2">"核查任务ID"</span>
+<a href="#__codelineno-6-10" id="__codelineno-6-10" name="__codelineno-6-10"></a><span class="w">    </span><span class="p">},</span>
+<a href="#__codelineno-6-11" id="__codelineno-6-11" name="__codelineno-6-11"></a><span class="w">    </span><span class="p">{</span>
+<a href="#__codelineno-6-12" id="__codelineno-6-12" name="__codelineno-6-12"></a><span class="w">        </span><span class="nt">"id"</span><span class="p">:</span><span class="s2">"核查任务ID"</span>
+<a href="#__codelineno-6-13" id="__codelineno-6-13" name="__codelineno-6-13"></a><span class="w">    </span><span class="p">}</span><span class="w">  </span>
+<a href="#__codelineno-6-14" id="__codelineno-6-14" name="__codelineno-6-14"></a><span class="w"> </span><span class="p">]</span>
+<a href="#__codelineno-6-15" id="__codelineno-6-15" name="__codelineno-6-15"></a><span class="p">}</span>
+</code></pre></div>
+<h4 id="_22">修改用户核查任务<a class="headerlink" href="#_22" title="Permanent link">¶</a></h4>
+<h5 id="_23">事件源<a class="headerlink" href="#_23" title="Permanent link">¶</a></h5>
+<blockquote>
+<p><code>topic</code>:user-management.user-audit-task</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-7-1" id="__codelineno-7-1" name="__codelineno-7-1"></a><span class="p">{</span>
+<a href="#__codelineno-7-2" id="__codelineno-7-2" name="__codelineno-7-2"></a><span class="nt">"action"</span><span class="p">:</span><span class="s2">"update"</span><span class="p">,</span>
+<a href="#__codelineno-7-3" id="__codelineno-7-3" name="__codelineno-7-3"></a><span class="nt">"sendTime"</span><span class="p">:</span><span class="s2">"2021-03-09 14:24:34"</span><span class="p">,</span>
+<a href="#__codelineno-7-4" id="__codelineno-7-4" name="__codelineno-7-4"></a><span class="nt">"operator"</span><span class="p">:</span><span class="s2">"admin"</span><span class="p">,</span>
+<a href="#__codelineno-7-5" id="__codelineno-7-5" name="__codelineno-7-5"></a><span class="nt">"srcIp"</span><span class="p">:</span><span class="s2">"192.168.1.2"</span><span class="p">,</span>
+<a href="#__codelineno-7-6" id="__codelineno-7-6" name="__codelineno-7-6"></a><span class="nt">"describe"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span>
+<a href="#__codelineno-7-7" id="__codelineno-7-7" name="__codelineno-7-7"></a><span class="nt">"data"</span><span class="p">:[</span>
+<a href="#__codelineno-7-8" id="__codelineno-7-8" name="__codelineno-7-8"></a><span class="w">    </span><span class="p">{</span>
+<a href="#__codelineno-7-9" id="__codelineno-7-9" name="__codelineno-7-9"></a><span class="w">        </span><span class="nt">"id"</span><span class="p">:</span><span class="s2">"核查任务ID"</span><span class="p">,</span>
+<a href="#__codelineno-7-10" id="__codelineno-7-10" name="__codelineno-7-10"></a><span class="w">        </span><span class="nt">"taskName"</span><span class="p">:</span><span class="s2">"zhangsan"</span><span class="p">,</span>
+<a href="#__codelineno-7-11" id="__codelineno-7-11" name="__codelineno-7-11"></a><span class="w">        </span><span class="nt">"auditType"</span><span class="p">:</span><span class="s2">"normal"</span><span class="p">,</span>
+<a href="#__codelineno-7-12" id="__codelineno-7-12" name="__codelineno-7-12"></a><span class="w">        </span><span class="nt">"taskType"</span><span class="p">:</span><span class="s2">"cycle"</span><span class="p">,</span>
+<a href="#__codelineno-7-13" id="__codelineno-7-13" name="__codelineno-7-13"></a><span class="w">        </span><span class="nt">"taskTypeValue"</span><span class="p">:</span><span class="s2">" * * */10 * *"</span><span class="p">,</span>
+<a href="#__codelineno-7-14" id="__codelineno-7-14" name="__codelineno-7-14"></a><span class="w">        </span><span class="nt">"expireTime"</span><span class="p">:</span><span class="s2">"2021-03-09 15:10:23"</span><span class="p">,</span>
+<a href="#__codelineno-7-15" id="__codelineno-7-15" name="__codelineno-7-15"></a><span class="w">        </span><span class="nt">"org"</span><span class="p">:[</span><span class="s2">"1"</span><span class="p">,</span><span class="s2">"2"</span><span class="p">,</span><span class="s2">"3"</span><span class="p">],</span>
+<a href="#__codelineno-7-16" id="__codelineno-7-16" name="__codelineno-7-16"></a><span class="w">        </span><span class="nt">"email"</span><span class="p">:</span><span class="s2">"abc@abc.com"</span>
+<a href="#__codelineno-7-17" id="__codelineno-7-17" name="__codelineno-7-17"></a><span class="w">    </span><span class="p">}</span>
+<a href="#__codelineno-7-18" id="__codelineno-7-18" name="__codelineno-7-18"></a><span class="w"> </span><span class="p">]</span>
+<a href="#__codelineno-7-19" id="__codelineno-7-19" name="__codelineno-7-19"></a><span class="p">}</span>
+</code></pre></div>
+<h2 id="_24">组织管理<a class="headerlink" href="#_24" title="Permanent link">¶</a></h2>
+<h3 id="_25">组织管理事件列表<a class="headerlink" href="#_25" title="Permanent link">¶</a></h3>
+<table>
+<thead>
+<tr>
+<th>序号</th>
+<th>topic</th>
+<th>action</th>
+<th>desc</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>user-management.org</td>
+<td>add</td>
+<td>新增组织</td>
+</tr>
+<tr>
+<td>2</td>
+<td>user-management.org</td>
+<td>delete</td>
+<td>删除组织</td>
+</tr>
+<tr>
+<td>3</td>
+<td>user-management.org</td>
+<td>update</td>
+<td>修改组织</td>
+</tr>
+<tr>
+<td>4</td>
+<td>user-management.org</td>
+<td>import</td>
+<td>导入组织列表</td>
+</tr>
+<tr>
+<td>5</td>
+<td>user-management.org</td>
+<td>export</td>
+<td>导出组织列表</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_26">组织管理事件说明<a class="headerlink" href="#_26" title="Permanent link">¶</a></h3>
+<h4 id="_27">新增组织<a class="headerlink" href="#_27" title="Permanent link">¶</a></h4>
+<h5 id="_28">事件源<a class="headerlink" href="#_28" title="Permanent link">¶</a></h5>
+<blockquote>
+<p><code>topic</code>:user-management.org</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-8-1" id="__codelineno-8-1" name="__codelineno-8-1"></a><span class="p">{</span>
+<a href="#__codelineno-8-2" id="__codelineno-8-2" name="__codelineno-8-2"></a><span class="nt">"action"</span><span class="p">:</span><span class="s2">"add"</span><span class="p">,</span>
+<a href="#__codelineno-8-3" id="__codelineno-8-3" name="__codelineno-8-3"></a><span class="nt">"sendTime"</span><span class="p">:</span><span class="s2">"2021-03-09 14:24:34"</span><span class="p">,</span>
+<a href="#__codelineno-8-4" id="__codelineno-8-4" name="__codelineno-8-4"></a><span class="nt">"operator"</span><span class="p">:</span><span class="s2">"admin"</span><span class="p">,</span>
+<a href="#__codelineno-8-5" id="__codelineno-8-5" name="__codelineno-8-5"></a><span class="nt">"srcIp"</span><span class="p">:</span><span class="s2">"192.168.1.2"</span><span class="p">,</span>
+<a href="#__codelineno-8-6" id="__codelineno-8-6" name="__codelineno-8-6"></a><span class="nt">"describe"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span>
+<a href="#__codelineno-8-7" id="__codelineno-8-7" name="__codelineno-8-7"></a><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<a href="#__codelineno-8-8" id="__codelineno-8-8" name="__codelineno-8-8"></a><span class="w">    </span><span class="p">{</span>
+<a href="#__codelineno-8-9" id="__codelineno-8-9" name="__codelineno-8-9"></a><span class="w">        </span><span class="nt">"id"</span><span class="p">:</span><span class="s2">"组织ID"</span><span class="p">,</span>
+<a href="#__codelineno-8-10" id="__codelineno-8-10" name="__codelineno-8-10"></a><span class="w">        </span><span class="nt">"orgName"</span><span class="p">:</span><span class="s2">"组织名称"</span><span class="p">,</span>
+<a href="#__codelineno-8-11" id="__codelineno-8-11" name="__codelineno-8-11"></a><span class="w">        </span><span class="nt">"orgType"</span><span class="p">:</span><span class="s2">"组织类型"</span><span class="p">,</span>
+<a href="#__codelineno-8-12" id="__codelineno-8-12" name="__codelineno-8-12"></a><span class="w">        </span><span class="nt">"orgCode"</span><span class="p">:</span><span class="s2">"组织编号"</span><span class="p">,</span>
+<a href="#__codelineno-8-13" id="__codelineno-8-13" name="__codelineno-8-13"></a><span class="w">        </span><span class="nt">"orgPath"</span><span class="p">:</span><span class="s2">"组织路径"</span><span class="p">,</span>
+<a href="#__codelineno-8-14" id="__codelineno-8-14" name="__codelineno-8-14"></a><span class="w">        </span><span class="nt">"region"</span><span class="p">:</span><span class="s2">"地域"</span><span class="p">,</span>
+<a href="#__codelineno-8-15" id="__codelineno-8-15" name="__codelineno-8-15"></a><span class="w">        </span><span class="s2">"content"</span><span class="err">：</span><span class="p">{</span>
+<a href="#__codelineno-8-16" id="__codelineno-8-16" name="__codelineno-8-16"></a><span class="w">            </span><span class="s2">"key1"</span><span class="err">：</span><span class="s2">"value1"</span><span class="p">,</span>
+<a href="#__codelineno-8-17" id="__codelineno-8-17" name="__codelineno-8-17"></a><span class="w">            </span><span class="s2">"key2"</span><span class="err">：</span><span class="s2">"value2"</span><span class="p">,</span>
+<a href="#__codelineno-8-18" id="__codelineno-8-18" name="__codelineno-8-18"></a><span class="w">            </span><span class="s2">"key3"</span><span class="err">：</span><span class="s2">"value3"</span>
+<a href="#__codelineno-8-19" id="__codelineno-8-19" name="__codelineno-8-19"></a><span class="w">        </span><span class="p">}</span>
+<a href="#__codelineno-8-20" id="__codelineno-8-20" name="__codelineno-8-20"></a><span class="w">     </span><span class="p">}</span>
+<a href="#__codelineno-8-21" id="__codelineno-8-21" name="__codelineno-8-21"></a><span class="w">  </span><span class="p">]</span>
+<a href="#__codelineno-8-22" id="__codelineno-8-22" name="__codelineno-8-22"></a><span class="p">}</span>
+</code></pre></div>
+<h4 id="_29">删除组织<a class="headerlink" href="#_29" title="Permanent link">¶</a></h4>
+<h5 id="_30">事件源<a class="headerlink" href="#_30" title="Permanent link">¶</a></h5>
+<blockquote>
+<p><code>topic</code>:user-management.org</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-9-1" id="__codelineno-9-1" name="__codelineno-9-1"></a><span class="p">{</span>
+<a href="#__codelineno-9-2" id="__codelineno-9-2" name="__codelineno-9-2"></a><span class="nt">"action"</span><span class="p">:</span><span class="s2">"delete"</span><span class="p">,</span>
+<a href="#__codelineno-9-3" id="__codelineno-9-3" name="__codelineno-9-3"></a><span class="nt">"sendTime"</span><span class="p">:</span><span class="s2">"2021-03-09 14:24:34"</span><span class="p">,</span>
+<a href="#__codelineno-9-4" id="__codelineno-9-4" name="__codelineno-9-4"></a><span class="nt">"operator"</span><span class="p">:</span><span class="s2">"admin"</span><span class="p">,</span>
+<a href="#__codelineno-9-5" id="__codelineno-9-5" name="__codelineno-9-5"></a><span class="nt">"srcIp"</span><span class="p">:</span><span class="s2">"192.168.1.2"</span><span class="p">,</span>
+<a href="#__codelineno-9-6" id="__codelineno-9-6" name="__codelineno-9-6"></a><span class="nt">"describe"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span>
+<a href="#__codelineno-9-7" id="__codelineno-9-7" name="__codelineno-9-7"></a><span class="nt">"data"</span><span class="p">:[</span>
+<a href="#__codelineno-9-8" id="__codelineno-9-8" name="__codelineno-9-8"></a><span class="w">    </span><span class="p">{</span>
+<a href="#__codelineno-9-9" id="__codelineno-9-9" name="__codelineno-9-9"></a><span class="w">        </span><span class="nt">"id"</span><span class="p">:</span><span class="s2">"组织ID"</span>
+<a href="#__codelineno-9-10" id="__codelineno-9-10" name="__codelineno-9-10"></a><span class="w">    </span><span class="p">},</span>
+<a href="#__codelineno-9-11" id="__codelineno-9-11" name="__codelineno-9-11"></a><span class="w">    </span><span class="p">{</span>
+<a href="#__codelineno-9-12" id="__codelineno-9-12" name="__codelineno-9-12"></a><span class="w">        </span><span class="nt">"id"</span><span class="p">:</span><span class="s2">"组织ID"</span>
+<a href="#__codelineno-9-13" id="__codelineno-9-13" name="__codelineno-9-13"></a><span class="w">    </span><span class="p">}</span><span class="w">  </span>
+<a href="#__codelineno-9-14" id="__codelineno-9-14" name="__codelineno-9-14"></a><span class="w"> </span><span class="p">]</span>
+<a href="#__codelineno-9-15" id="__codelineno-9-15" name="__codelineno-9-15"></a><span class="p">}</span>
+</code></pre></div>
+<h4 id="_31">修改组织<a class="headerlink" href="#_31" title="Permanent link">¶</a></h4>
+<h5 id="_32">事件源<a class="headerlink" href="#_32" title="Permanent link">¶</a></h5>
+<blockquote>
+<p><code>topic</code>:user-management.org</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-10-1" id="__codelineno-10-1" name="__codelineno-10-1"></a><span class="p">{</span>
+<a href="#__codelineno-10-2" id="__codelineno-10-2" name="__codelineno-10-2"></a><span class="nt">"action"</span><span class="p">:</span><span class="s2">"update"</span><span class="p">,</span>
+<a href="#__codelineno-10-3" id="__codelineno-10-3" name="__codelineno-10-3"></a><span class="nt">"sendTime"</span><span class="p">:</span><span class="s2">"2021-03-09 14:24:34"</span><span class="p">,</span>
+<a href="#__codelineno-10-4" id="__codelineno-10-4" name="__codelineno-10-4"></a><span class="nt">"operator"</span><span class="p">:</span><span class="s2">"admin"</span><span class="p">,</span>
+<a href="#__codelineno-10-5" id="__codelineno-10-5" name="__codelineno-10-5"></a><span class="nt">"srcIp"</span><span class="p">:</span><span class="s2">"192.168.1.2"</span><span class="p">,</span>
+<a href="#__codelineno-10-6" id="__codelineno-10-6" name="__codelineno-10-6"></a><span class="nt">"describe"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span>
+<a href="#__codelineno-10-7" id="__codelineno-10-7" name="__codelineno-10-7"></a><span class="nt">"data"</span><span class="p">:[</span>
+<a href="#__codelineno-10-8" id="__codelineno-10-8" name="__codelineno-10-8"></a><span class="w">    </span><span class="p">{</span>
+<a href="#__codelineno-10-9" id="__codelineno-10-9" name="__codelineno-10-9"></a><span class="w">        </span><span class="nt">"id"</span><span class="p">:</span><span class="s2">"组织ID"</span><span class="p">,</span>
+<a href="#__codelineno-10-10" id="__codelineno-10-10" name="__codelineno-10-10"></a><span class="w">        </span><span class="nt">"orgName"</span><span class="p">:</span><span class="s2">"组织名称"</span><span class="p">,</span>
+<a href="#__codelineno-10-11" id="__codelineno-10-11" name="__codelineno-10-11"></a><span class="w">        </span><span class="nt">"orgType"</span><span class="p">:</span><span class="s2">"组织类型"</span><span class="p">,</span>
+<a href="#__codelineno-10-12" id="__codelineno-10-12" name="__codelineno-10-12"></a><span class="w">        </span><span class="nt">"orgCode"</span><span class="p">:</span><span class="s2">"组织编号"</span><span class="p">,</span>
+<a href="#__codelineno-10-13" id="__codelineno-10-13" name="__codelineno-10-13"></a><span class="w">        </span><span class="nt">"orgPath"</span><span class="p">:</span><span class="s2">"组织路径"</span><span class="p">,</span>
+<a href="#__codelineno-10-14" id="__codelineno-10-14" name="__codelineno-10-14"></a><span class="w">        </span><span class="nt">"region"</span><span class="p">:</span><span class="s2">"地域"</span><span class="p">,</span>
+<a href="#__codelineno-10-15" id="__codelineno-10-15" name="__codelineno-10-15"></a><span class="w">        </span><span class="s2">"content"</span><span class="err">：</span><span class="p">{</span>
+<a href="#__codelineno-10-16" id="__codelineno-10-16" name="__codelineno-10-16"></a><span class="w">            </span><span class="s2">"key1"</span><span class="err">：</span><span class="s2">"value1"</span><span class="p">,</span>
+<a href="#__codelineno-10-17" id="__codelineno-10-17" name="__codelineno-10-17"></a><span class="w">            </span><span class="s2">"key2"</span><span class="err">：</span><span class="s2">"value2"</span><span class="p">,</span>
+<a href="#__codelineno-10-18" id="__codelineno-10-18" name="__codelineno-10-18"></a><span class="w">            </span><span class="s2">"key3"</span><span class="err">：</span><span class="s2">"value3"</span>
+<a href="#__codelineno-10-19" id="__codelineno-10-19" name="__codelineno-10-19"></a><span class="w">        </span><span class="p">}</span>
+<a href="#__codelineno-10-20" id="__codelineno-10-20" name="__codelineno-10-20"></a><span class="w">    </span><span class="p">}</span>
+<a href="#__codelineno-10-21" id="__codelineno-10-21" name="__codelineno-10-21"></a><span class="w"> </span><span class="p">]</span>
+<a href="#__codelineno-10-22" id="__codelineno-10-22" name="__codelineno-10-22"></a><span class="p">}</span>
+</code></pre></div>
+<h4 id="_33">导入组织<a class="headerlink" href="#_33" title="Permanent link">¶</a></h4>
+<h5 id="_34">事件源<a class="headerlink" href="#_34" title="Permanent link">¶</a></h5>
+<blockquote>
+<p><code>topic</code>:user-management.org</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-11-1" id="__codelineno-11-1" name="__codelineno-11-1"></a><span class="p">{</span>
+<a href="#__codelineno-11-2" id="__codelineno-11-2" name="__codelineno-11-2"></a><span class="nt">"action"</span><span class="p">:</span><span class="s2">"import"</span><span class="p">,</span>
+<a href="#__codelineno-11-3" id="__codelineno-11-3" name="__codelineno-11-3"></a><span class="nt">"sendTime"</span><span class="p">:</span><span class="s2">"2021-03-09 14:24:34"</span><span class="p">,</span>
+<a href="#__codelineno-11-4" id="__codelineno-11-4" name="__codelineno-11-4"></a><span class="nt">"operator"</span><span class="p">:</span><span class="s2">"admin"</span><span class="p">,</span>
+<a href="#__codelineno-11-5" id="__codelineno-11-5" name="__codelineno-11-5"></a><span class="nt">"srcIp"</span><span class="p">:</span><span class="s2">"192.168.1.2"</span><span class="p">,</span>
+<a href="#__codelineno-11-6" id="__codelineno-11-6" name="__codelineno-11-6"></a><span class="nt">"describe"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span>
+<a href="#__codelineno-11-7" id="__codelineno-11-7" name="__codelineno-11-7"></a><span class="nt">"data"</span><span class="p">:[</span>
+<a href="#__codelineno-11-8" id="__codelineno-11-8" name="__codelineno-11-8"></a><span class="w">    </span><span class="p">{</span>
+<a href="#__codelineno-11-9" id="__codelineno-11-9" name="__codelineno-11-9"></a><span class="w">        </span><span class="nt">"id"</span><span class="p">:</span><span class="s2">"组织ID"</span><span class="p">,</span>
+<a href="#__codelineno-11-10" id="__codelineno-11-10" name="__codelineno-11-10"></a><span class="w">        </span><span class="nt">"orgName"</span><span class="p">:</span><span class="s2">"组织名称"</span><span class="p">,</span>
+<a href="#__codelineno-11-11" id="__codelineno-11-11" name="__codelineno-11-11"></a><span class="w">        </span><span class="nt">"orgType"</span><span class="p">:</span><span class="s2">"组织类型"</span><span class="p">,</span>
+<a href="#__codelineno-11-12" id="__codelineno-11-12" name="__codelineno-11-12"></a><span class="w">        </span><span class="nt">"orgCode"</span><span class="p">:</span><span class="s2">"组织编号"</span><span class="p">,</span>
+<a href="#__codelineno-11-13" id="__codelineno-11-13" name="__codelineno-11-13"></a><span class="w">        </span><span class="nt">"orgPath"</span><span class="p">:</span><span class="s2">"组织路径"</span><span class="p">,</span>
+<a href="#__codelineno-11-14" id="__codelineno-11-14" name="__codelineno-11-14"></a><span class="w">        </span><span class="nt">"region"</span><span class="p">:</span><span class="s2">"地域"</span><span class="p">,</span>
+<a href="#__codelineno-11-15" id="__codelineno-11-15" name="__codelineno-11-15"></a><span class="w">        </span><span class="s2">"content"</span><span class="err">：</span><span class="p">{</span>
+<a href="#__codelineno-11-16" id="__codelineno-11-16" name="__codelineno-11-16"></a><span class="w">            </span><span class="s2">"key1"</span><span class="err">：</span><span class="s2">"value1"</span><span class="p">,</span>
+<a href="#__codelineno-11-17" id="__codelineno-11-17" name="__codelineno-11-17"></a><span class="w">            </span><span class="s2">"key2"</span><span class="err">：</span><span class="s2">"value2"</span><span class="p">,</span>
+<a href="#__codelineno-11-18" id="__codelineno-11-18" name="__codelineno-11-18"></a><span class="w">            </span><span class="s2">"key3"</span><span class="err">：</span><span class="s2">"value3"</span>
+<a href="#__codelineno-11-19" id="__codelineno-11-19" name="__codelineno-11-19"></a><span class="w">        </span><span class="p">}</span>
+<a href="#__codelineno-11-20" id="__codelineno-11-20" name="__codelineno-11-20"></a><span class="w">    </span><span class="p">}</span>
+<a href="#__codelineno-11-21" id="__codelineno-11-21" name="__codelineno-11-21"></a><span class="w"> </span><span class="p">]</span>
+<a href="#__codelineno-11-22" id="__codelineno-11-22" name="__codelineno-11-22"></a><span class="p">}</span>
+</code></pre></div>
+<h4 id="_35">导出组织<a class="headerlink" href="#_35" title="Permanent link">¶</a></h4>
+<h5 id="_36">事件源<a class="headerlink" href="#_36" title="Permanent link">¶</a></h5>
+<blockquote>
+<p><code>topic</code>:user-management.org</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-12-1" id="__codelineno-12-1" name="__codelineno-12-1"></a><span class="p">{</span>
+<a href="#__codelineno-12-2" id="__codelineno-12-2" name="__codelineno-12-2"></a><span class="nt">"action"</span><span class="p">:</span><span class="s2">"export"</span><span class="p">,</span>
+<a href="#__codelineno-12-3" id="__codelineno-12-3" name="__codelineno-12-3"></a><span class="nt">"sendTime"</span><span class="p">:</span><span class="s2">"2021-03-09 14:24:34"</span><span class="p">,</span>
+<a href="#__codelineno-12-4" id="__codelineno-12-4" name="__codelineno-12-4"></a><span class="nt">"operator"</span><span class="p">:</span><span class="s2">"admin"</span><span class="p">,</span>
+<a href="#__codelineno-12-5" id="__codelineno-12-5" name="__codelineno-12-5"></a><span class="nt">"srcIp"</span><span class="p">:</span><span class="s2">"192.168.1.2"</span><span class="p">,</span>
+<a href="#__codelineno-12-6" id="__codelineno-12-6" name="__codelineno-12-6"></a><span class="nt">"describe"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span>
+<a href="#__codelineno-12-7" id="__codelineno-12-7" name="__codelineno-12-7"></a><span class="nt">"data"</span><span class="p">:[</span>
+<a href="#__codelineno-12-8" id="__codelineno-12-8" name="__codelineno-12-8"></a><span class="w">    </span><span class="p">{</span>
+<a href="#__codelineno-12-9" id="__codelineno-12-9" name="__codelineno-12-9"></a><span class="w">        </span><span class="nt">"id"</span><span class="p">:</span><span class="s2">"组织ID"</span><span class="p">,</span>
+<a href="#__codelineno-12-10" id="__codelineno-12-10" name="__codelineno-12-10"></a><span class="w">        </span><span class="nt">"orgName"</span><span class="p">:</span><span class="s2">"组织名称"</span><span class="p">,</span>
+<a href="#__codelineno-12-11" id="__codelineno-12-11" name="__codelineno-12-11"></a><span class="w">        </span><span class="nt">"orgType"</span><span class="p">:</span><span class="s2">"组织类型"</span><span class="p">,</span>
+<a href="#__codelineno-12-12" id="__codelineno-12-12" name="__codelineno-12-12"></a><span class="w">        </span><span class="nt">"orgCode"</span><span class="p">:</span><span class="s2">"组织编号"</span><span class="p">,</span>
+<a href="#__codelineno-12-13" id="__codelineno-12-13" name="__codelineno-12-13"></a><span class="w">        </span><span class="nt">"orgPath"</span><span class="p">:</span><span class="s2">"组织路径"</span><span class="p">,</span>
+<a href="#__codelineno-12-14" id="__codelineno-12-14" name="__codelineno-12-14"></a><span class="w">        </span><span class="nt">"region"</span><span class="p">:</span><span class="s2">"地域"</span><span class="p">,</span>
+<a href="#__codelineno-12-15" id="__codelineno-12-15" name="__codelineno-12-15"></a><span class="w">        </span><span class="s2">"content"</span><span class="err">：</span><span class="p">{</span>
+<a href="#__codelineno-12-16" id="__codelineno-12-16" name="__codelineno-12-16"></a><span class="w">            </span><span class="s2">"key1"</span><span class="err">：</span><span class="s2">"value1"</span><span class="p">,</span>
+<a href="#__codelineno-12-17" id="__codelineno-12-17" name="__codelineno-12-17"></a><span class="w">            </span><span class="s2">"key2"</span><span class="err">：</span><span class="s2">"value2"</span><span class="p">,</span>
+<a href="#__codelineno-12-18" id="__codelineno-12-18" name="__codelineno-12-18"></a><span class="w">            </span><span class="s2">"key3"</span><span class="err">：</span><span class="s2">"value3"</span>
+<a href="#__codelineno-12-19" id="__codelineno-12-19" name="__codelineno-12-19"></a><span class="w">        </span><span class="p">}</span>
+<a href="#__codelineno-12-20" id="__codelineno-12-20" name="__codelineno-12-20"></a><span class="w">    </span><span class="p">}</span>
+<a href="#__codelineno-12-21" id="__codelineno-12-21" name="__codelineno-12-21"></a><span class="w"> </span><span class="p">]</span>
+<a href="#__codelineno-12-22" id="__codelineno-12-22" name="__codelineno-12-22"></a><span class="p">}</span>
+</code></pre></div>
+<h2 id="_37">口令策略管理<a class="headerlink" href="#_37" title="Permanent link">¶</a></h2>
+<h3 id="_38">口令策略管理事件列表<a class="headerlink" href="#_38" title="Permanent link">¶</a></h3>
+<table>
+<thead>
+<tr>
+<th>序号</th>
+<th>topic</th>
+<th>action</th>
+<th>desc</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>user-management.password-policy</td>
+<td>update</td>
+<td>修改口令策略</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_39">口令策略事件说明<a class="headerlink" href="#_39" title="Permanent link">¶</a></h3>
+<h4 id="_40">修改口令策略<a class="headerlink" href="#_40" title="Permanent link">¶</a></h4>
+<h5 id="_41">事件源<a class="headerlink" href="#_41" title="Permanent link">¶</a></h5>
+<blockquote>
+<p><code>topic</code>:user-management.password-policy</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-13-1" id="__codelineno-13-1" name="__codelineno-13-1"></a><span class="p">{</span>
+<a href="#__codelineno-13-2" id="__codelineno-13-2" name="__codelineno-13-2"></a><span class="nt">"action"</span><span class="p">:</span><span class="s2">"update"</span><span class="p">,</span>
+<a href="#__codelineno-13-3" id="__codelineno-13-3" name="__codelineno-13-3"></a><span class="nt">"sendTime"</span><span class="p">:</span><span class="s2">"2021-03-09 14:24:34"</span><span class="p">,</span>
+<a href="#__codelineno-13-4" id="__codelineno-13-4" name="__codelineno-13-4"></a><span class="nt">"operator"</span><span class="p">:</span><span class="s2">"admin"</span><span class="p">,</span>
+<a href="#__codelineno-13-5" id="__codelineno-13-5" name="__codelineno-13-5"></a><span class="nt">"srcIp"</span><span class="p">:</span><span class="s2">"192.168.1.2"</span><span class="p">,</span>
+<a href="#__codelineno-13-6" id="__codelineno-13-6" name="__codelineno-13-6"></a><span class="nt">"describe"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span>
+<a href="#__codelineno-13-7" id="__codelineno-13-7" name="__codelineno-13-7"></a><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<a href="#__codelineno-13-8" id="__codelineno-13-8" name="__codelineno-13-8"></a><span class="w">    </span><span class="p">{</span>
+<a href="#__codelineno-13-9" id="__codelineno-13-9" name="__codelineno-13-9"></a><span class="w">        </span><span class="nt">"id"</span><span class="p">:</span><span class="nt">"策略ID"</span>
+<a href="#__codelineno-13-10" id="__codelineno-13-10" name="__codelineno-13-10"></a><span class="w">        </span><span class="nt">"min"</span><span class="p">:</span><span class="mi">11</span><span class="p">,</span>
+<a href="#__codelineno-13-11" id="__codelineno-13-11" name="__codelineno-13-11"></a><span class="w">        </span><span class="nt">"max"</span><span class="p">:</span><span class="mi">12</span><span class="p">,</span>
+<a href="#__codelineno-13-12" id="__codelineno-13-12" name="__codelineno-13-12"></a><span class="w">        </span><span class="nt">"special"</span><span class="p">:</span><span class="s2">"$!@"</span><span class="p">,</span>
+<a href="#__codelineno-13-13" id="__codelineno-13-13" name="__codelineno-13-13"></a><span class="w">        </span><span class="nt">"requireNumber"</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span>
+<a href="#__codelineno-13-14" id="__codelineno-13-14" name="__codelineno-13-14"></a><span class="w">        </span><span class="nt">"requireLowercase"</span><span class="p">:</span><span class="kc">false</span><span class="p">,</span>
+<a href="#__codelineno-13-15" id="__codelineno-13-15" name="__codelineno-13-15"></a><span class="w">        </span><span class="nt">"requireUppercase"</span><span class="p">:</span><span class="kc">true</span>
+<a href="#__codelineno-13-16" id="__codelineno-13-16" name="__codelineno-13-16"></a><span class="w">    </span><span class="p">}</span>
+<a href="#__codelineno-13-17" id="__codelineno-13-17" name="__codelineno-13-17"></a><span class="w">  </span><span class="p">]</span>
+<a href="#__codelineno-13-18" id="__codelineno-13-18" name="__codelineno-13-18"></a><span class="p">}</span>
+</code></pre></div>
+<h2 id="otp">OTP管理<a class="headerlink" href="#otp" title="Permanent link">¶</a></h2>
+<h3 id="otp_1">OTP管理事件列表<a class="headerlink" href="#otp_1" title="Permanent link">¶</a></h3>
+<table>
+<thead>
+<tr>
+<th>序号</th>
+<th>topic</th>
+<th>action</th>
+<th>desc</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>user-management.otp</td>
+<td>add</td>
+<td>新增otp</td>
+</tr>
+<tr>
+<td>2</td>
+<td>user-management.otp</td>
+<td>delete</td>
+<td>删除otp</td>
+</tr>
+<tr>
+<td>3</td>
+<td>user-management.otp</td>
+<td>update</td>
+<td>修改otp</td>
+</tr>
+<tr>
+<td>4</td>
+<td>user-management.otp</td>
+<td>import</td>
+<td>导入otp列表</td>
+</tr>
+<tr>
+<td>5</td>
+<td>user-management.otp</td>
+<td>export</td>
+<td>导出otp列表</td>
+</tr>
+</tbody>
+</table>
+<h3 id="otp_2">OTP管理事件说明<a class="headerlink" href="#otp_2" title="Permanent link">¶</a></h3>
+<h4 id="otp_3">新增OTP<a class="headerlink" href="#otp_3" title="Permanent link">¶</a></h4>
+<h5 id="_42">事件源<a class="headerlink" href="#_42" title="Permanent link">¶</a></h5>
+<blockquote>
+<p><code>topic</code>:user-management.otp</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-14-1" id="__codelineno-14-1" name="__codelineno-14-1"></a><span class="p">{</span>
+<a href="#__codelineno-14-2" id="__codelineno-14-2" name="__codelineno-14-2"></a><span class="nt">"action"</span><span class="p">:</span><span class="s2">"add"</span><span class="p">,</span>
+<a href="#__codelineno-14-3" id="__codelineno-14-3" name="__codelineno-14-3"></a><span class="nt">"sendTime"</span><span class="p">:</span><span class="s2">"2021-03-09 14:24:34"</span><span class="p">,</span>
+<a href="#__codelineno-14-4" id="__codelineno-14-4" name="__codelineno-14-4"></a><span class="nt">"operator"</span><span class="p">:</span><span class="s2">"admin"</span><span class="p">,</span>
+<a href="#__codelineno-14-5" id="__codelineno-14-5" name="__codelineno-14-5"></a><span class="nt">"srcIp"</span><span class="p">:</span><span class="s2">"192.168.1.2"</span><span class="p">,</span>
+<a href="#__codelineno-14-6" id="__codelineno-14-6" name="__codelineno-14-6"></a><span class="nt">"describe"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span>
+<a href="#__codelineno-14-7" id="__codelineno-14-7" name="__codelineno-14-7"></a><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<a href="#__codelineno-14-8" id="__codelineno-14-8" name="__codelineno-14-8"></a><span class="w">    </span><span class="p">{</span>
+<a href="#__codelineno-14-9" id="__codelineno-14-9" name="__codelineno-14-9"></a><span class="w">        </span><span class="nt">"id"</span><span class="p">:</span><span class="s2">"1"</span><span class="p">,</span>
+<a href="#__codelineno-14-10" id="__codelineno-14-10" name="__codelineno-14-10"></a><span class="w">        </span><span class="nt">"key"</span><span class="p">:</span><span class="s2">"令牌编号"</span><span class="p">,</span>
+<a href="#__codelineno-14-11" id="__codelineno-14-11" name="__codelineno-14-11"></a><span class="w">        </span><span class="nt">"authkey"</span><span class="p">:</span><span class="s2">"密钥"</span>
+<a href="#__codelineno-14-12" id="__codelineno-14-12" name="__codelineno-14-12"></a><span class="w">    </span><span class="p">}</span>
+<a href="#__codelineno-14-13" id="__codelineno-14-13" name="__codelineno-14-13"></a><span class="w">  </span><span class="p">]</span>
+<a href="#__codelineno-14-14" id="__codelineno-14-14" name="__codelineno-14-14"></a><span class="p">}</span>
+</code></pre></div>
+<h4 id="otp_4">删除OTP<a class="headerlink" href="#otp_4" title="Permanent link">¶</a></h4>
+<h5 id="_43">事件源<a class="headerlink" href="#_43" title="Permanent link">¶</a></h5>
+<blockquote>
+<p><code>topic</code>:user-management.otp</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-15-1" id="__codelineno-15-1" name="__codelineno-15-1"></a><span class="p">{</span>
+<a href="#__codelineno-15-2" id="__codelineno-15-2" name="__codelineno-15-2"></a><span class="nt">"action"</span><span class="p">:</span><span class="s2">"delete"</span><span class="p">,</span>
+<a href="#__codelineno-15-3" id="__codelineno-15-3" name="__codelineno-15-3"></a><span class="nt">"sendTime"</span><span class="p">:</span><span class="s2">"2021-03-09 14:24:34"</span><span class="p">,</span>
+<a href="#__codelineno-15-4" id="__codelineno-15-4" name="__codelineno-15-4"></a><span class="nt">"operator"</span><span class="p">:</span><span class="s2">"admin"</span><span class="p">,</span>
+<a href="#__codelineno-15-5" id="__codelineno-15-5" name="__codelineno-15-5"></a><span class="nt">"srcIp"</span><span class="p">:</span><span class="s2">"192.168.1.2"</span><span class="p">,</span>
+<a href="#__codelineno-15-6" id="__codelineno-15-6" name="__codelineno-15-6"></a><span class="nt">"describe"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span>
+<a href="#__codelineno-15-7" id="__codelineno-15-7" name="__codelineno-15-7"></a><span class="nt">"data"</span><span class="p">:[</span>
+<a href="#__codelineno-15-8" id="__codelineno-15-8" name="__codelineno-15-8"></a><span class="w">    </span><span class="p">{</span>
+<a href="#__codelineno-15-9" id="__codelineno-15-9" name="__codelineno-15-9"></a><span class="w">        </span><span class="nt">"id"</span><span class="p">:</span><span class="s2">"otpID"</span>
+<a href="#__codelineno-15-10" id="__codelineno-15-10" name="__codelineno-15-10"></a><span class="w">    </span><span class="p">},</span>
+<a href="#__codelineno-15-11" id="__codelineno-15-11" name="__codelineno-15-11"></a><span class="w">    </span><span class="p">{</span>
+<a href="#__codelineno-15-12" id="__codelineno-15-12" name="__codelineno-15-12"></a><span class="w">        </span><span class="nt">"id"</span><span class="p">:</span><span class="s2">"otpID"</span>
+<a href="#__codelineno-15-13" id="__codelineno-15-13" name="__codelineno-15-13"></a><span class="w">    </span><span class="p">}</span><span class="w">  </span>
+<a href="#__codelineno-15-14" id="__codelineno-15-14" name="__codelineno-15-14"></a><span class="w"> </span><span class="p">]</span>
+<a href="#__codelineno-15-15" id="__codelineno-15-15" name="__codelineno-15-15"></a><span class="p">}</span>
+</code></pre></div>
+<h4 id="otp_5">修改OTP<a class="headerlink" href="#otp_5" title="Permanent link">¶</a></h4>
+<h5 id="_44">事件源<a class="headerlink" href="#_44" title="Permanent link">¶</a></h5>
+<blockquote>
+<p><code>topic</code>:user-management.otp</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-16-1" id="__codelineno-16-1" name="__codelineno-16-1"></a><span class="p">{</span>
+<a href="#__codelineno-16-2" id="__codelineno-16-2" name="__codelineno-16-2"></a><span class="nt">"action"</span><span class="p">:</span><span class="s2">"update"</span><span class="p">,</span>
+<a href="#__codelineno-16-3" id="__codelineno-16-3" name="__codelineno-16-3"></a><span class="nt">"sendTime"</span><span class="p">:</span><span class="s2">"2021-03-09 14:24:34"</span><span class="p">,</span>
+<a href="#__codelineno-16-4" id="__codelineno-16-4" name="__codelineno-16-4"></a><span class="nt">"operator"</span><span class="p">:</span><span class="s2">"admin"</span><span class="p">,</span>
+<a href="#__codelineno-16-5" id="__codelineno-16-5" name="__codelineno-16-5"></a><span class="nt">"srcIp"</span><span class="p">:</span><span class="s2">"192.168.1.2"</span><span class="p">,</span>
+<a href="#__codelineno-16-6" id="__codelineno-16-6" name="__codelineno-16-6"></a><span class="nt">"describe"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span>
+<a href="#__codelineno-16-7" id="__codelineno-16-7" name="__codelineno-16-7"></a><span class="nt">"data"</span><span class="p">:[</span>
+<a href="#__codelineno-16-8" id="__codelineno-16-8" name="__codelineno-16-8"></a><span class="w">    </span><span class="p">{</span>
+<a href="#__codelineno-16-9" id="__codelineno-16-9" name="__codelineno-16-9"></a><span class="w">        </span><span class="nt">"id"</span><span class="p">:</span><span class="s2">"1"</span><span class="p">,</span>
+<a href="#__codelineno-16-10" id="__codelineno-16-10" name="__codelineno-16-10"></a><span class="w">        </span><span class="nt">"key"</span><span class="p">:</span><span class="s2">"令牌编号"</span><span class="p">,</span>
+<a href="#__codelineno-16-11" id="__codelineno-16-11" name="__codelineno-16-11"></a><span class="w">        </span><span class="nt">"authkey"</span><span class="p">:</span><span class="s2">"密钥"</span>
+<a href="#__codelineno-16-12" id="__codelineno-16-12" name="__codelineno-16-12"></a><span class="w">    </span><span class="p">}</span>
+<a href="#__codelineno-16-13" id="__codelineno-16-13" name="__codelineno-16-13"></a><span class="w"> </span><span class="p">]</span>
+<a href="#__codelineno-16-14" id="__codelineno-16-14" name="__codelineno-16-14"></a><span class="p">}</span>
+</code></pre></div>
+<h4 id="otp_6">导入OTP<a class="headerlink" href="#otp_6" title="Permanent link">¶</a></h4>
+<h5 id="_45">事件源<a class="headerlink" href="#_45" title="Permanent link">¶</a></h5>
+<blockquote>
+<p><code>topic</code>:user-management.otp</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-17-1" id="__codelineno-17-1" name="__codelineno-17-1"></a><span class="p">{</span>
+<a href="#__codelineno-17-2" id="__codelineno-17-2" name="__codelineno-17-2"></a><span class="nt">"action"</span><span class="p">:</span><span class="s2">"import"</span><span class="p">,</span>
+<a href="#__codelineno-17-3" id="__codelineno-17-3" name="__codelineno-17-3"></a><span class="nt">"sendTime"</span><span class="p">:</span><span class="s2">"2021-03-09 14:24:34"</span><span class="p">,</span>
+<a href="#__codelineno-17-4" id="__codelineno-17-4" name="__codelineno-17-4"></a><span class="nt">"operator"</span><span class="p">:</span><span class="s2">"admin"</span><span class="p">,</span>
+<a href="#__codelineno-17-5" id="__codelineno-17-5" name="__codelineno-17-5"></a><span class="nt">"srcIp"</span><span class="p">:</span><span class="s2">"192.168.1.2"</span><span class="p">,</span>
+<a href="#__codelineno-17-6" id="__codelineno-17-6" name="__codelineno-17-6"></a><span class="nt">"describe"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span>
+<a href="#__codelineno-17-7" id="__codelineno-17-7" name="__codelineno-17-7"></a><span class="nt">"data"</span><span class="p">:[</span>
+<a href="#__codelineno-17-8" id="__codelineno-17-8" name="__codelineno-17-8"></a><span class="w">    </span><span class="p">{</span>
+<a href="#__codelineno-17-9" id="__codelineno-17-9" name="__codelineno-17-9"></a><span class="w">        </span><span class="nt">"id"</span><span class="p">:</span><span class="s2">"1"</span><span class="p">,</span>
+<a href="#__codelineno-17-10" id="__codelineno-17-10" name="__codelineno-17-10"></a><span class="w">        </span><span class="nt">"key"</span><span class="p">:</span><span class="s2">"令牌编号"</span><span class="p">,</span>
+<a href="#__codelineno-17-11" id="__codelineno-17-11" name="__codelineno-17-11"></a><span class="w">        </span><span class="nt">"authkey"</span><span class="p">:</span><span class="s2">"密钥"</span>
+<a href="#__codelineno-17-12" id="__codelineno-17-12" name="__codelineno-17-12"></a><span class="w">    </span><span class="p">}</span>
+<a href="#__codelineno-17-13" id="__codelineno-17-13" name="__codelineno-17-13"></a><span class="w"> </span><span class="p">]</span>
+<a href="#__codelineno-17-14" id="__codelineno-17-14" name="__codelineno-17-14"></a><span class="p">}</span>
+</code></pre></div>
+<h4 id="otp_7">导出OTP<a class="headerlink" href="#otp_7" title="Permanent link">¶</a></h4>
+<h5 id="_46">事件源<a class="headerlink" href="#_46" title="Permanent link">¶</a></h5>
+<blockquote>
+<p><code>topic</code>:user-management.otp</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-18-1" id="__codelineno-18-1" name="__codelineno-18-1"></a><span class="p">{</span>
+<a href="#__codelineno-18-2" id="__codelineno-18-2" name="__codelineno-18-2"></a><span class="nt">"action"</span><span class="p">:</span><span class="s2">"export"</span><span class="p">,</span>
+<a href="#__codelineno-18-3" id="__codelineno-18-3" name="__codelineno-18-3"></a><span class="nt">"sendTime"</span><span class="p">:</span><span class="s2">"2021-03-09 14:24:34"</span><span class="p">,</span>
+<a href="#__codelineno-18-4" id="__codelineno-18-4" name="__codelineno-18-4"></a><span class="nt">"operator"</span><span class="p">:</span><span class="s2">"admin"</span><span class="p">,</span>
+<a href="#__codelineno-18-5" id="__codelineno-18-5" name="__codelineno-18-5"></a><span class="nt">"srcIp"</span><span class="p">:</span><span class="s2">"192.168.1.2"</span><span class="p">,</span>
+<a href="#__codelineno-18-6" id="__codelineno-18-6" name="__codelineno-18-6"></a><span class="nt">"describe"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span>
+<a href="#__codelineno-18-7" id="__codelineno-18-7" name="__codelineno-18-7"></a><span class="nt">"data"</span><span class="p">:[</span>
+<a href="#__codelineno-18-8" id="__codelineno-18-8" name="__codelineno-18-8"></a><span class="w">    </span><span class="p">{</span>
+<a href="#__codelineno-18-9" id="__codelineno-18-9" name="__codelineno-18-9"></a><span class="w">        </span><span class="nt">"id"</span><span class="p">:</span><span class="s2">"1"</span><span class="p">,</span>
+<a href="#__codelineno-18-10" id="__codelineno-18-10" name="__codelineno-18-10"></a><span class="w">        </span><span class="nt">"key"</span><span class="p">:</span><span class="s2">"令牌编号"</span><span class="p">,</span>
+<a href="#__codelineno-18-11" id="__codelineno-18-11" name="__codelineno-18-11"></a><span class="w">        </span><span class="nt">"authkey"</span><span class="p">:</span><span class="s2">"密钥"</span>
+<a href="#__codelineno-18-12" id="__codelineno-18-12" name="__codelineno-18-12"></a><span class="w">    </span><span class="p">}</span>
+<a href="#__codelineno-18-13" id="__codelineno-18-13" name="__codelineno-18-13"></a><span class="w"> </span><span class="p">]</span>
+<a href="#__codelineno-18-14" id="__codelineno-18-14" name="__codelineno-18-14"></a><span class="p">}</span>
+</code></pre></div>
+<h2 id="_47">扩展属性管理<a class="headerlink" href="#_47" title="Permanent link">¶</a></h2>
+<h3 id="_48">扩展属性管理事件列表<a class="headerlink" href="#_48" title="Permanent link">¶</a></h3>
+<table>
+<thead>
+<tr>
+<th>序号</th>
+<th>topic</th>
+<th>action</th>
+<th>desc</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>user-management.ext-attribute</td>
+<td>add</td>
+<td>新增扩展属性</td>
+</tr>
+<tr>
+<td>2</td>
+<td>user-management.ext-attribute</td>
+<td>delete</td>
+<td>删除扩展属性</td>
+</tr>
+<tr>
+<td>3</td>
+<td>user-management.ext-attribute</td>
+<td>update</td>
+<td>修改扩展属性</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_49">扩展属性管理事件说明<a class="headerlink" href="#_49" title="Permanent link">¶</a></h3>
+<h4 id="_50">新增扩展属性<a class="headerlink" href="#_50" title="Permanent link">¶</a></h4>
+<h5 id="_51">事件源<a class="headerlink" href="#_51" title="Permanent link">¶</a></h5>
+<blockquote>
+<p><code>topic</code>:user-management.ext-attribute</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-19-1" id="__codelineno-19-1" name="__codelineno-19-1"></a><span class="p">{</span>
+<a href="#__codelineno-19-2" id="__codelineno-19-2" name="__codelineno-19-2"></a><span class="nt">"action"</span><span class="p">:</span><span class="s2">"add"</span><span class="p">,</span>
+<a href="#__codelineno-19-3" id="__codelineno-19-3" name="__codelineno-19-3"></a><span class="nt">"sendTime"</span><span class="p">:</span><span class="s2">"2021-03-09 14:24:34"</span><span class="p">,</span>
+<a href="#__codelineno-19-4" id="__codelineno-19-4" name="__codelineno-19-4"></a><span class="nt">"operator"</span><span class="p">:</span><span class="s2">"admin"</span><span class="p">,</span>
+<a href="#__codelineno-19-5" id="__codelineno-19-5" name="__codelineno-19-5"></a><span class="nt">"srcIp"</span><span class="p">:</span><span class="s2">"192.168.1.2"</span><span class="p">,</span>
+<a href="#__codelineno-19-6" id="__codelineno-19-6" name="__codelineno-19-6"></a><span class="nt">"describe"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span>
+<a href="#__codelineno-19-7" id="__codelineno-19-7" name="__codelineno-19-7"></a><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<a href="#__codelineno-19-8" id="__codelineno-19-8" name="__codelineno-19-8"></a><span class="w">    </span><span class="p">{</span>
+<a href="#__codelineno-19-9" id="__codelineno-19-9" name="__codelineno-19-9"></a><span class="w">        </span><span class="nt">"id"</span><span class="p">:</span><span class="s2">"扩展属性ID"</span><span class="p">,</span>
+<a href="#__codelineno-19-10" id="__codelineno-19-10" name="__codelineno-19-10"></a><span class="w">        </span><span class="nt">"type"</span><span class="p">:</span><span class="s2">"user"</span><span class="p">,</span>
+<a href="#__codelineno-19-11" id="__codelineno-19-11" name="__codelineno-19-11"></a><span class="w">        </span><span class="nt">"attributeKey"</span><span class="p">:</span><span class="s2">"令牌编号"</span><span class="p">,</span>
+<a href="#__codelineno-19-12" id="__codelineno-19-12" name="__codelineno-19-12"></a><span class="w">        </span><span class="nt">"attributeName"</span><span class="p">:</span><span class="s2">"密钥"</span><span class="p">,</span>
+<a href="#__codelineno-19-13" id="__codelineno-19-13" name="__codelineno-19-13"></a><span class="w">        </span><span class="nt">"required"</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span>
+<a href="#__codelineno-19-14" id="__codelineno-19-14" name="__codelineno-19-14"></a><span class="w">        </span><span class="nt">"isShow"</span><span class="p">:</span><span class="kc">false</span><span class="p">,</span>
+<a href="#__codelineno-19-15" id="__codelineno-19-15" name="__codelineno-19-15"></a><span class="w">        </span><span class="nt">"attributeType"</span><span class="p">:</span><span class="s2">"select"</span><span class="p">,</span>
+<a href="#__codelineno-19-16" id="__codelineno-19-16" name="__codelineno-19-16"></a><span class="w">        </span><span class="nt">"attributeTypeValue"</span><span class="p">:[{</span><span class="nt">"name"</span><span class="p">:</span><span class="s2">"男"</span><span class="p">,</span><span class="nt">"value"</span><span class="p">:</span><span class="s2">"male"</span><span class="p">},{</span><span class="nt">"name"</span><span class="p">:</span><span class="s2">"女"</span><span class="p">,</span><span class="nt">"value"</span><span class="p">:</span><span class="s2">"famale"</span><span class="p">}]</span>
+<a href="#__codelineno-19-17" id="__codelineno-19-17" name="__codelineno-19-17"></a><span class="w">    </span><span class="p">}</span>
+<a href="#__codelineno-19-18" id="__codelineno-19-18" name="__codelineno-19-18"></a><span class="w">  </span><span class="p">]</span>
+<a href="#__codelineno-19-19" id="__codelineno-19-19" name="__codelineno-19-19"></a><span class="p">}</span>
+</code></pre></div>
+<h4 id="_52">删除扩展属性<a class="headerlink" href="#_52" title="Permanent link">¶</a></h4>
+<h5 id="_53">事件源<a class="headerlink" href="#_53" title="Permanent link">¶</a></h5>
+<blockquote>
+<p><code>topic</code>:user-management.ext-attribute</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-20-1" id="__codelineno-20-1" name="__codelineno-20-1"></a><span class="p">{</span>
+<a href="#__codelineno-20-2" id="__codelineno-20-2" name="__codelineno-20-2"></a><span class="nt">"action"</span><span class="p">:</span><span class="s2">"delete"</span><span class="p">,</span>
+<a href="#__codelineno-20-3" id="__codelineno-20-3" name="__codelineno-20-3"></a><span class="nt">"sendTime"</span><span class="p">:</span><span class="s2">"2021-03-09 14:24:34"</span><span class="p">,</span>
+<a href="#__codelineno-20-4" id="__codelineno-20-4" name="__codelineno-20-4"></a><span class="nt">"operator"</span><span class="p">:</span><span class="s2">"admin"</span><span class="p">,</span>
+<a href="#__codelineno-20-5" id="__codelineno-20-5" name="__codelineno-20-5"></a><span class="nt">"srcIp"</span><span class="p">:</span><span class="s2">"192.168.1.2"</span><span class="p">,</span>
+<a href="#__codelineno-20-6" id="__codelineno-20-6" name="__codelineno-20-6"></a><span class="nt">"describe"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span>
+<a href="#__codelineno-20-7" id="__codelineno-20-7" name="__codelineno-20-7"></a><span class="nt">"data"</span><span class="p">:[</span>
+<a href="#__codelineno-20-8" id="__codelineno-20-8" name="__codelineno-20-8"></a><span class="w">    </span><span class="p">{</span>
+<a href="#__codelineno-20-9" id="__codelineno-20-9" name="__codelineno-20-9"></a><span class="w">        </span><span class="nt">"id"</span><span class="p">:</span><span class="s2">"扩展属性ID"</span>
+<a href="#__codelineno-20-10" id="__codelineno-20-10" name="__codelineno-20-10"></a><span class="w">    </span><span class="p">},</span>
+<a href="#__codelineno-20-11" id="__codelineno-20-11" name="__codelineno-20-11"></a><span class="w">    </span><span class="p">{</span>
+<a href="#__codelineno-20-12" id="__codelineno-20-12" name="__codelineno-20-12"></a><span class="w">        </span><span class="nt">"id"</span><span class="p">:</span><span class="s2">"扩展属性ID"</span>
+<a href="#__codelineno-20-13" id="__codelineno-20-13" name="__codelineno-20-13"></a><span class="w">    </span><span class="p">}</span><span class="w">  </span>
+<a href="#__codelineno-20-14" id="__codelineno-20-14" name="__codelineno-20-14"></a><span class="w"> </span><span class="p">]</span>
+<a href="#__codelineno-20-15" id="__codelineno-20-15" name="__codelineno-20-15"></a><span class="p">}</span>
+</code></pre></div>
+<h4 id="_54">修改扩展属性<a class="headerlink" href="#_54" title="Permanent link">¶</a></h4>
+<h5 id="_55">事件源<a class="headerlink" href="#_55" title="Permanent link">¶</a></h5>
+<blockquote>
+<p><code>topic</code>:user-management.ext-attribute</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-21-1" id="__codelineno-21-1" name="__codelineno-21-1"></a><span class="p">{</span>
+<a href="#__codelineno-21-2" id="__codelineno-21-2" name="__codelineno-21-2"></a><span class="nt">"action"</span><span class="p">:</span><span class="s2">"update"</span><span class="p">,</span>
+<a href="#__codelineno-21-3" id="__codelineno-21-3" name="__codelineno-21-3"></a><span class="nt">"sendTime"</span><span class="p">:</span><span class="s2">"2021-03-09 14:24:34"</span><span class="p">,</span>
+<a href="#__codelineno-21-4" id="__codelineno-21-4" name="__codelineno-21-4"></a><span class="nt">"operator"</span><span class="p">:</span><span class="s2">"admin"</span><span class="p">,</span>
+<a href="#__codelineno-21-5" id="__codelineno-21-5" name="__codelineno-21-5"></a><span class="nt">"srcIp"</span><span class="p">:</span><span class="s2">"192.168.1.2"</span><span class="p">,</span>
+<a href="#__codelineno-21-6" id="__codelineno-21-6" name="__codelineno-21-6"></a><span class="nt">"describe"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span>
+<a href="#__codelineno-21-7" id="__codelineno-21-7" name="__codelineno-21-7"></a><span class="nt">"data"</span><span class="p">:[</span>
+<a href="#__codelineno-21-8" id="__codelineno-21-8" name="__codelineno-21-8"></a><span class="w">    </span><span class="p">{</span>
+<a href="#__codelineno-21-9" id="__codelineno-21-9" name="__codelineno-21-9"></a><span class="w">        </span><span class="nt">"id"</span><span class="p">:</span><span class="s2">"扩展属性ID"</span><span class="p">,</span>
+<a href="#__codelineno-21-10" id="__codelineno-21-10" name="__codelineno-21-10"></a><span class="w">        </span><span class="nt">"type"</span><span class="p">:</span><span class="s2">"user"</span><span class="p">,</span>
+<a href="#__codelineno-21-11" id="__codelineno-21-11" name="__codelineno-21-11"></a><span class="w">        </span><span class="nt">"attributeKey"</span><span class="p">:</span><span class="s2">"令牌编号"</span><span class="p">,</span>
+<a href="#__codelineno-21-12" id="__codelineno-21-12" name="__codelineno-21-12"></a><span class="w">        </span><span class="nt">"attributeName"</span><span class="p">:</span><span class="s2">"密钥"</span><span class="p">,</span>
+<a href="#__codelineno-21-13" id="__codelineno-21-13" name="__codelineno-21-13"></a><span class="w">        </span><span class="nt">"required"</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span>
+<a href="#__codelineno-21-14" id="__codelineno-21-14" name="__codelineno-21-14"></a><span class="w">        </span><span class="nt">"isShow"</span><span class="p">:</span><span class="kc">false</span><span class="p">,</span>
+<a href="#__codelineno-21-15" id="__codelineno-21-15" name="__codelineno-21-15"></a><span class="w">        </span><span class="nt">"attributeType"</span><span class="p">:</span><span class="s2">"select"</span><span class="p">,</span>
+<a href="#__codelineno-21-16" id="__codelineno-21-16" name="__codelineno-21-16"></a><span class="w">        </span><span class="nt">"attributeTypeValue"</span><span class="p">:[{</span><span class="nt">"name"</span><span class="p">:</span><span class="s2">"男"</span><span class="p">,</span><span class="nt">"value"</span><span class="p">:</span><span class="s2">"male"</span><span class="p">},{</span><span class="nt">"name"</span><span class="p">:</span><span class="s2">"女"</span><span class="p">,</span><span class="nt">"value"</span><span class="p">:</span><span class="s2">"famale"</span><span class="p">}]</span>
+<a href="#__codelineno-21-17" id="__codelineno-21-17" name="__codelineno-21-17"></a><span class="w">    </span><span class="p">}</span>
+<a href="#__codelineno-21-18" id="__codelineno-21-18" name="__codelineno-21-18"></a><span class="w"> </span><span class="p">]</span>
+<a href="#__codelineno-21-19" id="__codelineno-21-19" name="__codelineno-21-19"></a><span class="p">}</span>
+</code></pre></div>
+<!-- Source file information -->
+<!-- taken from 
+https://github.com/squidfunk/mkdocs-material/blob/master/src/partials/source-file.html -->
+<hr/>
+<div class="md-source-file">
+<small>
+<!-- mkdocs-git-revision-date-localized-plugin -->
+<u>最后更新</u> :
+        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">2023年9月21日</span>
+<!-- mkdocs-git-revision-date-plugin -->
+<br/>
+<u>创建日期</u> :
+        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">2023年9月21日</span>
+<br/>
+<u>Auteur</u> : 罗潇
+        
+        
+    </small>
+</div>
+<!-- Was this page helpful? -->
+<!-- Comment system -->
+<!-- Giscus -->
+<!-- Giscus -->
+<script> 
+    try {
+      const index = document.querySelector('h1').innerHTML;
+      if (index === "Index") {
+        document.querySelector('h1').innerHTML = "基础平台1.0基事件源设计文档";
+      }
+    } catch (error) {
+      // console.log(error);
+    }
+  </script>
+</article>
+</div>
+</div>
+<button class="md-top md-icon" data-md-component="top" hidden="" type="button">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"></path></svg>
+            回到页面顶部
+          </button>
+</main>
+<footer class="md-footer">
+<div class="md-footer-meta md-typeset">
+<div class="md-footer-meta__inner md-grid">
+<div class="md-copyright">
+<div class="md-copyright__highlight">
+      Copyright © 2022 - 2023 启明星辰-天榕
+    </div>
+</div>
+</div>
+</div>
+</footer>
+</div>
+<div class="md-dialog" data-md-component="dialog">
+<div class="md-dialog__inner md-typeset"></div>
+</div>
+<script id="__config" type="application/json">{"base": "../..", "features": ["navigation.indexes", "navigation.top", "navigation.tabs", "navigation.tabs.sticky", "navigation.expand", "navigation.path", "navigation.sections", "search.suggest", "search.highlight", "search.share", "content.code.copy", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.dfff1995.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": {"provider": "mike"}}</script>
+<script src="../../assets/javascripts/bundle.dff1b7c8.min.js"></script>
+<script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
+</html>
