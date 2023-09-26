@@ -48,7 +48,7 @@
 <input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
 <label class="md-overlay" for="__drawer"></label>
 <div data-md-component="skip">
-<a class="md-skip" href="#_1">
+<a class="md-skip" href="#主备">
           跳转至
         </a>
 </div>
@@ -557,7 +557,7 @@
     </label>
 <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link" href="#_1">
+<a class="md-nav__link" href="#主备">
     主备
   </a>
 </li>
@@ -597,7 +597,7 @@
 -->
 <h1>主备.架构设计.p1</h1>
 <!-- Page content -->
-<h4 id="_1">主备<a class="headerlink" href="#_1" title="Permanent link">¶</a></h4>
+<h4 id="主备">主备<a class="headerlink" href="#主备" title="Permanent link">¶</a></h4>
 <p><a class="glightbox" data-desc-position="bottom" data-height="auto" data-width="100%" href="../../assets/img/Pasted%20image%2020230920135520.png"><img alt="Pasted image 20230920135520" src="../../assets/img/Pasted%20image%2020230920135520.png" title="Pasted image 20230920135520"/></a></p>
 <p>前端调用系统管理服务API发起主备配置操作，系统管理服务向消息中心发送主备配置命令，后台主备服务订阅消息执行主备动作：主备数据同步，数据同步后通过主备事件处理程序上报主备切换完成事件给消息中心，同时通过API上报给系统管理后端用于界面展示，通知服务订阅该事件，并通过短信服务或邮件服务给管理员发送通知。</p>
 <ul>

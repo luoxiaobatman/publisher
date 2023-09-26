@@ -48,7 +48,7 @@
 <input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
 <label class="md-overlay" for="__drawer"></label>
 <div data-md-component="skip">
-<a class="md-skip" href="#id">
+<a class="md-skip" href="#用分布式id生成递增来做为数据库主键">
           跳转至
         </a>
 </div>
@@ -557,13 +557,13 @@
     </label>
 <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link" href="#id">
+<a class="md-nav__link" href="#用分布式id生成递增来做为数据库主键">
     用分布式id生成递增来做为数据库主键
   </a>
 <nav aria-label="用分布式id生成递增来做为数据库主键" class="md-nav">
 <ul class="md-nav__list">
 <li class="md-nav__item">
-<a class="md-nav__link" href="#_1">
+<a class="md-nav__link" href="#进一步分析性能">
     进一步分析性能
   </a>
 <nav aria-label="进一步分析性能" class="md-nav">
@@ -574,7 +574,7 @@
   </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#_2">
+<a class="md-nav__link" href="#碎片化">
     碎片化
   </a>
 </li>
@@ -620,7 +620,7 @@
 -->
 <h1>预研</h1>
 <!-- Page content -->
-<h4 id="id">用分布式id生成递增来做为数据库主键<a class="headerlink" href="#id" title="Permanent link">¶</a></h4>
+<h4 id="用分布式id生成递增来做为数据库主键">用分布式id生成递增来做为数据库主键<a class="headerlink" href="#用分布式id生成递增来做为数据库主键" title="Permanent link">¶</a></h4>
 <p>在pg里面使用递增的id来作为主键</p>
 <div class="admonition success">
 <p class="admonition-title">优点</p>
@@ -638,7 +638,7 @@
 <li>在分布式系统中，跨多个数据库实例生成唯一的递增ID可能会很复杂。</li>
 </ul>
 </div>
-<h5 id="_1">进一步分析性能<a class="headerlink" href="#_1" title="Permanent link">¶</a></h5>
+<h5 id="进一步分析性能">进一步分析性能<a class="headerlink" href="#进一步分析性能" title="Permanent link">¶</a></h5>
 <h6 id="b-tree">B-tree<a class="headerlink" href="#b-tree" title="Permanent link">¶</a></h6>
 <p>B-tree（平衡树）索引是一种数据结构，允许高效地进行插入、删除和搜索操作。当在某列上创建索引时，除非指定了另一种索引类型，否则PostgreSQL将为该索引创建一个B-tree结构。B-tree索引的关键特性是：</p>
 <ul>
@@ -648,7 +648,7 @@
 <p>我们进一步分析:<br/>
 当执行<strong>插入</strong>操作时：当添加具有递增主键的新行时，新值通常会添加到B-tree的最右侧叶节点，性能极高。相比之下，如果插入随机或乱序值，数据库可能需要频繁地重新平衡B-tree的部分，这更加消耗资源。<br/>
 当执行<strong>搜索</strong>操作时：B-tree索引允许对搜索操作进行对数时间复杂度。递增的ID使范围查询变得高效。例如，如果想找到所有ID在1000到2000之间的行，B-tree可以快速定位并扫描这个连续范围。</p>
-<h6 id="_2">碎片化<a class="headerlink" href="#_2" title="Permanent link">¶</a></h6>
+<h6 id="碎片化">碎片化<a class="headerlink" href="#碎片化" title="Permanent link">¶</a></h6>
 <p>碎片化是指数据存储空间使用效率低下的情况，减少了容量或性能。在B-tree索引和PostgreSQL的上下文中：</p>
 <p class="annotate"><strong>页面碎片化</strong>：在向索引列中插入随机值时，数据库可能会得到只部分填充的页面 (1) 。随着时间的推移，随着值的插入和删除，可能导致页面内部的散布空闲空间。严格递增的值在很大程度上缓解了这个问题，因为每个新值只是扩展当前页面，直到它满了，然后会分配一个新页面。<br/></p>
 <ol>

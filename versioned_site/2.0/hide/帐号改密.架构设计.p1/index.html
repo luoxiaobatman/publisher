@@ -48,7 +48,7 @@
 <input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
 <label class="md-overlay" for="__drawer"></label>
 <div data-md-component="skip">
-<a class="md-skip" href="#354">
+<a class="md-skip" href="#354帐号改密">
           跳转至
         </a>
 </div>
@@ -557,7 +557,7 @@
     </label>
 <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link" href="#354">
+<a class="md-nav__link" href="#354帐号改密">
     3.5.4. 帐号改密
   </a>
 </li>
@@ -597,7 +597,7 @@
 -->
 <h1>帐号改密.架构设计.p1</h1>
 <!-- Page content -->
-<h4 id="354">3.5.4. <strong>帐号改密</strong><a class="headerlink" href="#354" title="Permanent link">¶</a></h4>
+<h4 id="354帐号改密">3.5.4. <strong>帐号改密</strong><a class="headerlink" href="#354帐号改密" title="Permanent link">¶</a></h4>
 <p><a class="glightbox" data-desc-position="bottom" data-height="auto" data-width="100%" href="../../assets/img/Pasted%20image%2020230920135418.png"><img alt="Pasted image 20230920135418" src="../../assets/img/Pasted%20image%2020230920135418.png" title="Pasted image 20230920135418"/></a></p>
 <p>基础平台和堡垒机对于改密都是异步调用，所以基础平台上发起改密动作后，把帐号状态置为改密中，数据库还是保存老密码，不影响帐号正常使用。</p>
 <p>目标资源改密完成后堡垒机会进行密码拨测，保证改密结果，拨测完成后，堡垒机回调数据同步服务接口，通知改密结果，根据改密结果修改帐号状态、修改密码、同步帐号给堡垒机等能力组件，保持数据一致。</p>

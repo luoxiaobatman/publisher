@@ -5,7 +5,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
-<meta content="设计目标与原则：" name="description"/>
+<meta content="基础平台" name="description"/>
 <meta content="罗潇" name="author"/>
 <link href="../" rel="prev"/>
 <link href="../%E5%9F%BA%E7%A1%80%E5%B9%B3%E5%8F%B02.0TLDR/" rel="next"/>
@@ -25,8 +25,8 @@
 <meta content="None" name="site_url"/>
 <meta content="基础平台2.0" property="og:title"/>
 <meta content="基础平台2.0" name="twitter:title"/>
-<meta content="设计目标与原则：" name="description"/>
-<meta content="设计目标与原则：" name="twitter:description"/>
+<meta content="基础平台" name="og:description"/>
+<meta content="基础平台" name="twitter:description"/>
 <meta content="summary_large_image" name="twitter:card"/>
 <meta content="Noneassets/meta/SEO.png" property="og:image"/>
 <meta content="Noneassets/meta/SEO.png" name="twitter:image"/>
@@ -48,7 +48,7 @@
 <input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
 <label class="md-overlay" for="__drawer"></label>
 <div data-md-component="skip">
-<a class="md-skip" href="#1">
+<a class="md-skip" href="#简介">
           跳转至
         </a>
 </div>
@@ -557,80 +557,80 @@
     </label>
 <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link" href="#1">
-    1. 简介
+<a class="md-nav__link" href="#简介">
+    简介
   </a>
-<nav aria-label="1. 简介" class="md-nav">
+<nav aria-label="简介" class="md-nav">
 <ul class="md-nav__list">
 <li class="md-nav__item">
-<a class="md-nav__link" href="#11">
-    1.1. 目的
+<a class="md-nav__link" href="#目的">
+    目的
   </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#12">
-    1.2. 阅读范围
+<a class="md-nav__link" href="#阅读范围">
+    阅读范围
   </a>
 </li>
 </ul>
 </nav>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#2">
-    2. 设计目标与原则
+<a class="md-nav__link" href="#设计目标与原则">
+    设计目标与原则
   </a>
-<nav aria-label="2. 设计目标与原则" class="md-nav">
+<nav aria-label="设计目标与原则" class="md-nav">
 <ul class="md-nav__list">
 <li class="md-nav__item">
-<a class="md-nav__link" href="#21">
-    2.1. 设计目标
+<a class="md-nav__link" href="#设计目标">
+    设计目标
   </a>
-<nav aria-label="2.1. 设计目标" class="md-nav">
+<nav aria-label="设计目标" class="md-nav">
 <ul class="md-nav__list">
 <li class="md-nav__item">
-<a class="md-nav__link" href="#211">
-    2.1.1. 关键功能
+<a class="md-nav__link" href="#关键功能">
+    关键功能
   </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#212">
-    2.1.2. 关键质量属性
+<a class="md-nav__link" href="#关键质量属性">
+    关键质量属性
   </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#213">
-    2.1.3. 部署方式
+<a class="md-nav__link" href="#部署方式">
+    部署方式
   </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#214">
-    2.1.4. 设计约束
+<a class="md-nav__link" href="#设计约束">
+    设计约束
   </a>
 </li>
 </ul>
 </nav>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#22">
-    2.2. 设计原则
+<a class="md-nav__link" href="#2设计原则">
+    2.设计原则
   </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#23">
-    2.3. 技术选型
+<a class="md-nav__link" href="#2技术选型">
+    2.技术选型
   </a>
 </li>
 </ul>
 </nav>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#3">
-    3. 功能架构图
+<a class="md-nav__link" href="#功能架构图">
+    功能架构图
   </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#4">
-    4. 逻辑架构图
+<a class="md-nav__link" href="#逻辑架构图">
+    逻辑架构图
   </a>
 </li>
 </ul>
@@ -669,94 +669,17 @@
 -->
 <h1>基础平台2.0</h1>
 <!-- Page content -->
-<table>
-<thead>
-<tr>
-<th><strong>版本</strong></th>
-<th><strong>作者</strong></th>
-<th><strong>修改时间</strong></th>
-<th><strong>修改内容</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>V1.0</td>
-<td>陈亮</td>
-<td>2023.9.20</td>
-<td>起草架构设计</td>
-</tr>
-</tbody>
-</table>
-<div class="admonition info">
-<p class="admonition-title">TLDR</p>
-<ol>
-<li><strong>简介：</strong><ul>
-<li>该文档介绍了基础平台2.0的架构设计，涵盖功能架构、逻辑架构、开发架构、运行架构和物理架构。</li>
-<li>旨在为研发人员提供一个对基础平台的深入理解，并为其业务功能的快速开发提供支持。</li>
-<li>文档主要适用于SE、研发经理和开发人员阅读。</li>
-</ul>
-</li>
-<li>
-<p><strong>设计目标与原则：</strong></p>
-<ul>
-<li><strong>设计目标：</strong><ul>
-<li>简化技术难度，降低人力成本。</li>
-<li>提供公共服务，避免重复劳动。</li>
-<li>平台代码和产品代码进行隔离。</li>
-<li>提供多种部署方式，包括低资源消耗或高性能支撑。</li>
-</ul>
-</li>
-<li><strong>关键功能：</strong><ul>
-<li>包括网关服务、系统服务、用户服务、消息模块和公共代码。</li>
-</ul>
-</li>
-<li><strong>关键质量属性：</strong><ul>
-<li>详细列出了硬件配置和性能要求。</li>
-<li>着重强调了规范性、易用性和接口化。</li>
-</ul>
-</li>
-<li><strong>部署方式：</strong><ul>
-<li>提供低资源部署、高性能部署和容器化部署三种方式。</li>
-</ul>
-</li>
-<li><strong>设计约束：</strong><ul>
-<li>对服务间交互和操作系统交互都有明确的约束。</li>
-</ul>
-</li>
-<li><strong>设计原则：</strong><ul>
-<li>功能与业务功能隔离，强调配置与扩展的重要性。</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>技术选型：</strong><br/>
-   - 后端采用 Spring Boot、Spring security、MyBatis-Plus；前端使用 AngularJS。<br/>
-   - API服务网关基于Spring cloud gateway。<br/>
-   - 引入ActiveMQ作为嵌入式MQ，满足低资源部署需求。</p>
-</li>
-<li>
-<p><strong>功能架构：</strong><br/>
-   - 基础平台主要由基础功能、API网关、公共服务和前端组成。<br/>
-   - 基础能力通过Maven依赖注入，无需部署。<br/>
-  - 前端负责提供平台界面，包括系统登录、用户管理等功能。<br/>
-  - API网关负责路由加载、登录认证等。<br/>
-  - 功能服务包括系统管理、用户管理和资产管理。<br/>
-  - 中间件主要依赖Postgresql，但不强依赖Kafka和Redis。</p>
-</li>
-</ol>
-</div>
-<h2 id="1">1. <strong>简介</strong><a class="headerlink" href="#1" title="Permanent link">¶</a></h2>
+<h2 id="简介"><strong>简介</strong><a class="headerlink" href="#简介" title="Permanent link">¶</a></h2>
 <p>本文档为基础平台2.0架构设计文档，包括功能架构、逻辑架构、开发架构、运行架构、物理架构。</p>
-<h3 id="11">1.1. <strong>目的</strong><a class="headerlink" href="#11" title="Permanent link">¶</a></h3>
+<h3 id="目的"><strong>目的</strong><a class="headerlink" href="#目的" title="Permanent link">¶</a></h3>
 <p>本文档为基础平台2.0架构设计文档，从功能架构、逻辑架构、开发架构、运行架构、物理架构等五个方面介绍了基础平台2.0，为研发人员了解基础平台并快速开发业务功能提供支撑。</p>
-<h3 id="12">1.2. <strong>阅读范围</strong><a class="headerlink" href="#12" title="Permanent link">¶</a></h3>
+<h3 id="阅读范围"><strong>阅读范围</strong><a class="headerlink" href="#阅读范围" title="Permanent link">¶</a></h3>
 <p>该文档适用于SE、研发经理和开发人员。</p>
 <p>SE：本文档由平台SE进行维护，产品SE通过文档理解平台设计，并指导产品开发人员进行二次开发。</p>
 <p>研发经理：通过本文档理解平台设计，为平台提供指导意见。</p>
 <p>开发人员：学习平台设计，并利用平台进行二次开发。</p>
-<h2 id="2">2. <strong>设计目标与原则</strong><a class="headerlink" href="#2" title="Permanent link">¶</a></h2>
-<h3 id="21">2.1. <strong>设计目标</strong><a class="headerlink" href="#21" title="Permanent link">¶</a></h3>
+<h2 id="设计目标与原则"><strong>设计目标与原则</strong><a class="headerlink" href="#设计目标与原则" title="Permanent link">¶</a></h2>
+<h3 id="设计目标"><strong>设计目标</strong><a class="headerlink" href="#设计目标" title="Permanent link">¶</a></h3>
 <ul>
 <li><strong>降低技术难度，节省人力成本，<mark style="background: #6082C5A6;">增强代码安全性</mark> </strong>：基础平台的主要目的是能够让开发人员快速的开发出复杂的业务功能，让其专注业务开发，由有平台来封装技术细节，缩短项目周期。封装技术细节时强制插入安全规范，增加代码安全性。<mark style="background: #6082C5A6;">在基础平台设计中，代码的安全性被视为一项核心目标。为了确保开发人员在开发复杂业务功能时遵循最佳的安全实践。</mark> </li>
 <li><strong>提供公共服务</strong>：系统管理，用户管理，网关转发，登录认证等业务功能在各产品大体相同，平台提供统一功能，并预留功能扩展点，避免各产品重复开发，浪费人力。</li>
@@ -770,13 +693,13 @@
 <strong>安全培训和文档</strong>：提供针对性的安全培训和文档，确保开发人员了解并遵循平台推荐的安全策略。<br/>
 <strong>定期审计与更新</strong>：随着技术和威胁的发展，平台定期进行安全审计，确保代码库始终与当前的安全标准相匹配。</li>
 </ol>
-<h4 id="211">2.1.1. <strong>关键功能</strong><a class="headerlink" href="#211" title="Permanent link">¶</a></h4>
+<h4 id="关键功能"><strong>关键功能</strong><a class="headerlink" href="#关键功能" title="Permanent link">¶</a></h4>
 <p><strong>网关服务：</strong>API服务路由，统一身份认证和鉴权，支持密码，OAuth，Cas，OTP等多种认证方式 。</p>
 <p><strong>系统服务：</strong>提供IP，SSH，时间，防火墙，升级，公告等常用系统管理功能。涉及操作系统交互都是用ITR接口。</p>
 <p><strong>用户服务：</strong>用户和权限管理。</p>
 <p><strong>消息模块：</strong>提供嵌入式或高性能两种模式，灵活切换，自由选择。</p>
 <p><strong>公共代码：</strong>封装常用非业务功能，例如：工具类，Web，ORM，消息，缓存，RPC，邮件，短信，配置等，降低框架使用难度，提升开发效率。</p>
-<h4 id="212">2.1.2. <strong>关键质量属性</strong><a class="headerlink" href="#212" title="Permanent link">¶</a></h4>
+<h4 id="关键质量属性"><strong>关键质量属性</strong><a class="headerlink" href="#关键质量属性" title="Permanent link">¶</a></h4>
 <ul>
 <li>最低硬件配置</li>
 </ul>
@@ -799,18 +722,16 @@
 <p>接口化：公共服务面向接口编程，按插件接口设计和开发</p>
 </li>
 </ul>
-<h4 id="213">2.1.3. <strong>部署方式</strong><a class="headerlink" href="#213" title="Permanent link">¶</a></h4>
+<h4 id="部署方式"><strong>部署方式</strong><a class="headerlink" href="#部署方式" title="Permanent link">¶</a></h4>
 <p>基础平台用户产品二次开发，需要灵活部署方式适应各种需求。</p>
 <p><strong>低资源部署：</strong>资源受限情况下，合并服务与组件，以较低资源进行部署，架构简单，部署便捷，业务流转快。</p>
 <p><strong>高性能部署：</strong>服务与组件采用单独部署，充分利用资源，服务间不强制依赖，独立运行，不存在单点问题，支撑大数据和高并发。</p>
 <p><strong>容器化部署：</strong> 满足上云需求，服务和组件都支持镜像部署。</p>
-<h4 id="214">2.1.4. <strong>设计约束</strong><a class="headerlink" href="#214" title="Permanent link">¶</a></h4>
-<p>由于部门架构的要求，基础平台遵循以下技术约束：</p>
-<p>1. 服务间交互</p>
-<p>为了服务高内聚低耦合，减少服务内部变化导致外部影响，服务间交互都采用Rest接口，禁止直接连接服务数据库或中间件获取数据，并且服务接口需考虑后期维护和扩展，尽量做到接口不改或少改。</p>
-<p>2. 操作系统交互</p>
+<h4 id="设计约束"><strong>设计约束</strong><a class="headerlink" href="#设计约束" title="Permanent link">¶</a></h4>
+<p>由于部门架构的要求，基础平台遵循以下技术约束： 服务间交互</p>
+<p>为了服务高内聚低耦合，减少服务内部变化导致外部影响，服务间交互都采用Rest接口，禁止直接连接服务数据库或中间件获取数据，并且服务接口需考虑后期维护和扩展，尽量做到接口不改或少改。 操作系统交互</p>
 <p>系统服务存在大量与操作系统交互操作，例如：IP，DHCP，时间，防火墙，只要ITR系统平台已提供的功能，都需通过ITR完成与操作系统交互，严禁支持使用操作系统命令。</p>
-<h3 id="22">2.2. <strong>设计原则</strong><a class="headerlink" href="#22" title="Permanent link">¶</a></h3>
+<h3 id="2设计原则">2.<strong>设计原则</strong><a class="headerlink" href="#2设计原则" title="Permanent link">¶</a></h3>
 <ul>
 <li><strong>基础功能和业务功能隔离</strong></li>
 </ul>
@@ -820,7 +741,7 @@
 <li><strong>配置与扩展</strong></li>
 </ul>
 <p>平台做为二次开发底座，交付每个功能都要考虑产品使用时的个性化需求，做到易使用，易扩展。功能设计预先考虑变化点，设计相关配置项，提前预留相关扩展点。公共服务需遵循插件化设计原则，以适应功能不满足需求时的复写扩展。</p>
-<h3 id="23">2.3. <strong>技术选型</strong><a class="headerlink" href="#23" title="Permanent link">¶</a></h3>
+<h3 id="2技术选型">2.<strong>技术选型</strong><a class="headerlink" href="#2技术选型" title="Permanent link">¶</a></h3>
 <ul>
 <li>
 <p>后端基于 Spring Boot、Spring security、MyBatis-Plus，前端采用 AngularJS。前后端框架都在业界广泛使用，受众广，易使用，社区活跃，文档全面，二次开发时能做到无缝连接。</p>
@@ -832,7 +753,7 @@
 <p>为减轻对Kafka依赖，引入ActiveMQ作为嵌入式MQ。Apache ActiveMQ是一款老牌消息中间件，稳定性高，功能丰富，作为低资源部署时Message Broker。</p>
 </li>
 </ul>
-<h2 id="3">3. <strong>功能架构图</strong><a class="headerlink" href="#3" title="Permanent link">¶</a></h2>
+<h2 id="功能架构图"><strong>功能架构图</strong><a class="headerlink" href="#功能架构图" title="Permanent link">¶</a></h2>
 <p><a class="glightbox" data-desc-position="bottom" data-height="auto" data-width="100%" href="../../assets/img/Pasted%20image%2020230922094258.png"><img alt="Pasted image 20230922094258" src="../../assets/img/Pasted%20image%2020230922094258.png" title="Pasted image 20230922094258"/></a></p>
 <ul>
 <li>
@@ -854,7 +775,7 @@
 <p>中间件只强依赖Postgresql，消息与缓存不强依赖Kafka和Redis，可通过嵌入式中间件提供服务。</p>
 </li>
 </ul>
-<h2 id="4">4. <strong>逻辑架构图</strong><a class="headerlink" href="#4" title="Permanent link">¶</a></h2>
+<h2 id="逻辑架构图"><strong>逻辑架构图</strong><a class="headerlink" href="#逻辑架构图" title="Permanent link">¶</a></h2>
 <!-- Source file information -->
 <!-- taken from 
 https://github.com/squidfunk/mkdocs-material/blob/master/src/partials/source-file.html -->
@@ -863,7 +784,7 @@ https://github.com/squidfunk/mkdocs-material/blob/master/src/partials/source-fil
 <small>
 <!-- mkdocs-git-revision-date-localized-plugin -->
 <u>最后更新</u> :
-        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">2023年9月22日</span>
+        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">2023年9月26日</span>
 <!-- mkdocs-git-revision-date-plugin -->
 <br/>
 <u>创建日期</u> :

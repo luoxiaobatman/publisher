@@ -48,7 +48,7 @@
 <input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
 <label class="md-overlay" for="__drawer"></label>
 <div data-md-component="skip">
-<a class="md-skip" href="#_1">
+<a class="md-skip" href="#持久化机制">
           跳转至
         </a>
 </div>
@@ -406,9 +406,38 @@
     </label>
 <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link" href="#_1">
-    数据架构图
+<a class="md-nav__link" href="#持久化机制">
+    持久化机制
   </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#持久化存储方案">
+    持久化存储方案
+  </a>
+<nav aria-label="持久化存储方案" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#业务库设计">
+    业务库设计
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#缓存库设计">
+    缓存库设计
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#mq存储设计">
+    MQ存储设计
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#其他存储设计">
+    其他存储设计
+  </a>
+</li>
+</ul>
+</nav>
 </li>
 </ul>
 </nav>
@@ -577,9 +606,38 @@
     </label>
 <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link" href="#_1">
-    数据架构图
+<a class="md-nav__link" href="#持久化机制">
+    持久化机制
   </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#持久化存储方案">
+    持久化存储方案
+  </a>
+<nav aria-label="持久化存储方案" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#业务库设计">
+    业务库设计
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#缓存库设计">
+    缓存库设计
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#mq存储设计">
+    MQ存储设计
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#其他存储设计">
+    其他存储设计
+  </a>
+</li>
+</ul>
+</nav>
 </li>
 </ul>
 </nav>
@@ -617,7 +675,73 @@
 -->
 <h1>数据架构图</h1>
 <!-- Page content -->
-<h2 id="_1">数据架构图<a class="headerlink" href="#_1" title="Permanent link">¶</a></h2>
+<h2 id="持久化机制">持久化机制<a class="headerlink" href="#持久化机制" title="Permanent link">¶</a></h2>
+<p>业务数据持久化存储在业务库，业务库使用关系型数据库Postgresql。</p>
+<p>为减轻数据库访问压力，对于高频访问数据采用缓存，本地缓存采用内存或Ehcache，Ehcache采用本地文件存储。如果采用分布式缓存库Redis，持久化也采用本地文件存储。redis持久化机制分为RDB和AOF，建议数据量小缓存采用RBD，数据量大的缓存采用RDB+AOF。</p>
+<p>消息中间件采用嵌入式ActiveMQ和Kafka。</p>
+<p>ActiveMQ采用Postgresql存储,如果出现性能问题，考虑使用KahaDB，采用本地文件存储<strong>。</strong></p>
+<p>Kafka采用本地文件存储。</p>
+<p>配置协同中间件Zookeeper采用本地文件存储。</p>
+<p>升级包，导入文件，临时文件，配置文件等采用本地文件存储。</p>
+<p><a class="glightbox" data-desc-position="bottom" data-height="auto" data-width="100%" href="../../assets/img/Pasted%20image%2020230926154557.png"><img alt="Pasted image 20230926154557" src="../../assets/img/Pasted%20image%2020230926154557.png" title="Pasted image 20230926154557"/></a></p>
+<h2 id="持久化存储方案">持久化存储方案<a class="headerlink" href="#持久化存储方案" title="Permanent link">¶</a></h2>
+<h3 id="业务库设计">业务库设计<a class="headerlink" href="#业务库设计" title="Permanent link">¶</a></h3>
+<p>基础平台默认提供资产服务，用户服务，系统服务，针对三个服务分别独立设计表结构。</p>
+<p>资产服务表名以，t_res_作为前缀。</p>
+<p>用户服务表名以，t_usr_作为前缀。</p>
+<p>系统服务表名以，t_sys_作为前缀。</p>
+<p>三个服务具体表结构设计在功能设计阶段细化。</p>
+<h3 id="缓存库设计">缓存库设计<a class="headerlink" href="#缓存库设计" title="Permanent link">¶</a></h3>
+<p>缓存对象设计原则：</p>
+<p>1. 准入规则：纳入缓存的对象可能是全局状态对象，如登录信息；或高频读取热点数据，如规则类数据。</p>
+<p>2. key值选取，业务逻辑侧驱动，以能够快速查找索引为宜。</p>
+<p>3. 定义合适的过期策略，利于数据的被动刷新，同时提高redis内存使用效率，同时防止雪崩。</p>
+<p>4. 缓存对象的设计，一定是满足快速使用为优先，在初始化、同步时的一些转换是可接受的。</p>
+<p>5. 明确缓存对象的维护方和使用方，制定相应机制保证数据的一致性。</p>
+<p>6. Key值取值规则：｛产品名简写｝:｛实体名简写｝,冒号分隔。</p>
+<p>基于以上原则，在理顺系统核心业务和执行逻辑的情况下，统一定义、扩充至此处：</p>
+<table>
+<thead>
+<tr>
+<th><strong>缓存对象</strong></th>
+<th><strong>Key</strong></th>
+<th><strong>使用场景</strong></th>
+<th><strong>过期策略</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>用户会话</td>
+<td>platform:user:info</td>
+<td>用户登录成功后缓存用户信息。</td>
+<td></td>
+</tr>
+<tr>
+<td>用户角色</td>
+<td>Platform:user:role</td>
+<td>用户角色信息</td>
+<td></td>
+</tr>
+<tr>
+<td>用户权限</td>
+<td>Platform:user:role</td>
+<td>用户权限信息</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="mq存储设计">MQ存储设计<a class="headerlink" href="#mq存储设计" title="Permanent link">¶</a></h3>
+<p>MQ消息存储本地文件系统或Postgresql中，主要用以异步任务处理和消息广播。由于当前信息量不大，考虑json格式，可更换为性能更优的其他编码方式。</p>
+<p>资产服务Topic名以，t_res_作为前缀。</p>
+<p>用户服务Topic名以，t_usr_作为前缀。</p>
+<p>系统服务Topic名以，t_sys_作为前缀。</p>
+<h3 id="其他存储设计">其他存储设计<a class="headerlink" href="#其他存储设计" title="Permanent link">¶</a></h3>
+<p>1. 上传文件</p>
+<p>如excel导入功能上传的文件，服务模块存上传临时目录/data/XXXX/files/upload，使用完成后即删除。</p>
+<p>2. 临时文件</p>
+<p>服务模块存临时目录/data/XXXX/files/tmp，使用完成后即删除。</p>
+<p>3. 配置文件</p>
+<p>服务模块存上传临时目录/data/XXXX/files/config。</p>
 <!-- Source file information -->
 <!-- taken from 
 https://github.com/squidfunk/mkdocs-material/blob/master/src/partials/source-file.html -->

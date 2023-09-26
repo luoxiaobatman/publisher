@@ -48,7 +48,7 @@
 <input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
 <label class="md-overlay" for="__drawer"></label>
 <div data-md-component="skip">
-<a class="md-skip" href="#_1">
+<a class="md-skip" href="#版本规划">
           跳转至
         </a>
 </div>
@@ -557,22 +557,22 @@
     </label>
 <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link" href="#_1">
+<a class="md-nav__link" href="#版本规划">
     版本规划
   </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#_2">
+<a class="md-nav__link" href="#软件升级机制">
     软件升级机制
   </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#db">
+<a class="md-nav__link" href="#db升级机制">
     DB升级机制
   </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#_3">
+<a class="md-nav__link" href="#跨版本升级">
     跨版本升级
   </a>
 </li>
@@ -612,17 +612,17 @@
 -->
 <h1>版本与升级.架构设计.p1</h1>
 <!-- Page content -->
-<h4 id="_1">版本规划<a class="headerlink" href="#_1" title="Permanent link">¶</a></h4>
+<h4 id="版本规划">版本规划<a class="headerlink" href="#版本规划" title="Permanent link">¶</a></h4>
 <p>版本格式：主版本号.次版本号.修订号，版本号递增规则如下：</p>
 <p>主版本号：当做了无法向下兼容的修改时修改主版本号；</p>
 <p>次版本号：当做了向下兼容的功能性变更时修改次版本号；</p>
 <p>修订号：当做了向下兼容的BUG修正时修改修订号；</p>
 <p>基础平台第一个版本，版本号规划为1.0.0。</p>
-<h4 id="_2">软件升级机制<a class="headerlink" href="#_2" title="Permanent link">¶</a></h4>
+<h4 id="软件升级机制">软件升级机制<a class="headerlink" href="#软件升级机制" title="Permanent link">¶</a></h4>
 <p>各个服务软件升级时，升级流程会先停服务、备份历史软件到备份目录、拷贝新软件覆盖软件安装目录、再启动容器实现服务升级。</p>
 <p>升级后，如果验证服务异常，则可以手工恢复历史软件来实现升级回退。</p>
 <p>考虑到磁盘空间的使用，备份目录只保留最近一次历史软件的备份。</p>
-<h4 id="db">DB升级机制<a class="headerlink" href="#db" title="Permanent link">¶</a></h4>
+<h4 id="db升级机制">DB升级机制<a class="headerlink" href="#db升级机制" title="Permanent link">¶</a></h4>
 <p>DB升级机制没有备份恢复，DB升级通过设置约束向下兼容来规避升级回滚的需求。DB变更遵循以下约束：</p>
 <ul>
 <li>新增表</li>
@@ -649,7 +649,7 @@
 </ul>
 <p>新增、修改、删除初始化数据时，同样在升级脚本中通过SQL完成。</p>
 <p>说明：任何版本的DB升级，必须基于上版本DB的基础上对DB进行修改，比如1.0.0有一条初始化数据，1.0.1版本删除了该数据，1.0.2该数据时需要基于1.0.1执行insert语句，而非基于1.0.0执行update。</p>
-<h4 id="_3">跨版本升级<a class="headerlink" href="#_3" title="Permanent link">¶</a></h4>
+<h4 id="跨版本升级">跨版本升级<a class="headerlink" href="#跨版本升级" title="Permanent link">¶</a></h4>
 <p>以上的升级机制能够满足次版本号和修订号的跨版本升级。</p>
 <!-- Source file information -->
 <!-- taken from 
