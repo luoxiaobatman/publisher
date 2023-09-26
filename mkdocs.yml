@@ -16,3 +16,14 @@ plugins:
             - 概要设计/[!{i}]*
         regex:
             - '^(?!.*基础平台2\.0).*\.md$'
+    enumerate-headings:
+        toc_depth: 6
+        strict: true
+        increment_across_pages: true
+        include:
+          - "*"
+        exclude:
+          - index.md
+          - another_page.md
+        restart_increment_after:
+          - second_section.md
