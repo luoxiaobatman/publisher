@@ -48,23 +48,9 @@ B-tree（平衡树）索引是一种数据结构，允许高效地进行插入�
 **逻辑碎片化**：随着时间的推移，随着随机插入和删除，索引数据的逻辑顺序可能与磁盘上的物理顺序不同。这可能导致顺序扫描变慢，因为系统可能需要跳转磁盘的不同部分。对于递增的ID，特别是如果删除很少发生时，索引条目的逻辑顺序通常与其物理顺序很好地对齐。
 **维护开销**：PostgreSQL有一个`VACUUM`过程，有助于从已删除的行中回收空间并减少碎片化。随着随机插入和删除，可能需要更频繁地运行VACUUM。对于递增的ID和大多数追加型的工作负载，可能不需要频繁地执行vacuum操作。
 
-```java  
-class HelloWorld {  
-    public static void main(String[] args) {    
-        System.out.printf("HelloWorld")
-    } 
-}
-```
 
-^06e63d
 
-```python
-if __name__ == '__main__':  
-    print("HelloWorld")
-```
 
-^2ee877
-
-| Java HelloWorld | Python HelloWorld |
-| --------------- | ----------------- |
-| ![[index#^06e63d|^06e63d]]   | ![[index#^2ee877|^2ee877]]     | 
+| Java HelloWorld                      | Python HelloWorld                    |
+| ------------------------------------ | ------------------------------------ |
+| ![[../../jh\|jh]] | ![[../../ph\|ph]] | 
