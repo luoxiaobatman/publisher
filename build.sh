@@ -8,5 +8,5 @@ fi
 mike deploy -F "$MKDOCS_CONFIG_FILE" -b main --prefix versioned_site --ignore "$VERSIONED"
 
 # git 魔法!
-git reset --hard HEAD^
+git reset --hard HEAD
 git reset --mixed HEAD^
