@@ -1,5 +1,5 @@
-mkdocs==1.4.2
-mkdocs-material==9.0.6
+mkdocs==1.5.3
+mkdocs-material==9.3.1
 mkdocs-ezlinked-plugin==0.3.3
 mkdocs-awesome-pages-plugin==2.8.0
 mdx_breakless_lists==1.0.1
@@ -17,3 +17,4 @@ cairosvg==2.6.0
 pillow==9.4.0
 mkdocs-glightbox==0.3.1
 mkdocs-minify-plugin==0.6.2
+mike=1.1.2
