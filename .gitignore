@@ -244,3 +244,7 @@ cython_debug/
 #.idea/
 
 tmp/
+
+versioned_site/
+
+site/
