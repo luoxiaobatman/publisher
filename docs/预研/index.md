@@ -53,4 +53,13 @@ B-tree（平衡树）索引是一种数据结构，允许高效地进行插入�
 
 | Java HelloWorld                      | Python HelloWorld                    |
 | ------------------------------------ | ------------------------------------ |
-| ![[../../jh\|jh]] | ![[../../ph\|ph]] | 
+| ```java  
+class HelloWorld {  
+    public static void main(String[] args) {    
+        System.out.printf("HelloWorld")
+    } 
+}
+``` | ```python
+if __name__ == '__main__':  
+    print("HelloWorld")
+``` | 
